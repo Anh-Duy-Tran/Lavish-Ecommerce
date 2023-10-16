@@ -76,7 +76,6 @@ export const StyledButton = styled(ButtonMUI, {
   position: relative;
 
   min-height: 20px;
-  max-height: 80px;
   min-width: 20px;
   cursor: pointer;
   width: ${width ? `${width}px` : fullWidth ? "100%" : `auto`};
@@ -93,25 +92,32 @@ export const StyledButton = styled(ButtonMUI, {
       : "12px 14px"
   };
   border: ${
-    variant === "outlined" ? `1px solid ${palette.text}` : "none"
+    variant === "outlined" ? `1px solid ${palette.primary.text}` : "none"
   };
-  color: ${variant === "contained" ? palette.primary : palette.secondary};
-  backgroundColor: ${
-    variant === "contained" ? palette.background : "transparent"
+  color: ${
+    variant === "contained" ? palette.primary.background : palette.primary.text
+  };
+  background-color: ${
+    variant === "contained" ? palette.primary.text : "transparent"
   };
   
   &::before {
     content: "";
     position: absolute;
-    left: 0;
-    right: 0;
+    transform-origin: center;
+    left: 50%;
     bottom: 0;
+    transform: translate(-50%, -50%);
     border-radius: 4px;
-    height: ${active ? "4px" : "0"};
-    background-color: ${palette.primary};
-    transition: height 100ms ease;
+    height: 3px;
+    width: ${active ? "25px" : "0"};
+    background-color: ${palette.primary.text};
+    transition: width 100ms ease;
   }
-
+  
+  transition: background-color 300ms ease;
+  transition: color 300ms ease;
+  
   &:hover {
     background-color: ${
       variant === "contained" ? palette.primary : palette.primary

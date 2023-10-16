@@ -42,7 +42,7 @@ const ThemeBlock = styled.div<{ left?: boolean; fill?: boolean }>(
       display: flex;
       justify-content: center;
       align-items: center;
-      background: ${theme};
+      background-color: ${theme};
     `
 );
 
