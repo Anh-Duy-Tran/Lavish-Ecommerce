@@ -76,6 +76,7 @@ export const StyledButton = styled(ButtonMUI, {
   position: relative;
 
   min-height: 20px;
+  max-height: 80px;
   min-width: 20px;
   cursor: pointer;
   width: ${width ? `${width}px` : fullWidth ? "100%" : `auto`};
@@ -92,7 +93,7 @@ export const StyledButton = styled(ButtonMUI, {
       : "12px 14px"
   };
   border: ${
-    variant === "outlined" ? `1px solid ${palette.background}` : "none"
+    variant === "outlined" ? `1px solid ${palette.text}` : "none"
   };
   color: ${variant === "contained" ? palette.primary : palette.secondary};
   backgroundColor: ${
