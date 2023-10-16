@@ -12,15 +12,17 @@ import { useThemeStore } from "@/context/useThemeStore";
 
 interface PaletteProviderProps {
   children: ReactNode;
+  modeProps?: "light" | "dark";
 }
 
 const PaletteContext = createContext<Palette | undefined>(undefined);
 
 export const PaletteProvider: React.FC<PaletteProviderProps> = ({
   children,
+  modeProps,
 }) => {
-  const { mode } = useThemeStore();
-  const [palette, setPalette] = useState<Palette>(lightPalette); // default to light palette
+  const { mode } = modeProps ? { mode: modeProps } : useThemeStore();
+  const [palette, setPalette] = useState<Palette>(lightPalette);
 
   useEffect(() => {
     // Update the palette when the mode changes

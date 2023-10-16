@@ -12,7 +12,7 @@ import { styled } from "@mui/system";
 
 export type ButtonVariantType = "text" | "contained" | "outlined";
 
-export type ButtonSizeType = "small" | "standard" | "large";
+export type ButtonSizeType = "compact" | "standard" | "large";
 
 export interface ButtonProps extends ButtonMUIProps {
   /**
@@ -60,8 +60,9 @@ export function Button({
   );
 }
 
-const StyledButton = styled(ButtonMUI, {
-  shouldForwardProp: (props) => props !== "fullWidth" && props !== "active",
+export const StyledButton = styled(ButtonMUI, {
+  shouldForwardProp: (props) =>
+    !["fullWidth", "active", "palette"].includes(props as string),
 })(
   ({
     palette,
@@ -73,35 +74,42 @@ const StyledButton = styled(ButtonMUI, {
   }: ButtonProps & { palette: Palette }) => `
   all: unset;
   position: relative;
-  font-weight: 600;
-  text-align: center;
-  width: ${fullWidth ? "100%" : width ? `${width}px` : "auto"};
-  font-size: 1,125rem;
-  background-color: ${variant === "contained" ? palette.primary : "white"};
+
+  min-height: 20px;
+  min-width: 20px;
+  cursor: pointer;
+  width: ${width ? `${width}px` : fullWidth ? "100%" : `auto`};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+
   padding: ${
-    size === "large" ? "18px 14px" : size === "small" ? "4px 12px" : "12px 14px"
+    size === "large"
+      ? "18px 14px"
+      : size === "compact"
+      ? "4px 12px"
+      : "12px 14px"
   };
-  border-radius: 4px;
+  border: ${
+    variant === "outlined" ? `1px solid ${palette.background}` : "none"
+  };
+  color: ${variant === "contained" ? palette.primary : palette.secondary};
+  backgroundColor: ${
+    variant === "contained" ? palette.background : "transparent"
+  };
   
   &::before {
-    content: ""; /* Create an empty pseudo-element for the line indicator */
+    content: "";
     position: absolute;
     left: 0;
     right: 0;
     bottom: 0;
     border-radius: 4px;
-    height: ${
-      active ? "4px" : "0"
-    }; /* Set the height of the line based on 'active' */
-    background-color: ${palette.primary}; /* Color of the line */
-    transition: height 100ms ease; /* Transition only the height property */
+    height: ${active ? "4px" : "0"};
+    background-color: ${palette.primary};
+    transition: height 100ms ease;
   }
-
-  outline: ${variant === "outlined" ? `2px solid ${palette.primary}` : "none"};
-  color: ${variant === "contained" ? "white" : palette.primary};
-  transition: all 150ms ease;
-  cursor: pointer;
-  box-sizing: border-box;
 
   &:hover {
     background-color: ${
@@ -114,5 +122,5 @@ const StyledButton = styled(ButtonMUI, {
       variant === "contained" ? palette.primary : palette.primary
     };
   }
-`,
+`
 );
