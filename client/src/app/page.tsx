@@ -1,9 +1,14 @@
+"use client"
+
 import React from "react";
 import Image from "next/image";
 import styles from "./page.module.css";
 import { Button } from "@/components/Button";
+import { useThemeStore } from "@/context/useThemeStore";
 
 export default function Home() {
+  const { toggleMode } = useThemeStore();
+
   return (
     <main className={styles.main}>
       {" "}
@@ -40,7 +45,12 @@ export default function Home() {
           priority
         />
       </div>
-      <Button />
+      <Button variant="contained">
+        ABISBDISABDIUHA
+      </Button>
+      <Button onClick={toggleMode}>
+        ABISBDISABDIUHA
+      </Button>
       <div className={styles.grid}>
         <a
           href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
