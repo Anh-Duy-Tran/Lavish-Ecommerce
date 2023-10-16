@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React from "react";
 import { Palette } from "@/theme/palettes";
@@ -114,5 +114,5 @@ const StyledButton = styled(ButtonMUI, {
       variant === "contained" ? palette.primary : palette.primary
     };
   }
-`
+`,
 );
