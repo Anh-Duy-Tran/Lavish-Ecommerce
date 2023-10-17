@@ -1,8 +1,6 @@
 "use client";
 
 import { breakpoints } from "@/theme/breakpoints";
-import { Palette } from "@/theme/palettes";
-import { usePalette } from "@/theme/usePalette";
 import { styled } from "@mui/system";
 import { Montserrat } from "next/font/google";
 import React, { ReactNode } from "react";
@@ -81,5 +79,5 @@ const StyledTypography = styled("p")<TypographyProps>(
     [theme.breakpoints.up(breakpoints.laptopHD)]: {
       fontSize: fontSizeLookup["laptopHD"][variant],
     },
-  })
+  }),
 );

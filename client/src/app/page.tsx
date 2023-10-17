@@ -45,9 +45,7 @@ export default function Home() {
           priority
         />
       </div>
-      <Button variant="contained">
-        ABISBDISABDIUHA
-      </Button>
+      <Button variant="contained">ABISBDISABDIUHA</Button>
       <Button onClick={toggleMode}>ABISBDISABDIUHA</Button>
       <div className={styles.grid}>
         <a

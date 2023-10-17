@@ -56,7 +56,7 @@ export function Button({
 
   return (
     <StyledButton palette={palette} variant={variant} size={size} {...props}>
-      <Typography variant="text" compact >
+      <Typography variant="text" compact>
         {label || children}
       </Typography>
     </StyledButton>
