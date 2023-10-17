@@ -3,7 +3,7 @@
 exports[`StyledButton Component renders correctly 1`] = `
 <DocumentFragment>
   <button
-    class="MuiButton-root css-1ebfljq"
+    class="MuiButton-root css-13jmdlf"
     type="button"
     variant="outlined"
   >

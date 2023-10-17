@@ -53,7 +53,7 @@ export const WithColorScheme: Decorator = (Story, context) => {
     return (
       <div style={{ display: "flex" }}>
         <PaletteProvider modeProps={"light"}>
-          <ThemeBlock left>
+          <ThemeBlock left theme={"white"}>
             <Story />
           </ThemeBlock>
         </PaletteProvider>

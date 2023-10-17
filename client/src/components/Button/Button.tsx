@@ -117,17 +117,14 @@ export const StyledButton = styled(ButtonMUI, {
   
   transition: background-color 300ms ease;
   transition: color 300ms ease;
-  
-  &:hover {
-    background-color: ${
-      variant === "contained" ? palette.primary : palette.primary
-    };
-  }
 
   &.${buttonClasses.active} {
-    background-color: ${
-      variant === "contained" ? palette.primary : palette.primary
-    };
+    ${
+      variant === "contained"
+        ? `background-color: ${palette.secondary.text};`
+        : `color: ${palette.secondary.text};
+           border-color: ${palette.secondary.text};`
+    }
   }
 `
 );

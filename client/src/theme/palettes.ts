@@ -14,8 +14,8 @@ export const lightPalette: Palette = {
     text: "#000000",
   },
   secondary: {
-    background: "#FFFFFF",
-    text: "#000000",
+    background: "#DDDDDD",
+    text: "#222222",
   },
 };
 
@@ -25,7 +25,7 @@ export const darkPalette: Palette = {
     text: "#FFFFFF",
   },
   secondary: {
-    background: "#000000",
-    text: "#FFFFFF",
+    text: "#DDDDDD",
+    background: "#222222",
   },
 };
