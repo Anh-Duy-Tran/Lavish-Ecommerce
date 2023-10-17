@@ -21,7 +21,8 @@ export const PaletteProvider: React.FC<PaletteProviderProps> = ({
   children,
   modeProps,
 }) => {
-  const { mode } = modeProps ? { mode: modeProps } : useThemeStore();
+  const themeStore = useThemeStore();
+  const mode = modeProps || themeStore.mode;
   const [palette, setPalette] = useState<Palette>(lightPalette);
 
   useEffect(() => {

@@ -7,7 +7,6 @@
     "plugin:react-hooks/recommended",
     "plugin:storybook/recommended"
   ],
-  "plugins": ["@next/next"],
   "ignorePatterns": ["dist"],
   "parser": "@typescript-eslint/parser",
   "overrides": [

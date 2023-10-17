@@ -126,5 +126,5 @@ export const StyledButton = styled(ButtonMUI, {
            border-color: ${palette.secondary.text};`
     }
   }
-`
+`,
 );
