@@ -46,7 +46,7 @@ export default function Home() {
         />
       </div>
       <Button variant="contained">
-        <p>ABISBDISABDIUHA</p>
+        ABISBDISABDIUHA
       </Button>
       <Button onClick={toggleMode}>ABISBDISABDIUHA</Button>
       <div className={styles.grid}>
