@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Typography component renders correctly 1`] = `
+<DocumentFragment>
+  <p
+    class="className css-1nm918a"
+  >
+    Test Content
+  </p>
+  <p
+    class="className css-12w9o5h"
+  >
+    Test Content
+  </p>
+  <p
+    class="className css-10saslx"
+  >
+    Test Content
+  </p>
+</DocumentFragment>
+`;
