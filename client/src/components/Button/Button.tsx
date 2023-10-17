@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import { Palette } from "@/theme/palettes";
 import { usePalette } from "@/theme/usePalette";
