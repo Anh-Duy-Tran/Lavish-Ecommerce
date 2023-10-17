@@ -32,7 +32,7 @@ export const PaletteProvider: React.FC<PaletteProviderProps> = ({
 
   return (
     <PaletteContext.Provider value={palette}>
-      {children}
+      <div style={{ color: palette.primary.text }}>{children}</div>
     </PaletteContext.Provider>
   );
 };

@@ -9,6 +9,7 @@ import {
   buttonClasses,
 } from "@mui/base";
 import { styled } from "@mui/system";
+import { Typography } from "@/components/Typography";
 
 export type ButtonVariantType = "text" | "contained" | "outlined";
 
@@ -55,7 +56,9 @@ export function Button({
 
   return (
     <StyledButton palette={palette} variant={variant} size={size} {...props}>
-      {label || children}
+      <Typography variant="text" compact >
+        {label || children}
+      </Typography>
     </StyledButton>
   );
 }
