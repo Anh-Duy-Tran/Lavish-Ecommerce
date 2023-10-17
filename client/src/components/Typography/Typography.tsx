@@ -1,5 +1,3 @@
-"use client";
-
 import { breakpoints } from "@/theme/breakpoints";
 import { styled } from "@mui/system";
 import { Montserrat } from "next/font/google";
@@ -13,11 +11,26 @@ export const font = Montserrat({
 export type TypographyVariant = "heading" | "text" | "subtitle";
 
 interface TypographyProps {
+  /**
+   * Option to make the text bold
+   */
   bold?: boolean;
-  children: ReactNode;
+  /**
+   * The style variant (heading, text, or subtitle)
+   */
   variant: TypographyVariant;
+  /**
+   * Option to reduce the margin
+   */
   compact?: boolean;
+  /**
+   * Option to prevent text wrapping
+   */
   inline?: boolean;
+  /**
+   * Content within the Typography component
+   */
+  children: ReactNode;
 }
 
 export function Typography({
@@ -79,5 +92,5 @@ const StyledTypography = styled("p")<TypographyProps>(
     [theme.breakpoints.up(breakpoints.laptopHD)]: {
       fontSize: fontSizeLookup["laptopHD"][variant],
     },
-  }),
+  })
 );
