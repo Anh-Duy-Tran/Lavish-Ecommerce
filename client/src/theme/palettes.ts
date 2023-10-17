@@ -1,20 +1,31 @@
-export interface Palette {
+type PaletteElement = {
   background: string;
   text: string;
-  primary: string;
-  secondary: string;
+};
+
+export interface Palette {
+  primary: PaletteElement;
+  secondary: PaletteElement;
 }
 
 export const lightPalette: Palette = {
-  background: "#ffffff",
-  text: "#000000",
-  primary: "#990000",
-  secondary: "#d3455b",
+  primary: {
+    background: "#FFFFFF",
+    text: "#000000",
+  },
+  secondary: {
+    background: "#DDDDDD",
+    text: "#222222",
+  },
 };
 
 export const darkPalette: Palette = {
-  background: "#000000",
-  text: "#ffffff",
-  primary: "#000099",
-  secondary: "#ff6978",
+  primary: {
+    background: "#000000",
+    text: "#FFFFFF",
+  },
+  secondary: {
+    text: "#DDDDDD",
+    background: "#222222",
+  },
 };

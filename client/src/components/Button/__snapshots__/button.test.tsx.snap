@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StyledButton Component renders correctly 1`] = `
+<DocumentFragment>
+  <button
+    class="MuiButton-root css-13jmdlf"
+    type="button"
+    variant="outlined"
+  >
+    Snapshot
+  </button>
+</DocumentFragment>
+`;
