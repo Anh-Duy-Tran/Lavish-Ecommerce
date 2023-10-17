@@ -3,11 +3,40 @@
 exports[`StyledButton Component renders correctly 1`] = `
 <DocumentFragment>
   <button
+    class="MuiButton-root css-1jtwy2w"
+    type="button"
+    variant="contained"
+  >
+    <p
+      class="className css-12w9o5h"
+      style="margin: 0px;"
+    >
+      Snapshot1
+    </p>
+  </button>
+  <button
     class="MuiButton-root css-13jmdlf"
     type="button"
     variant="outlined"
   >
-    Snapshot
+    <p
+      class="className css-12w9o5h"
+      style="margin: 0px;"
+    >
+      Snapshot2
+    </p>
+  </button>
+  <button
+    class="MuiButton-root css-956kow"
+    type="button"
+    variant="text"
+  >
+    <p
+      class="className css-12w9o5h"
+      style="margin: 0px;"
+    >
+      Snapshot3
+    </p>
   </button>
 </DocumentFragment>
 `;

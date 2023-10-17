@@ -17,7 +17,13 @@ describe("StyledButton Component", () => {
   });
 
   it("renders correctly", () => {
-    const { asFragment } = render(<Button label="Snapshot" />);
+    const { asFragment } = render(
+      <>
+        <Button variant="contained" label="Snapshot1" />
+        <Button variant="outlined" label="Snapshot2" />
+        <Button variant="text" label="Snapshot3" />
+      </>
+    );
     expect(asFragment()).toMatchSnapshot();
   });
 
@@ -46,11 +52,11 @@ describe("StyledButton Component", () => {
 
   it("applies the correct width when the width prop is provided", () => {
     render(<Button width={300} label="Click me" />);
-    expect(screen.getByText("Click me")).toHaveStyle("width: 300px");
+    expect(screen.getByRole("button")).toHaveStyle("width: 300px");
   });
 
   it("occupies all available space when fullWidth prop is true", () => {
     render(<Button fullWidth label="Click me" />);
-    expect(screen.getByText("Click me")).toHaveStyle("width: 100%");
+    expect(screen.getByRole("button")).toHaveStyle("width: 100%");
   });
 });
