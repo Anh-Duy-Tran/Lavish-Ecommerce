@@ -92,5 +92,5 @@ const StyledTypography = styled("p")<TypographyProps>(
     [theme.breakpoints.up(breakpoints.laptopHD)]: {
       fontSize: fontSizeLookup["laptopHD"][variant],
     },
-  })
+  }),
 );
