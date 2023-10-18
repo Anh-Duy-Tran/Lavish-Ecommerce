@@ -1,11 +1,14 @@
 import React from "react";
 
-import { Inter } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import { ThemeProvider } from "./theme-prodiver";
 import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+export const font = Montserrat({
+  weight: ["200", "400", "700"],
+  subsets: ["latin"],
+});
 
 export const metadata = {
   title: "Create Next App",
@@ -19,12 +22,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body
-        className={`${inter.className} bg-slate-50 dark:bg-[#0d1117] duration-200`}
-      >
+      <body className="bg-slate-50 dark:bg-[#0d1117] duration-config">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <ThemeSwitcher />
-          <main>{children}</main>
+          <main className={font.className}>{children}</main>
         </ThemeProvider>
       </body>
     </html>

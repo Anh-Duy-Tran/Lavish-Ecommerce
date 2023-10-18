@@ -31,24 +31,24 @@ export function Button({
       )}
     >
       <div
-        className={`absolute bg-black dark:bg-white transform -translate-x-1/2 
+        className={`absolute bg-fg dark:bg-dfg transform -translate-x-1/2 
         -translate-y-1/2 left-1/2 bottom-0 h-[2px] transition-width duration-100 ease-in`}
         style={{ width: active ? "25px" : "0px" }}
       />
-      {children}
+      <h2>{children}</h2>
     </button>
   );
 }
 
 const buttonVariant = tv({
-  base: "relative box-border text-black dark:text-white bg-transparent px-4 py-2 cursor-pointer \
-       active:bg-gray-100 dark:active:bg-gray-800 transition-colors duration-300",
+  base: "relative box-border text-fg dark:text-dfg bg-transparent px-4 py-2 cursor-pointer \
+       active:bg-gray-100 dark:active:bg-gray-800 transition-colors duration-config",
   variants: {
     variant: {
       contained:
-        "text-white dark:text-black bg-black dark:bg-white active:bg-gray-800\
+        "text-dfg dark:text-fg bg-dbg dark:bg-bg active:bg-gray-800\
          dark:active:bg-gray-100",
-      outlined: "border border-black dark:border-white",
+      outlined: "border border-fg dark:border-dfg",
       text: "",
     },
     size: {

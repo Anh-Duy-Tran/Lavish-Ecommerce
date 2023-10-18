@@ -11,8 +11,11 @@ export default function Home() {
       >
         DARK MODE
       </h1>
+      <h1>Heading</h1>
+      <h2>Text</h2>
+      <h3>Subtitle</h3>
       <Button variant="contained" className="hover:bg-red">
-        ABC
+        DARK MODE
       </Button>
       <p
         className={`p-2 tracking-wide text-2xl rounded-sm text-slate-900 dark:text-slate-50 ${switchThemeDuration}`}
