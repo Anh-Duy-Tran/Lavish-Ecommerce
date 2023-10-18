@@ -3,19 +3,8 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
 import { Button } from ".";
-import { usePalette } from "@/theme/usePalette";
-import { lightPalette } from "@/theme/palettes";
-
-jest.mock("@/theme/usePalette", () => ({
-  usePalette: jest.fn(),
-}));
 
 describe("StyledButton Component", () => {
-  beforeEach(() => {
-    // Reset the mock implementation before each test
-    jest.mocked(usePalette).mockImplementation(() => lightPalette);
-  });
-
   it("renders correctly", () => {
     const { asFragment } = render(
       <>

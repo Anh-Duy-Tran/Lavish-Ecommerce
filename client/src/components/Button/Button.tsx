@@ -27,7 +27,7 @@ export function Button({
       {...props}
       className={twMerge(
         buttonVariant({ variant, size, fullWidth }),
-        className
+        className,
       )}
     >
       <div
