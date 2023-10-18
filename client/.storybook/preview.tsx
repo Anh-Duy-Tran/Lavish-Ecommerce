@@ -1,4 +1,5 @@
 import React from "react";
+import "../src/app/globals.css";
 import { Decorator, type Preview } from "@storybook/react";
 import { PaletteProvider } from "../src/theme/usePalette";
 import styled from "@emotion/styled";
@@ -43,7 +44,7 @@ const ThemeBlock = styled.div<{ left?: boolean; fill?: boolean }>(
       justify-content: center;
       align-items: center;
       background-color: ${theme};
-    `,
+    `
 );
 
 export const WithColorScheme: Decorator = (Story, context) => {
@@ -52,24 +53,24 @@ export const WithColorScheme: Decorator = (Story, context) => {
   if (mode === "side-by-side") {
     return (
       <div style={{ display: "flex" }}>
-        <PaletteProvider modeProps={"light"}>
+        <div>
           <ThemeBlock left theme={"white"}>
             <Story />
           </ThemeBlock>
-        </PaletteProvider>
-        <PaletteProvider modeProps={"dark"}>
+        </div>
+        <div className={"dark"}>
           <ThemeBlock theme={"black"}>
             <Story />
           </ThemeBlock>
-        </PaletteProvider>
+        </div>
       </div>
     );
   }
 
   return (
-    <PaletteProvider modeProps={mode}>
+    <div className={mode === "dark" ? `${mode}` : ""}>
       <Story />
-    </PaletteProvider>
+    </div>
   );
 };
 
