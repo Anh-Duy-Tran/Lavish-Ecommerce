@@ -1,0 +1,22 @@
+@tailwind components;
+
+@layer components {
+  .navbar-component {
+    @apply fixed top-0 left-0 w-full h-[48px] z-10 
+           tablet:h-[96px]
+           laptopHD:h-[120px]
+           desktop:h-[142px]
+           desktopHD:h-[160px]
+           wide:h-[192px];
+  }
+
+  .navbar-content-wrapper {
+    @apply flex relative justify-between items-start w-full h-full py-3 px-4
+           tablet:py-4 tablet:px-5;
+  }
+
+  .navbar-logo-wrapper {
+    @apply flex absolute h-full w-full left-0 py-4 invisible justify-center
+           tablet:visible;
+  }
+}

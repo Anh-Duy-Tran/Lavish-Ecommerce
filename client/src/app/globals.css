@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer base {
+  body {
+    @apply bg-white dark:bg-black duration-config;
+  }
+
   h1 {
     @apply font-bold 
            text-sm laptop:text-base laptopHD:text-lg;
@@ -13,8 +17,37 @@
            text-sm laptopHD:text-base;
   }
 
+  p {
+    @apply font-normal 
+           text-sm laptopHD:text-base;
+  }
+
   h3 {
     @apply font-extralight 
            text-xxs laptopHD:text-xs;
+  }
+}
+
+@layer components {
+  .icon {
+    @apply dark:invert transition duration-config select-none;
+  }
+
+  .page-wrapper {
+    @apply flex flex-col items-center justify-center h-full w-full pt-[94px]
+           tablet:pt-[96px]
+           laptopHD:pt-[128px]
+           desktop:pt-[142px]
+           desktopHD:pt-[160px]
+           wide:pt-[192px];
+  }
+
+  .page-container {
+    @apply flex relative
+           tablet:w-tablet
+           laptop:w-laptop
+           laptopHD:w-laptopHD
+           desktop:w-desktop
+           wide:w-wide;
   }
 }

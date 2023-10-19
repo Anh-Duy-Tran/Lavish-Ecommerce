@@ -10,6 +10,16 @@ const config: Config = withTV({
   darkMode: ["class"],
   theme: {
     extend: {
+      width: {
+        mobile: "100%",
+        tablet: "676px",
+        laptop: "892px",
+        laptopHD: "1180px",
+        desktop: "1372px",
+        desktopHS: "1564px",
+        wide: "1996px",
+        ultraWide: "2092px",
+      },
       fontSize: {
         xxs: [
           "10px",
