@@ -21,6 +21,20 @@
 
 @layer components {
   .page-wrapper {
-    @apply flex flex-col items-center justify-center h-full
+    @apply flex flex-col items-center justify-center h-full w-full pt-[94px]
+           tablet:pt-[96px]
+           laptopHD:pt-[128px]
+           desktop:pt-[142px]
+           desktopHD:pt-[160px]
+           wide:pt-[192px];
+  }
+
+  .page-container {
+    @apply flex relative
+           tablet:w-tablet
+           laptop:w-laptop
+           laptopHD:w-laptopHD
+           desktop:w-desktop
+           wide:w-wide;
   }
 }

@@ -22,7 +22,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-slate-50 dark:bg-[#0d1117] duration-config">
+      <body className="bg-white dark:bg-black duration-config">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <main className={font.className}>
             <Navbar />
