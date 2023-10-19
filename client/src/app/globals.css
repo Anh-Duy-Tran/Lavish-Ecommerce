@@ -18,3 +18,9 @@
            text-xxs laptopHD:text-xs;
   }
 }
+
+@layer components {
+  .page-wrapper {
+    @apply flex flex-col items-center justify-center h-full
+  }
+}

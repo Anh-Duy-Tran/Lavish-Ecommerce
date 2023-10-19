@@ -2,8 +2,8 @@ import React from "react";
 
 import { Montserrat } from "next/font/google";
 import { ThemeProvider } from "./theme-prodiver";
-import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 import "./globals.css";
+import { Navbar } from "@/components/Navbar";
 
 export const font = Montserrat({
   weight: ["200", "400", "700"],
@@ -24,8 +24,10 @@ export default function RootLayout({
     <html lang="en">
       <body className="bg-slate-50 dark:bg-[#0d1117] duration-config">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <ThemeSwitcher />
-          <main className={font.className}>{children}</main>
+          <main className={font.className}>
+            <Navbar />
+            {children}
+          </main>
         </ThemeProvider>
       </body>
     </html>
