@@ -13,7 +13,7 @@ export const ThemeSwitcher = () => {
   }, []);
 
   if (!mounted) {
-    return null;
+    return <div />;
   }
 
   return (
