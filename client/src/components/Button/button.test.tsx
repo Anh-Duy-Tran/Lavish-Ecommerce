@@ -11,7 +11,7 @@ describe("StyledButton Component", () => {
         <Button variant="contained">Snapshot1</Button>
         <Button variant="outlined">Snapshot1</Button>
         <Button variant="text">Snapshot1</Button>
-      </>
+      </>,
     );
     expect(asFragment()).toMatchSnapshot();
   });
