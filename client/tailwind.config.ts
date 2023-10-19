@@ -9,7 +9,29 @@ const config: Config = withTV({
   ],
   darkMode: ["class"],
   theme: {
-    extend: {},
+    extend: {
+      fontSize: {
+        xxs: [
+          "10px",
+          {
+            lineHeight: "12px",
+          },
+        ],
+      },
+      colors: {
+        //background color
+        bg: "#fff",
+        //foreground color
+        fg: "#000",
+        //dark background color
+        dbg: "#000",
+        //dark foreground color
+        dfg: "#fff",
+      },
+      transitionDuration: {
+        config: "200ms",
+      },
+    },
     screens: {
       tablet: "767px",
       laptop: "1024px",

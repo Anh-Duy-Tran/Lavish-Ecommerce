@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  h1 {
+    @apply font-bold 
+           text-sm laptop:text-base laptopHD:text-lg;
+  }
+
+  h2 {
+    @apply font-normal 
+           text-sm laptopHD:text-base;
+  }
+
+  h3 {
+    @apply font-extralight 
+           text-xxs laptopHD:text-xs;
+  }
+}

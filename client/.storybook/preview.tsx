@@ -1,8 +1,13 @@
 import React from "react";
 import "../src/app/globals.css";
 import { Decorator, type Preview } from "@storybook/react";
-import { PaletteProvider } from "../src/theme/usePalette";
+import { Montserrat } from "next/font/google";
 import styled from "@emotion/styled";
+
+export const font = Montserrat({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+});
 
 const preview: Preview = {
   parameters: {
@@ -26,6 +31,10 @@ const preview: Preview = {
       },
     },
   },
+};
+
+const WithNextFont: Decorator = (Story, _) => {
+  return <div className={font.className}>{<Story />}</div>;
 };
 
 const ThemeBlock = styled.div<{ left?: boolean; fill?: boolean }>(
@@ -74,6 +83,6 @@ export const WithColorScheme: Decorator = (Story, context) => {
   );
 };
 
-export const decorators = [WithColorScheme];
+export const decorators = [WithNextFont, WithColorScheme];
 
 export default preview;
