@@ -4,7 +4,10 @@ import React from "react";
 
 export function ToggleSidebarButton() {
   return (
-    <button onClick={() => console.log("toggle sidebar")}>
+    <button
+      id="toggle-sidebar-button"
+      onClick={() => console.log("toggle sidebar")}
+    >
       <div className="icon">{openSidebarIcon}</div>
     </button>
   );

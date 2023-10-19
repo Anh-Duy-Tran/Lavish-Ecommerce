@@ -3,34 +3,40 @@
 exports[`StyledButton Component renders correctly 1`] = `
 <DocumentFragment>
   <button
-    class="relative box-border px-4 py-2 cursor-pointer transition-colors duration-300 text-white dark:text-black bg-black dark:bg-white active:bg-gray-800 dark:active:bg-gray-100"
+    class="relative box-border px-4 py-2 cursor-pointer transition-colors duration-config text-dfg dark:text-fg bg-dbg dark:bg-bg active:bg-gray-800 dark:active:bg-gray-100"
   >
     <div
-      class="absolute bg-black dark:bg-white transform -translate-x-1/2 
+      class="absolute bg-fg dark:bg-dfg transform -translate-x-1/2 
         -translate-y-1/2 left-1/2 bottom-0 h-[2px] transition-width duration-100 ease-in"
       style="width: 0px;"
     />
-    Snapshot1
+    <h2>
+      Snapshot1
+    </h2>
   </button>
   <button
-    class="relative box-border text-black dark:text-white bg-transparent px-4 py-2 cursor-pointer active:bg-gray-100 dark:active:bg-gray-800 transition-colors duration-300 border border-black dark:border-white"
+    class="relative box-border text-fg dark:text-dfg bg-transparent px-4 py-2 cursor-pointer active:bg-gray-100 dark:active:bg-gray-800 transition-colors duration-config border border-fg dark:border-dfg"
   >
     <div
-      class="absolute bg-black dark:bg-white transform -translate-x-1/2 
+      class="absolute bg-fg dark:bg-dfg transform -translate-x-1/2 
         -translate-y-1/2 left-1/2 bottom-0 h-[2px] transition-width duration-100 ease-in"
       style="width: 0px;"
     />
-    Snapshot1
+    <h2>
+      Snapshot1
+    </h2>
   </button>
   <button
-    class="relative box-border text-black dark:text-white bg-transparent px-4 py-2 cursor-pointer active:bg-gray-100 dark:active:bg-gray-800 transition-colors duration-300"
+    class="relative box-border text-fg dark:text-dfg bg-transparent px-4 py-2 cursor-pointer active:bg-gray-100 dark:active:bg-gray-800 transition-colors duration-config"
   >
     <div
-      class="absolute bg-black dark:bg-white transform -translate-x-1/2 
+      class="absolute bg-fg dark:bg-dfg transform -translate-x-1/2 
         -translate-y-1/2 left-1/2 bottom-0 h-[2px] transition-width duration-100 ease-in"
       style="width: 0px;"
     />
-    Snapshot1
+    <h2>
+      Snapshot1
+    </h2>
   </button>
 </DocumentFragment>
 `;

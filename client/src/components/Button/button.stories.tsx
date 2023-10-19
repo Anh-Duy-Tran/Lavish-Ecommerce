@@ -72,12 +72,12 @@ export const Large = Template.bind({});
 Large.args = {
   size: "large",
   variant: "outlined",
-  children: "Large",
+  children: "LARGE",
 };
 
 export const Compact = Template.bind({});
 Compact.args = {
   size: "compact",
   variant: "outlined",
-  children: "Compact",
+  children: "COMPACT",
 };

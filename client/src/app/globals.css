@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer base {
+  body {
+    @apply bg-white dark:bg-black duration-config;
+  }
+
   h1 {
     @apply font-bold 
            text-sm laptop:text-base laptopHD:text-lg;

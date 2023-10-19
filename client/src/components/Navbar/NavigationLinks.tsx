@@ -5,10 +5,10 @@ import { usePathname } from "next/navigation";
 import React from "react";
 
 export function NavigationLinks() {
-  const pathname = usePathname();
+  const pathname = usePathname() || "";
 
   return (
-    <div className="flex gap-7 select-none">
+    <div id="navigation-links" className="flex gap-7 select-none">
       {!pathname.includes("/login") ? (
         <Link href="/login">
           <p>LOGIN</p>
