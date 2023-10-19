@@ -25,6 +25,10 @@
 }
 
 @layer components {
+  .icon {
+    @apply dark:invert transition duration-config select-none;
+  }
+
   .page-wrapper {
     @apply flex flex-col items-center justify-center h-full w-full pt-[94px]
            tablet:pt-[96px]

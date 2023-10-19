@@ -5,7 +5,7 @@ import React from "react";
 export function ToggleSidebarButton() {
   return (
     <button onClick={() => console.log("toggle sidebar")}>
-      <div className="dark:invert">{openSidebarIcon}</div>
+      <div className="icon">{openSidebarIcon}</div>
     </button>
   );
 }

@@ -53,7 +53,7 @@ const ThemeBlock = styled.div<{ left?: boolean; fill?: boolean }>(
       justify-content: center;
       align-items: center;
       background-color: ${theme};
-    `,
+    `
 );
 
 export const WithColorScheme: Decorator = (Story, context) => {

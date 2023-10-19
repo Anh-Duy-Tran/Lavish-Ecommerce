@@ -17,7 +17,7 @@ export function Navbar() {
               alt="lavish-logo"
               width={0}
               height={0}
-              className="dark:invert h-full w-auto transition duration-config"
+              className="icon h-full w-auto"
             />
           </Link>
         </div>

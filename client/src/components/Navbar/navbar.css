@@ -17,9 +17,6 @@
 
   .navbar-logo-wrapper {
     @apply flex absolute h-full w-full left-0 py-4 invisible justify-center
-           tablet:visible
-           /* temp */
-           border border-yellow-500
-           /*  */;
+           tablet:visible;
   }
 }
