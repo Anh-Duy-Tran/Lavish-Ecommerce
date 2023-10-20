@@ -1,1 +1,1 @@
-export { Slider, Slide } from "./Slider";
+export { Slider } from "./Slider";

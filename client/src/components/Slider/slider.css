@@ -13,6 +13,14 @@
     @apply w-full h-full flex-shrink-0;
   }
 
+  .slider-overlay-container {
+    @apply w-full h-full relative;
+  }
+
+  .slide-overlay-container {
+    @apply w-full h-full absolute z-10;
+  }
+
   .slide-left-button {
     @apply fixed top-[50%] left-3 rotate-180 hover:left-2 hover:scale-90 z-30 p-4 transition-all duration-config;
   }

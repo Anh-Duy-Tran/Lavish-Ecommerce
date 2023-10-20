@@ -9,77 +9,118 @@ interface SliderProps {
   children: React.ReactNode;
   arrow?: boolean;
   direction?: "horizontal" | "vertical";
-  buttonNav?: boolean;
+  type?: "slide" | "overlay";
+  discreteInput?: boolean;
 }
 
 export function Slider({
   children,
   arrow,
-  buttonNav,
+  discreteInput = false,
+  type = "slide",
   direction = "horizontal",
 }: SliderProps) {
-  const { dragging, mouse, handleMouseDown } = useMousePosition();
+  const { dragging, dragDirection, mouse, handleMouseDown } =
+    useMousePosition();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [squareRef, { width, height }] = useElementSize();
   const [thisDragging, setThisDragging] = useState(false);
 
   useEffect(() => {
+    setThisDragging((prev) => (dragging === true ? prev : false));
+  }, [dragging]);
+
+  useEffect(() => {
+    const correctDiscreteInput = !discreteInput || direction === dragDirection;
     const totalSlide = Children.count(children);
     const handleChangeSlide = (n: number) => {
       setCurrentSlide((prev) =>
         prev + n >= totalSlide ? totalSlide - 1 : prev + n < 0 ? 0 : prev + n
       );
     };
-    if (!dragging) {
+    if (thisDragging && !dragging) {
       const threshold = 0.35;
-      const prev =
-        direction === "horizontal"
+      const prevOffset = correctDiscreteInput
+        ? direction === "horizontal"
           ? mouse.offSetX / width
-          : mouse.offSetY / height;
+          : mouse.offSetY / height
+        : 0;
 
-      if (prev > threshold) {
+      if (prevOffset > threshold) {
         handleChangeSlide(-1);
-      } else if (prev < -threshold) {
+      } else if (prevOffset < -threshold) {
         handleChangeSlide(1);
       }
+
       setThisDragging(false);
     }
-  }, [children, direction, dragging, height, mouse, width]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [thisDragging, dragging]);
 
-  useEffect(() => {
-    const handleArrowKeyPress = (e: KeyboardEvent) => {
-      if (direction === "horizontal") {
-        switch (e.key) {
-          case "ArrowLeft":
-            setCurrentSlide((prev) => prev - 1);
-            break;
-          case "ArrowRight":
-            setCurrentSlide((prev) => prev + 1);
-            break;
-          default:
-            break;
-        }
-      } else {
-        switch (e.key) {
-          case "ArrowUp":
-            setCurrentSlide((prev) => prev - 1);
-            break;
-          case "ArrowDown":
-            setCurrentSlide((prev) => prev + 1);
-            break;
-          default:
-            break;
-        }
-      }
-    };
+  // useEffect(() => {
+  //   const totalSlide = Children.count(children);
+  //   const handleChangeSlide = (n: number) => {
+  //     setCurrentSlide((prev) =>
+  //       prev + n >= totalSlide ? totalSlide - 1 : prev + n < 0 ? 0 : prev + n
+  //     );
+  //   };
+  //   const handleArrowKeyPress = (e: KeyboardEvent) => {
+  //     if (direction === "horizontal") {
+  //       switch (e.key) {
+  //         case "ArrowLeft":
+  //           handleChangeSlide(-1);
+  //           break;
+  //         case "ArrowRight":
+  //           handleChangeSlide(+1);
+  //           break;
+  //         default:
+  //           break;
+  //       }
+  //     } else {
+  //       switch (e.key) {
+  //         case "ArrowUp":
+  //           handleChangeSlide(-1);
+  //           break;
+  //         case "ArrowDown":
+  //           handleChangeSlide(+1);
+  //           break;
+  //         default:
+  //           break;
+  //       }
+  //     }
+  //   };
 
-    document.addEventListener("keydown", handleArrowKeyPress);
+  //   document.addEventListener("keydown", handleArrowKeyPress);
 
-    // Remove the event listener on unmount
-    return () => {
-      document.removeEventListener("keydown", handleArrowKeyPress);
-    };
-  }, [buttonNav, children, direction]);
+  //   // Remove the event listener on unmount
+  //   return () => {
+  //     document.removeEventListener("keydown", handleArrowKeyPress);
+  //   };
+  // }, [buttonNav, children, direction, type]);
+
+  const correctDiscreteInput = !discreteInput || direction === dragDirection;
+
+  // slide standard calculation
+  const offsetHorizontal =
+    thisDragging && correctDiscreteInput
+      ? (mouse.offSetX * 100) / width - 100 * currentSlide
+      : -100 * currentSlide;
+
+  const offsetVertical =
+    thisDragging && correctDiscreteInput
+      ? (mouse.offSetY * 100) / height - 100 * currentSlide
+      : -100 * currentSlide;
+
+  // slide overlay calculation
+  const offsetCurrentSlide =
+    thisDragging && correctDiscreteInput
+      ? Math.max(mouse.offSetY * 100, 0) / height
+      : 0;
+
+  const offsetNextSlide =
+    thisDragging && correctDiscreteInput
+      ? Math.min(mouse.offSetY * 100, 0) / height + 100
+      : 100;
 
   return (
     <>
@@ -106,35 +147,59 @@ export function Slider({
           </button>
         </>
       ) : null}
-      <div
-        onMouseDown={(e) => {
-          setThisDragging(true);
-          handleMouseDown(e);
-        }}
-        style={{
-          transition: "transform 700ms cubic-bezier(.17,.79,.42,1)",
-          transform:
+      {type === "slide" ? (
+        // type slide
+        <div
+          onMouseDown={(e) => {
+            setThisDragging(true);
+            handleMouseDown(e);
+          }}
+          style={{
+            transition: "transform 700ms cubic-bezier(.17,.79,.42,1)",
+            transform:
+              direction === "horizontal"
+                ? `translateX(${offsetHorizontal}%)`
+                : `translateY(${offsetVertical}%)`,
+          }}
+          ref={squareRef}
+          className={
             direction === "horizontal"
-              ? thisDragging
-                ? `translateX(${
-                    (mouse.offSetX * 100) / width - 100 * currentSlide
-                  }%)`
-                : `translateX(${-100 * currentSlide}%)`
-              : thisDragging
-              ? `translateY(${
-                  (mouse.offSetY * 100) / height - 100 * currentSlide
-                }%)`
-              : `translateY(${-100 * currentSlide}%)`,
-        }}
-        ref={squareRef}
-        className={
-          direction === "horizontal"
-            ? "slider-container"
-            : "slider-vertical-container"
-        }
-      >
-        {children}
-      </div>
+              ? "slider-container"
+              : "slider-vertical-container"
+          }
+        >
+          {Children.toArray(children).map((child, i) => (
+            <Slide key={i}>{child}</Slide>
+          ))}
+        </div>
+      ) : (
+        // type overlay
+        <div
+          onMouseDown={(e) => {
+            setThisDragging(true);
+            handleMouseDown(e);
+          }}
+          ref={squareRef}
+          className="slider-overlay-container"
+        >
+          {Children.toArray(children).map((child, i) => (
+            <SlideOverlay
+              translateY={
+                i === currentSlide
+                  ? offsetCurrentSlide
+                  : i === currentSlide + 1
+                  ? offsetNextSlide
+                  : i < currentSlide
+                  ? 0
+                  : 100
+              }
+              key={i}
+            >
+              {child}
+            </SlideOverlay>
+          ))}
+        </div>
+      )}
     </>
   );
 }
@@ -143,8 +208,25 @@ interface SlideProps {
   children: React.ReactNode;
 }
 
-export function Slide({ children }: SlideProps) {
+function Slide({ children }: SlideProps) {
   return <div className="slide-container">{children}</div>;
+}
+
+function SlideOverlay({
+  children,
+  translateY,
+}: SlideProps & { translateY: number }) {
+  return (
+    <div
+      className="slide-overlay-container"
+      style={{
+        transform: `translateY(${translateY}%)`,
+        transition: "transform 700ms cubic-bezier(.17,.79,.42,1)",
+      }}
+    >
+      {children}
+    </div>
+  );
 }
 
 const arrowIcon = (
