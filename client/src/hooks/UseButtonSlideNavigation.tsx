@@ -1,6 +1,6 @@
 "use client";
 
-import { useMousePosition } from "@/context/useMousePosition";
+import { useMousePosition } from "@/context/useMousePositionStore";
 import { useEffect } from "react";
 
 export function UseStartMouseListener() {
