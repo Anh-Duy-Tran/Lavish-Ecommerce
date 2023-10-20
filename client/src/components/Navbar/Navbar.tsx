@@ -13,6 +13,7 @@ export function Navbar() {
         <div className="page-container">
           <Link href={"/"} style={{ zIndex: 11 }}>
             <Image
+              priority
               src="/lavish.svg"
               alt="lavish-logo"
               width={0}

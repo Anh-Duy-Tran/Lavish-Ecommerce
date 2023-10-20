@@ -1,0 +1,1 @@
+export { HighlightSlider } from "./HighlightSlider";

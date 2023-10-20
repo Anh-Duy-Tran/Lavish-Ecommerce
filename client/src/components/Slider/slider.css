@@ -1,0 +1,11 @@
+@tailwind components;
+
+@layer components {
+  .slider-container {
+    @apply flex w-full h-full align-super overflow-hidden;
+  }
+
+  .slide-container {
+    @apply w-full h-full flex-shrink-0;
+  }
+}
