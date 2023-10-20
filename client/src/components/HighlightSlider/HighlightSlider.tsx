@@ -5,6 +5,7 @@ import { useCategoryStore } from "@/context/useCategoryStore";
 import Image from "next/image";
 
 export function HighlightSlider() {
+  // const categories = useCategoryStore.getState().categories;
   const categories = useCategoryStore.getState().categories;
 
   return (
@@ -24,10 +25,13 @@ export function HighlightSlider() {
               {category.highlightSrcs.map((src) => (
                 <div key={src} className="relative h-full w-auto">
                   <Image
-                    style={{ userSelect: "none", pointerEvents: "none" }}
+                    style={{
+                      userSelect: "none",
+                      pointerEvents: "none",
+                      objectFit: "cover",
+                    }}
                     priority
                     fill
-                    objectFit="cover"
                     src={src}
                     alt={src}
                   />
@@ -35,74 +39,6 @@ export function HighlightSlider() {
               ))}
             </Slider>
           ))}
-          {/* <Slider
-            type="overlay"
-            direction="vertical"
-            discreteInput
-            buttonNav
-            id={0}
-          >
-            <p>
-              111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
-            </p>
-            <p>
-              222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
-            </p>
-            <p>
-              333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
-            </p>
-          </Slider>
-          <Slider
-            type="overlay"
-            direction="vertical"
-            discreteInput
-            buttonNav
-            id={1}
-          >
-            <p>
-              111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
-            </p>
-            <p>
-              222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
-            </p>
-            <p>
-              333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
-            </p>
-          </Slider>
-          <Slider
-            type="overlay"
-            direction="vertical"
-            discreteInput
-            buttonNav
-            id={2}
-          >
-            <p>
-              111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
-            </p>
-            <p>
-              222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
-            </p>
-            <p>
-              333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
-            </p>
-          </Slider>
-          <Slider
-            type="overlay"
-            direction="vertical"
-            discreteInput
-            buttonNav
-            id={3}
-          >
-            <p>
-              111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
-            </p>
-            <p>
-              222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
-            </p>
-            <p>
-              333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
-            </p>
-          </Slider> */}
         </SliderSyncWithStore>
       </div>
     </>

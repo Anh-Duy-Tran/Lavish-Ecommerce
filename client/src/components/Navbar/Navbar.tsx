@@ -5,13 +5,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { ToggleSidebarButton } from "./ToggleSidebarButton";
 import { NavigationLinks } from "./NavigationLinks";
-import mockData from "./mockdata.json";
 import { useCategoryStore } from "@/context/useCategoryStore";
 
-export async function Navbar() {
-  const fetch = await Promise.resolve(mockData);
-
-  useCategoryStore.setState({ categories: fetch });
+export function Navbar() {
+  const categories = useCategoryStore.getState().categories;
+  console.log(categories);
 
   return (
     <div className="navbar-component">
