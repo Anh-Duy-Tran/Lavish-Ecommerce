@@ -9,7 +9,7 @@ export function UseStartMouseListener() {
   useEffect(() => {
     window.document.documentElement.addEventListener(
       "mousemove",
-      handleMouseMove
+      handleMouseMove,
     );
 
     window.document.documentElement.addEventListener("mouseup", handleMouseUp);
@@ -17,11 +17,11 @@ export function UseStartMouseListener() {
     return () => {
       window.document.documentElement.removeEventListener(
         "mousemove",
-        handleMouseMove
+        handleMouseMove,
       );
       window.document.documentElement.removeEventListener(
         "mouseup",
-        handleMouseUp
+        handleMouseUp,
       );
     };
   }, [handleMouseMove, handleMouseUp]);

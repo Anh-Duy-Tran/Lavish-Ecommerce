@@ -31,14 +31,14 @@ export function SliderSyncWithStore(props: SliderProps) {
       switch (e.key) {
         case "ArrowLeft":
           setCurrentCategoryIndex(
-            currentCategoryIndex - 1 < 0 ? 0 : currentCategoryIndex - 1
+            currentCategoryIndex - 1 < 0 ? 0 : currentCategoryIndex - 1,
           );
           break;
         case "ArrowRight":
           setCurrentCategoryIndex(
             currentCategoryIndex + 1 > totalSlide - 1
               ? totalSlide - 1
-              : currentCategoryIndex + 1
+              : currentCategoryIndex + 1,
           );
           break;
         default:
@@ -97,7 +97,7 @@ export function Slider({
           break;
         case "ArrowDown":
           setCurrentSlide((prev) =>
-            prev + 1 > totalSlide - 1 ? totalSlide - 1 : prev + 1
+            prev + 1 > totalSlide - 1 ? totalSlide - 1 : prev + 1,
           );
           break;
         default:
@@ -128,7 +128,7 @@ export function Slider({
     const totalSlide = Children.count(children);
     const handleChangeSlide = (n: number) => {
       setCurrentSlide((prev) =>
-        prev + n >= totalSlide ? totalSlide - 1 : prev + n < 0 ? 0 : prev + n
+        prev + n >= totalSlide ? totalSlide - 1 : prev + n < 0 ? 0 : prev + n,
       );
     };
     if (thisDragging && !dragging) {
