@@ -25,8 +25,38 @@ export function SliderSyncWithStore(props: SliderProps) {
   // get current slide index from UIStore
   const { currentCategoryIndex, setCurrentCategoryIndex } = useUIStore();
 
+  useEffect(() => {
+    const totalSlide = Children.count(props.children);
+    const handleArrowKeyPress = (e: KeyboardEvent) => {
+      switch (e.key) {
+        case "ArrowLeft":
+          setCurrentCategoryIndex(
+            currentCategoryIndex - 1 < 0 ? 0 : currentCategoryIndex - 1
+          );
+          break;
+        case "ArrowRight":
+          setCurrentCategoryIndex(
+            currentCategoryIndex + 1 > totalSlide - 1
+              ? totalSlide - 1
+              : currentCategoryIndex + 1
+          );
+          break;
+        default:
+          break;
+      }
+    };
+
+    document.addEventListener("keydown", handleArrowKeyPress);
+
+    // Remove the event listener on unmount
+    return () => {
+      document.removeEventListener("keydown", handleArrowKeyPress);
+    };
+  }, [currentCategoryIndex, props.children, setCurrentCategoryIndex]);
+
   return (
     <Slider
+      buttonNav
       {...props}
       crrSlide={currentCategoryIndex}
       onChange={setCurrentCategoryIndex}
@@ -45,6 +75,7 @@ export function Slider({
   type = "slide",
   direction = "horizontal",
 }: SliderProps) {
+  const { currentCategoryIndex } = useUIStore();
   const { dragging, dragDirection, mouse, handleMouseDown } =
     useMousePosition();
   const [currentSlide, setCurrentSlide] = useState(crrSlide);
@@ -55,6 +86,32 @@ export function Slider({
     setThisDragging((prev) => (dragging === true ? prev : false));
   }, [dragging]);
 
+  // Arrow Button navigation hook
+  useEffect(() => {
+    const totalSlide = Children.count(children);
+    const handleArrowKeyPress = (e: KeyboardEvent) => {
+      if (!buttonNav || currentCategoryIndex !== id) return;
+      switch (e.key) {
+        case "ArrowUp":
+          setCurrentSlide((prev) => (prev - 1 < 0 ? 0 : prev - 1));
+          break;
+        case "ArrowDown":
+          setCurrentSlide((prev) =>
+            prev + 1 > totalSlide - 1 ? totalSlide - 1 : prev + 1
+          );
+          break;
+        default:
+          break;
+      }
+    };
+
+    document.addEventListener("keydown", handleArrowKeyPress);
+
+    // Remove the event listener on unmount
+    return () => {
+      document.removeEventListener("keydown", handleArrowKeyPress);
+    };
+  }, [buttonNav, children, currentCategoryIndex, id]);
 
   // Sync with global state for slide
   useEffect(() => {

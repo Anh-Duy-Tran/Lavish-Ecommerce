@@ -8,7 +8,13 @@ export function HighlightSlider() {
       <UseStartMouseListener />
       <div className="w-screen h-screen overflow-hidden">
         <SliderSyncWithStore discreteInput arrow>
-          <Slider type="overlay" direction="vertical" discreteInput id={0}>
+          <Slider
+            type="overlay"
+            direction="vertical"
+            discreteInput
+            buttonNav
+            id={0}
+          >
             <p>
               111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
             </p>
@@ -19,7 +25,13 @@ export function HighlightSlider() {
               333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
             </p>
           </Slider>
-          <Slider type="overlay" direction="vertical" discreteInput>
+          <Slider
+            type="overlay"
+            direction="vertical"
+            discreteInput
+            buttonNav
+            id={1}
+          >
             <p>
               111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
             </p>
@@ -30,7 +42,13 @@ export function HighlightSlider() {
               333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
             </p>
           </Slider>
-          <Slider type="overlay" direction="vertical" discreteInput>
+          <Slider
+            type="overlay"
+            direction="vertical"
+            discreteInput
+            buttonNav
+            id={2}
+          >
             <p>
               111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
             </p>
@@ -41,7 +59,24 @@ export function HighlightSlider() {
               333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
             </p>
           </Slider>
-        </SliderSyncWithStore >
+          <Slider
+            type="overlay"
+            direction="vertical"
+            discreteInput
+            buttonNav
+            id={3}
+          >
+            <p>
+              111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+            </p>
+            <p>
+              222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
+            </p>
+            <p>
+              333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
+            </p>
+          </Slider>
+        </SliderSyncWithStore>
       </div>
     </>
   );
