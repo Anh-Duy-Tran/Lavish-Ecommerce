@@ -23,48 +23,19 @@ export function Slider({
   const [squareRef, { width, height }] = useElementSize();
   const [thisDragging, setThisDragging] = useState(false);
 
-  const totalSlide = Children.count(children);
-  const handleChangeSlide = (n: number) => {
-    setCurrentSlide((prev) =>
-      prev + n >= totalSlide ? totalSlide - 1 : prev + n < 0 ? 0 : prev + n
-    );
-  };
-
-  const handleArrowKeyPress = (e: KeyboardEvent) => {
-    if (direction === "horizontal") {
-      switch (e.key) {
-        case "ArrowLeft":
-          handleChangeSlide(-1);
-          break;
-        case "ArrowRight":
-          handleChangeSlide(1);
-          break;
-        default:
-          break;
-      }
-    } else {
-      switch (e.key) {
-        case "ArrowUp":
-          handleChangeSlide(-1);
-          break;
-        case "ArrowDown":
-          handleChangeSlide(1);
-          break;
-        default:
-          break;
-      }
-    }
-  };
-
   useEffect(() => {
+    const totalSlide = Children.count(children);
+    const handleChangeSlide = (n: number) => {
+      setCurrentSlide((prev) =>
+        prev + n >= totalSlide ? totalSlide - 1 : prev + n < 0 ? 0 : prev + n
+      );
+    };
     if (!dragging) {
       const threshold = 0.35;
       const prev =
         direction === "horizontal"
           ? mouse.offSetX / width
           : mouse.offSetY / height;
-
-          console.log(mouse);
 
       if (prev > threshold) {
         handleChangeSlide(-1);
@@ -73,17 +44,42 @@ export function Slider({
       }
       setThisDragging(false);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dragging]);
+  }, [children, direction, dragging, height, mouse, width]);
 
   useEffect(() => {
+    const handleArrowKeyPress = (e: KeyboardEvent) => {
+      if (direction === "horizontal") {
+        switch (e.key) {
+          case "ArrowLeft":
+            setCurrentSlide((prev) => prev - 1);
+            break;
+          case "ArrowRight":
+            setCurrentSlide((prev) => prev + 1);
+            break;
+          default:
+            break;
+        }
+      } else {
+        switch (e.key) {
+          case "ArrowUp":
+            setCurrentSlide((prev) => prev - 1);
+            break;
+          case "ArrowDown":
+            setCurrentSlide((prev) => prev + 1);
+            break;
+          default:
+            break;
+        }
+      }
+    };
+
     document.addEventListener("keydown", handleArrowKeyPress);
 
     // Remove the event listener on unmount
     return () => {
       document.removeEventListener("keydown", handleArrowKeyPress);
     };
-  }, [buttonNav]);
+  }, [buttonNav, children, direction]);
 
   return (
     <>
@@ -92,16 +88,19 @@ export function Slider({
           <button
             className="icon slide-left-button"
             style={{ visibility: currentSlide > 0 ? "visible" : "hidden" }}
-            onClick={() => handleChangeSlide(-1)}
+            onClick={() => setCurrentSlide((prev) => prev - 1)}
           >
             {arrowIcon}
           </button>
           <button
             className="icon slide-right-button"
             style={{
-              visibility: currentSlide < totalSlide - 1 ? "visible" : "hidden",
+              visibility:
+                currentSlide < Children.count(children) - 1
+                  ? "visible"
+                  : "hidden",
             }}
-            onClick={() => handleChangeSlide(1)}
+            onClick={() => setCurrentSlide((prev) => prev + 1)}
           >
             {arrowIcon}
           </button>
