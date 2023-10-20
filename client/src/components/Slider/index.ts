@@ -1,1 +1,1 @@
-export { Slider } from "./Slider";
+export { Slider, SliderSyncWithStore } from "./Slider";

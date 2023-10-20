@@ -4,6 +4,7 @@ import React, { Children, useEffect, useState } from "react";
 import "./slider.css";
 import { useElementSize } from "usehooks-ts";
 import { useMousePosition } from "@/context/useMousePosition";
+import { useUIStore } from "@/context/useUIStore";
 
 interface SliderProps {
   children: React.ReactNode;
@@ -11,24 +12,59 @@ interface SliderProps {
   direction?: "horizontal" | "vertical";
   type?: "slide" | "overlay";
   discreteInput?: boolean;
+
+  crrSlide?: number;
+  onChange?: (i: number) => void;
+
+  // for arrow keyboard button navigation
+  buttonNav?: boolean;
+  id?: number;
+}
+
+export function SliderSyncWithStore(props: SliderProps) {
+  // get current slide index from UIStore
+  const { currentCategoryIndex, setCurrentCategoryIndex } = useUIStore();
+
+  return (
+    <Slider
+      {...props}
+      crrSlide={currentCategoryIndex}
+      onChange={setCurrentCategoryIndex}
+    />
+  );
 }
 
 export function Slider({
   children,
   arrow,
+  id,
+  onChange = () => {},
+  crrSlide = 0,
+  buttonNav = false,
   discreteInput = false,
   type = "slide",
   direction = "horizontal",
 }: SliderProps) {
   const { dragging, dragDirection, mouse, handleMouseDown } =
     useMousePosition();
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState(crrSlide);
   const [squareRef, { width, height }] = useElementSize();
   const [thisDragging, setThisDragging] = useState(false);
 
   useEffect(() => {
     setThisDragging((prev) => (dragging === true ? prev : false));
   }, [dragging]);
+
+
+  // Sync with global state for slide
+  useEffect(() => {
+    setCurrentSlide(crrSlide);
+  }, [crrSlide]);
+
+  useEffect(() => {
+    onChange(currentSlide);
+  }, [currentSlide, onChange]);
+  //
 
   useEffect(() => {
     const correctDiscreteInput = !discreteInput || direction === dragDirection;
@@ -56,47 +92,6 @@ export function Slider({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [thisDragging, dragging]);
-
-  // useEffect(() => {
-  //   const totalSlide = Children.count(children);
-  //   const handleChangeSlide = (n: number) => {
-  //     setCurrentSlide((prev) =>
-  //       prev + n >= totalSlide ? totalSlide - 1 : prev + n < 0 ? 0 : prev + n
-  //     );
-  //   };
-  //   const handleArrowKeyPress = (e: KeyboardEvent) => {
-  //     if (direction === "horizontal") {
-  //       switch (e.key) {
-  //         case "ArrowLeft":
-  //           handleChangeSlide(-1);
-  //           break;
-  //         case "ArrowRight":
-  //           handleChangeSlide(+1);
-  //           break;
-  //         default:
-  //           break;
-  //       }
-  //     } else {
-  //       switch (e.key) {
-  //         case "ArrowUp":
-  //           handleChangeSlide(-1);
-  //           break;
-  //         case "ArrowDown":
-  //           handleChangeSlide(+1);
-  //           break;
-  //         default:
-  //           break;
-  //       }
-  //     }
-  //   };
-
-  //   document.addEventListener("keydown", handleArrowKeyPress);
-
-  //   // Remove the event listener on unmount
-  //   return () => {
-  //     document.removeEventListener("keydown", handleArrowKeyPress);
-  //   };
-  // }, [buttonNav, children, direction, type]);
 
   const correctDiscreteInput = !discreteInput || direction === dragDirection;
 
