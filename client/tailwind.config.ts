@@ -11,6 +11,7 @@ const config: Config = withTV({
   theme: {
     extend: {
       width: {
+        inherit: "inherit",
         mobile: "100%",
         tablet: "676px",
         laptop: "892px",
