@@ -10,7 +10,7 @@ export type MousePositionType = {
 type MousePositionStore = {
   mouse: MousePositionType;
   dragging: boolean;
-  handleMouseDown: (e: React.MouseEvent<HTMLUListElement>) => void;
+  handleMouseDown: (e: React.MouseEvent<HTMLDivElement>) => void;
   handleMouseMove: (e: MouseEvent) => void;
   handleMouseUp: () => void;
 };
@@ -31,6 +31,8 @@ export const useMousePosition = create<MousePositionStore>()((set) => ({
         ...mouse,
         x: e.clientX,
         y: e.clientY,
+        offSetX: 0,
+        offSetY: 0,
       },
       dragging: true,
     })),
@@ -47,7 +49,6 @@ export const useMousePosition = create<MousePositionStore>()((set) => ({
     }),
   handleMouseUp: () =>
     set(() => ({
-      mouse: defaultValue,
       dragging: false,
     })),
 }));

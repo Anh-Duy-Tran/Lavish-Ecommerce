@@ -2,10 +2,22 @@
 
 @layer components {
   .slider-container {
-    @apply flex w-full h-full align-super overflow-hidden;
+    @apply flex w-full h-full;
+  }
+
+  .slider-vertical-container {
+    @apply flex flex-col w-full h-full;
   }
 
   .slide-container {
     @apply w-full h-full flex-shrink-0;
+  }
+
+  .slide-left-button {
+    @apply fixed top-[50%] left-3 rotate-180 hover:left-2 hover:scale-90 z-30 p-4 transition-all duration-config;
+  }
+
+  .slide-right-button {
+    @apply fixed top-[50%] right-3 hover:right-2 hover:scale-90 z-30 p-4 transition-all duration-config;
   }
 }

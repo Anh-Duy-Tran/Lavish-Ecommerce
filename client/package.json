@@ -24,6 +24,7 @@
     "react-dom": "^18",
     "tailwind-merge": "^1.14.0",
     "tailwind-variants": "^0.1.14",
+    "usehooks-ts": "^2.9.1",
     "zustand": "^4.4.3"
   },
   "devDependencies": {
