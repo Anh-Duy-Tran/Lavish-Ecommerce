@@ -13,7 +13,7 @@ export function HighlightSlider() {
     <>
       <UseStartMouseListener />
       <div className="flex absolute w-full left-0 justify-center">
-        <div className="page-container mt-2 ml-[-17px] add-padding-top z-30">
+        <div className="page-container mt-2 ml-[-17px] add-padding-top z-20">
           <SidebarCategoryButton />
         </div>
       </div>

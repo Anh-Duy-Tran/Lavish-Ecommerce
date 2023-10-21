@@ -35,7 +35,7 @@ export function LoginForm() {
   return (
     <div className="login-form-container">
       <div className="login-form-grid">
-        <div className="grid-item">
+        <div className="login-form-grid-item">
           <h1>LOG IN TO YOUR ACCOUNT</h1>
           <form noValidate onSubmit={handleSubmit(onSubmit)}>
             <InputField
@@ -43,7 +43,7 @@ export function LoginForm() {
               type="email"
               name="email"
               register={register("email")}
-              helperText="Enter you email address."
+              helperText="Enter your email address."
               control={control}
             />
             <InputField
@@ -63,7 +63,7 @@ export function LoginForm() {
             </Button>
           </form>
         </div>
-        <div className="grid-item">
+        <div className="login-form-grid-item">
           <h1>NEED AN ACCOUNT?</h1>
           <Link href={"/register"} passHref>
             <Button variant="outlined" fullWidth>

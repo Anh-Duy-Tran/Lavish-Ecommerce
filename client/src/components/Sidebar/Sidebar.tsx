@@ -19,7 +19,7 @@ export function Sidebar() {
             isSidebarOpen ? " opacity-100 visible" : " opacity-0 invisible"
           }`}
         >
-          <div className="add-padding-top mt-[-20px] z-30">
+          <div className="add-padding-top mt-[-20px] z-30 ml-3 tablet:ml-0">
             {pathname !== "/" ? <SidebarCategoryButton /> : <div />}
           </div>
         </div>

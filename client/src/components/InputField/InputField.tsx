@@ -32,13 +32,13 @@ export function InputField<T extends FieldValues>({
   ...props
 }: InputFieldProps<T>) {
   const [hasValue, setHasValue] = useState(!!defaultValue);
-  const { onBlur, ...registerFunc } = register
+  const { onChange, ...registerFunc } = register
     ? register
-    : { onBlur: () => {} };
+    : { onChange: () => {} };
 
-  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.FocusEvent<HTMLInputElement>) => {
     setHasValue(e.target.value.length !== 0);
-    onBlur(e);
+    onChange(e);
   };
 
   const {
@@ -54,12 +54,12 @@ export function InputField<T extends FieldValues>({
         {...registerFunc}
         {...props}
         name={name}
-        onBlur={handleBlur}
+        onChange={handleChange}
         className={twMerge(inputFieldVariant({ error: !!error }), className)}
       />
       <label
         className={`absolute opacity-50 origin-left peer-focus:-translate-y-5 peer-focus:scale-75 
-        transition-all linear duration-config select-none ${
+        transition-all linear duration-config select-none pointer-events-none ${
           hasValue ? "-translate-y-5 scale-75" : ""
         }`}
       >
@@ -67,11 +67,12 @@ export function InputField<T extends FieldValues>({
       </label>
 
       <div
-        className={`flex items-center gap-3 mt-0.5 dark:fill-white peer-focus:visible ${
+        className={twMerge(
+          `flex items-center gap-3 mt-0.5 dark:fill-white peer-focus:visible`,
           error
             ? "text-red-500 fill-red-500 dark:fill-red-500 visible"
-            : "invisible"
-        }`}
+            : "invisible",
+        )}
       >
         {(error && error.message) || helperText ? infoIcon : null}
         <h3 className="">{(error && error.message) || helperText}</h3>

@@ -1,18 +1,18 @@
 @tailwind components;
 
 @layer components {
-  .login-form-container {
+  .register-form-container {
     @apply w-full p-5 tablet:p-0 tablet:mt-[40px];
   }
 
-  .login-form-grid {
-    @apply grid grid-cols-1 gap-10 max-w-7xl 
+  .register-form-grid {
+    @apply grid grid-cols-1 tablet:gap-10 max-w-6xl 
            tablet:grid-cols-2 tablet:mr-12
            laptop:mr-24 items-stretch
            desktop:gap-24;
   }
 
-  .login-form-grid-item {
+  .register-form-grid-item {
     @apply flex flex-col w-full gap-8;
   }
 }
