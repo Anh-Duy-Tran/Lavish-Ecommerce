@@ -3,10 +3,11 @@
 import React from "react";
 import "./loginForm.css";
 import { InputField } from "../InputField/InputField";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { Button } from "../Button";
+import Link from "next/link";
 
 export type LoginFormType = {
   email: string;
@@ -21,20 +22,22 @@ export function LoginForm() {
     password: Yup.string().required("Required field."),
   });
 
-  const { register, control, formState } = useForm<LoginFormType>({
+  const { handleSubmit, register, control } = useForm<LoginFormType>({
     mode: "all",
     resolver: yupResolver(validationSchema),
     reValidateMode: "onChange",
   });
 
-  console.log(formState);
+  const onSubmit: SubmitHandler<LoginFormType> = async (data) => {
+    console.log(data);
+  };
 
   return (
-    <div className="w-full p-2 tablet:p-0">
+    <div className="login-form-container">
       <div className="login-form-grid">
         <div className="grid-item">
           <h1>LOG IN TO YOUR ACCOUNT</h1>
-          <form>
+          <form noValidate onSubmit={handleSubmit(onSubmit)}>
             <InputField
               title="E-MAIL"
               type="email"
@@ -62,9 +65,11 @@ export function LoginForm() {
         </div>
         <div className="grid-item">
           <h1>NEED AN ACCOUNT?</h1>
-          <Button variant="outlined" fullWidth>
-            REGISTER
-          </Button>
+          <Link href={"/register"} passHref>
+            <Button variant="outlined" fullWidth>
+              REGISTER
+            </Button>
+          </Link>
         </div>
       </div>
     </div>

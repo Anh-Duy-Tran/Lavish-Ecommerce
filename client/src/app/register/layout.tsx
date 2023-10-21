@@ -1,9 +1,9 @@
 import React from "react";
-interface LoginLayoutProps {
+interface RegisterLayoutProps {
   children: React.ReactNode;
 }
 
-export default function LoginLayout({ children }: LoginLayoutProps) {
+export default function RegisterLayout({ children }: RegisterLayoutProps) {
   return (
     <div className="page-wrapper">
       <div className="page-container">{children}</div>
