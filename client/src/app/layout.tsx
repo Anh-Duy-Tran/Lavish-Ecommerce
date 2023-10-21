@@ -6,6 +6,8 @@ import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { useCategoryStore } from "@/context/useCategoryStore";
 import mockData from "./mockdata.json";
+import { Sidebar } from "@/components/Sidebar";
+import CategoryStoreInitializer from "@/hooks/CategoryStoreInitializer";
 
 export const font = Montserrat({
   weight: ["200", "400", "700"],
@@ -29,9 +31,11 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body>
+        <CategoryStoreInitializer categories={fetch} />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <main className={font.className}>
             <Navbar />
+            <Sidebar />
             {children}
           </main>
         </ThemeProvider>

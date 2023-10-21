@@ -4,7 +4,11 @@
 
 @layer base {
   body {
-    @apply bg-white dark:bg-black duration-config;
+    @apply bg-white dark:bg-black transition duration-config;
+  }
+
+  main {
+    @apply relative;
   }
 
   h1 {
@@ -33,8 +37,18 @@
     @apply dark:invert transition duration-config select-none;
   }
 
+  /* not using this? */
   .page-wrapper {
     @apply flex flex-col items-center justify-center h-full w-full pt-[94px]
+           tablet:pt-[96px]
+           laptopHD:pt-[128px]
+           desktop:pt-[142px]
+           desktopHD:pt-[160px]
+           wide:pt-[192px];
+  }
+
+  .add-padding-top {
+    @apply pt-[94px]
            tablet:pt-[96px]
            laptopHD:pt-[128px]
            desktop:pt-[142px]
