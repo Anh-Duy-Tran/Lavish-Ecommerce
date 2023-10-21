@@ -42,7 +42,7 @@ export function Button({
 
 const buttonVariant = tv({
   base: "relative box-border text-fg dark:text-dfg bg-transparent px-4 py-2 cursor-pointer \
-       active:bg-gray-100/20 dark:active:bg-gray-800/20 transition duration-config",
+       active:bg-gray-100/20 dark:active:bg-gray-800/20 transition duration-config select-none",
   variants: {
     variant: {
       contained:

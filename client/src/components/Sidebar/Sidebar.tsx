@@ -12,9 +12,13 @@ export function Sidebar() {
   const pathname = usePathname() || "/";
 
   return (
-    <div className={`sidebar-wrapper${!isSidebarOpen ? " hidden" : " flex"}`}>
+    <div className={`sidebar-wrapper`}>
       <div className="page-container">
-        <div className="sidebar-container">
+        <div
+          className={`sidebar-container${
+            isSidebarOpen ? " opacity-100 visible" : " opacity-0 invisible"
+          }`}
+        >
           <div className="add-padding-top mt-[-20px] z-30">
             {pathname !== "/" ? <SidebarCategoryButton /> : <div />}
           </div>

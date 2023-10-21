@@ -2,7 +2,7 @@
 
 @layer components {
   .sidebar-wrapper {
-    @apply absolute w-full top-0 tablet:top-2 left-0 justify-center;
+    @apply absolute flex w-full top-0 tablet:top-2 left-0 justify-center;
   }
 
   .sidebar-container {
@@ -10,9 +10,10 @@
            z-20 tablet:ml-[-10px]
            border border-black dark:border-white
            bg-white dark:bg-black
-           tablet:w-[350px] tablet:h-[50vh]
-           laptop:w-[400px]
-           desktop:w-[500px] desktop:h-[60vh]
+           transition-opacity duration-config
+           tablet:w-[330px] tablet:h-[60vh]
+           laptopHD:w-[400px]
+           desktop:w-[500px] desktop:h-[65vh]
            desktopHD:w-[550px]
            wide:w-[600px] wide:h-[70vh];
   }
