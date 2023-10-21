@@ -71,7 +71,7 @@ export function InputField<T extends FieldValues>({
           `flex items-center gap-3 mt-0.5 dark:fill-white peer-focus:visible`,
           error
             ? "text-red-500 fill-red-500 dark:fill-red-500 visible"
-            : "invisible"
+            : "invisible",
         )}
       >
         {(error && error.message) || helperText ? infoIcon : null}
