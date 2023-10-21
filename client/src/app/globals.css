@@ -12,7 +12,7 @@
   }
 
   h1 {
-    @apply font-bold 
+    @apply font-normal 
            text-sm laptop:text-base laptopHD:text-lg;
   }
 
@@ -22,6 +22,11 @@
   }
 
   p {
+    @apply font-normal 
+           text-sm laptopHD:text-base;
+  }
+
+  input {
     @apply font-normal 
            text-sm laptopHD:text-base;
   }
@@ -37,7 +42,6 @@
     @apply dark:invert transition duration-config select-none;
   }
 
-  /* not using this? */
   .page-wrapper {
     @apply flex flex-col items-center justify-center h-full w-full pt-[94px]
            tablet:pt-[96px]
@@ -57,7 +61,7 @@
   }
 
   .page-container {
-    @apply flex relative
+    @apply flex relative w-full
            tablet:w-tablet
            laptop:w-laptop
            laptopHD:w-laptopHD
