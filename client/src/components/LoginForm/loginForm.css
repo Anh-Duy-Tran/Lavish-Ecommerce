@@ -2,7 +2,7 @@
 
 @layer components {
   .login-form-container {
-    @apply w-full p-2 tablet:p-0 tablet:mt-[40px];
+    @apply w-full p-5 tablet:p-0 tablet:mt-[40px];
   }
 
   .login-form-grid {
