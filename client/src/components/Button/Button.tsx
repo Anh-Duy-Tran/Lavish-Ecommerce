@@ -32,7 +32,7 @@ export function Button({
     >
       <div
         className={`absolute bg-fg dark:bg-dfg transform -translate-x-1/2 
-        -translate-y-1/2 left-1/2 bottom-0 h-[2px] transition-width duration-100 ease-in`}
+        -translate-y-1/2 left-1/2 bottom-0 h-[2px] transition duration-100 ease-in`}
         style={{ width: active ? "25px" : "0px" }}
       />
       <h2>{children}</h2>

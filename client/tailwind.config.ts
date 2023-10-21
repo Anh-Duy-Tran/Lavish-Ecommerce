@@ -13,9 +13,9 @@ const config: Config = withTV({
       width: {
         inherit: "inherit",
         mobile: "100%",
-        tablet: "676px",
-        laptop: "892px",
-        laptopHD: "1180px",
+        tablet: "606px",
+        laptop: "852px",
+        laptopHD: "1130px",
         desktop: "1372px",
         desktopHS: "1564px",
         wide: "1996px",

@@ -1,0 +1,15 @@
+@tailwind components;
+
+@layer components {
+  .sidebar-wrapper {
+    @apply absolute w-full top-0 tablet:top-2 left-0 justify-center;
+  }
+
+  .sidebar-container {
+    @apply w-screen h-screen 
+           z-20 tablet:ml-[-10px]
+           border border-black dark:border-white
+           bg-white dark:bg-black
+           tablet:w-[350px] laptop:w-[400px] tablet:h-[90vh];
+  }
+}
