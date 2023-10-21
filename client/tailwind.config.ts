@@ -40,7 +40,7 @@ const config: Config = withTV({
         dfg: "#fff",
       },
       transitionDuration: {
-        config: "200ms",
+        config: "300ms",
       },
     },
     screens: {

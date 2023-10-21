@@ -1,9 +1,12 @@
 "use client";
 
-import { useCategoryStore } from "@/context/useCategoryStore";
+import {
+  CategoryStoreType,
+  useCategoryStore,
+} from "@/context/useCategoryStore";
 import { useRef } from "react";
 
-function CategoryStoreInitializer(props) {
+function CategoryStoreInitializer(props: Partial<CategoryStoreType>) {
   const initialized = useRef(false);
   if (!initialized.current) {
     useCategoryStore.setState(props);

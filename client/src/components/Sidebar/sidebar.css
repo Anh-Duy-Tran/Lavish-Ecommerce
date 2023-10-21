@@ -10,6 +10,10 @@
            z-20 tablet:ml-[-10px]
            border border-black dark:border-white
            bg-white dark:bg-black
-           tablet:w-[350px] laptop:w-[400px] tablet:h-[90vh];
+           tablet:w-[350px] tablet:h-[50vh]
+           laptop:w-[400px]
+           desktop:w-[500px] desktop:h-[60vh]
+           desktopHD:w-[550px]
+           wide:w-[600px] wide:h-[70vh];
   }
 }

@@ -27,12 +27,12 @@ export function Button({
       {...props}
       className={twMerge(
         buttonVariant({ variant, size, fullWidth }),
-        className,
+        className
       )}
     >
       <div
         className={`absolute bg-fg dark:bg-dfg transform -translate-x-1/2 
-        -translate-y-1/2 left-1/2 bottom-0 h-[2px] transition duration-100 ease-in`}
+        -translate-y-1/2 left-1/2 bottom-0 h-[2px] transition-width duration-100`}
         style={{ width: active ? "25px" : "0px" }}
       />
       <h2>{children}</h2>
@@ -42,7 +42,7 @@ export function Button({
 
 const buttonVariant = tv({
   base: "relative box-border text-fg dark:text-dfg bg-transparent px-4 py-2 cursor-pointer \
-       active:bg-gray-100 dark:active:bg-gray-800 transition-colors duration-config",
+       active:bg-gray-100/20 dark:active:bg-gray-800/20 transition duration-config",
   variants: {
     variant: {
       contained:

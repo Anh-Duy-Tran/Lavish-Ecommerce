@@ -35,7 +35,7 @@ export default async function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <main className={font.className}>
             <Navbar />
-            <Sidebar />
+            {/* <Sidebar /> */}
             {children}
           </main>
         </ThemeProvider>

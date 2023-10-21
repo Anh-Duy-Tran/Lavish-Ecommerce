@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-white dark:bg-black duration-config;
+    @apply bg-white dark:bg-black transition duration-config;
   }
 
   main {

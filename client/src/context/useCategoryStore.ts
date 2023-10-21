@@ -1,11 +1,11 @@
 import { create } from "zustand";
 
-type Category = {
+export type Category = {
   name: string;
   highlightSrcs: string[];
 };
 
-interface CategoryStoreType {
+export interface CategoryStoreType {
   categories: Category[];
   setCategories: (categories: Category[]) => void;
 }
