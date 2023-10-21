@@ -4,7 +4,7 @@ import { useRef } from "react";
 
 type SetStateFunction<T> = (
   partial: T | Partial<T> | ((state: T) => T | Partial<T>),
-  replace?: boolean
+  replace?: boolean,
 ) => void;
 
 type StoreInitializerProps<T> = {
