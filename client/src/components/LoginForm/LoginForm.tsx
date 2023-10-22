@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import "./loginForm.css";
 import { InputField } from "../InputField/InputField";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -8,13 +8,21 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { Button } from "../Button";
 import Link from "next/link";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export type LoginFormType = {
   email: string;
   password: string;
 };
 
-export function LoginForm() {
+interface LoginFormProps {
+  callbackUrl?: string;
+  error?: string;
+}
+
+export function LoginForm({ callbackUrl, error }: LoginFormProps) {
+  const router = useRouter();
   const validationSchema = Yup.object().shape({
     email: Yup.string()
       .required("Required field.")
@@ -28,8 +36,23 @@ export function LoginForm() {
     reValidateMode: "onChange",
   });
 
+  useEffect(() => {
+    if (error) {
+      alert("Wrong credentials");
+    }
+  }, [error]);
+
   const onSubmit: SubmitHandler<LoginFormType> = async (data) => {
-    console.log(data);
+    const signInResponse = await signIn("credentials", {
+      ...data,
+      redirect: false,
+    });
+
+    console.log(signInResponse);
+
+    if (signInResponse?.ok) {
+      router.push(callbackUrl ? callbackUrl : "/");
+    }
   };
 
   return (

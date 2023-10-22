@@ -1,6 +1,10 @@
 import { LoginForm } from "@/components/LoginForm";
 import React from "react";
 
-export default function LoginPage() {
-  return <LoginForm />;
+interface pageProps {
+  searchParams?: Record<"callbackUrl" | "error", string>;
+}
+
+export default function page({ searchParams }: pageProps) {
+  return <LoginForm {...searchParams} />;
 }
