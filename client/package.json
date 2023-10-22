@@ -20,6 +20,7 @@
     "@mui/base": "^5.0.0-beta.19",
     "@mui/system": "^5.14.13",
     "next": "13.5.4",
+    "next-auth": "^4.24.3",
     "next-themes": "^0.2.1",
     "react": "^18",
     "react-dom": "^18",
