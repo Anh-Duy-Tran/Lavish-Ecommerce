@@ -15,11 +15,12 @@ interface UIStoreType {
 
   isMessageModalOpen: boolean;
   messageModalContent: MessageModalContent;
+  closeMessageModal: () => void;
   setMessageModalContent: (content: MessageModalContent) => void;
   setLoadingModalContent: <T>(
     promise: Promise<T>,
-    resolver: (input: T) => MessageModalContent
-  ) => void;
+    resolver: (input: T) => MessageModalContent | null
+  ) => Promise<T>;
 }
 
 export const useUIStore = create<UIStoreType>()((set) => ({
@@ -32,16 +33,40 @@ export const useUIStore = create<UIStoreType>()((set) => ({
 
   isMessageModalOpen: false,
   messageModalContent: { title: "", message: "" },
+  // should not close message modal when the loading attribute is true
+  closeMessageModal: () =>
+    set(({ isMessageModalOpen, messageModalContent }) => ({
+      isMessageModalOpen: messageModalContent.loading
+        ? isMessageModalOpen
+        : false,
+    })),
   setMessageModalContent: (content) =>
-    set(() => ({ messageModalContent: { ...content, loading: false } })),
+    set(() => ({
+      isMessageModalOpen: true,
+      messageModalContent: { ...content, loading: false },
+    })),
   setLoadingModalContent: async <T>(
     promise: Promise<T>,
-    resolver: (input: T) => MessageModalContent
+    resolver: (input: T) => MessageModalContent | null
   ) => {
     set(({ messageModalContent }) => ({
+      isMessageModalOpen: true,
       messageModalContent: { ...messageModalContent, loading: true },
     }));
-    const content = await promise.then(resolver);
-    set(() => ({ messageModalContent: { ...content, loading: false } }));
+    let response;
+    const content = await promise.then((res) => {
+      response = res;
+      return resolver(res);
+    });
+    if (content !== null) {
+      set(() => ({
+        messageModalContent: { ...content, loading: false },
+      }));
+    } else {
+      set(() => ({
+        isMessageModalOpen: false,
+      }));
+    }
+    return response as T;
   },
 }));

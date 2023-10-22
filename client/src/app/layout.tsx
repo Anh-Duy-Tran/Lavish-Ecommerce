@@ -9,6 +9,7 @@ import mockData from "./mockdata.json";
 import { Sidebar } from "@/components/Sidebar";
 import CategoryStoreInitializer from "@/hooks/CategoryStoreInitializer";
 import { AuthProvider } from "@/context/AuthProvider";
+import { MessageModal } from "@/components/MessageModal";
 
 export const font = Montserrat({
   weight: ["200", "400", "700"],
@@ -36,6 +37,7 @@ export default async function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <AuthProvider>
             <main className={font.className}>
+              <MessageModal />
               <Navbar />
               <Sidebar />
               {children}

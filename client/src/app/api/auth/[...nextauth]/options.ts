@@ -2,6 +2,7 @@ import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 export const options: NextAuthOptions = {
+  secret: process.env.NEXTAUTH_URL,
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -31,9 +32,13 @@ export const options: NextAuthOptions = {
           credentials?.email === user.email &&
           credentials?.password === user.password
         ) {
-          return user;
+          return await new Promise((resolve) =>
+            setTimeout(() => resolve(user), 3000)
+          );
         } else {
-          return null;
+          return await new Promise((resolve) =>
+            setTimeout(() => resolve(null), 3000)
+          );
         }
       },
     }),
