@@ -19,7 +19,7 @@ interface UIStoreType {
   setMessageModalContent: (content: MessageModalContent) => void;
   setLoadingModalContent: <T>(
     promise: Promise<T>,
-    resolver: (input: T) => MessageModalContent | null
+    resolver: (input: T) => MessageModalContent | null,
   ) => Promise<T>;
 }
 
@@ -47,17 +47,19 @@ export const useUIStore = create<UIStoreType>()((set) => ({
     })),
   setLoadingModalContent: async <T>(
     promise: Promise<T>,
-    resolver: (input: T) => MessageModalContent | null
+    resolver: (input: T) => MessageModalContent | null,
   ) => {
     set(({ messageModalContent }) => ({
       isMessageModalOpen: true,
       messageModalContent: { ...messageModalContent, loading: true },
     }));
     let response;
-    const content = await promise.then((res) => {
-      response = res;
-      return resolver(res);
-    });
+    const content = await promise
+      .then((res) => {
+        response = res;
+        return resolver(res);
+      })
+      .catch((err) => ({ title: "Unexpected Error", message: err }));
     if (content !== null) {
       set(() => ({
         messageModalContent: { ...content, loading: false },

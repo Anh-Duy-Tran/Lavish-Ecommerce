@@ -52,7 +52,10 @@ export function LoginForm({ error }: LoginFormProps) {
         ...data,
         redirect: false,
       }),
-      (input) => (input?.ok ? null : { title: "error", message: "error" })
+      (input) =>
+        input?.ok
+          ? null
+          : { title: "LOGIN FAILED", message: "Wrong credentials" },
     );
 
     if (signInResponse?.ok) {

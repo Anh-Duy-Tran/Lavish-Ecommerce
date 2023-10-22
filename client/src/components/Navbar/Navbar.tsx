@@ -5,11 +5,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { ToggleSidebarButton } from "./ToggleSidebarButton";
 import { NavigationLinks } from "./NavigationLinks";
-import { useCategoryStore } from "@/context/useCategoryStore";
+// import { useCategoryStore } from "@/context/useCategoryStore";
 
 export function Navbar() {
-  const categories = useCategoryStore.getState().categories;
-  console.log(categories);
+  // const categories = useCategoryStore.getState().categories;
+  // console.log(categories);
 
   return (
     <div className="navbar-component">

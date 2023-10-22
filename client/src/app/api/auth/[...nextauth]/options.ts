@@ -33,11 +33,11 @@ export const options: NextAuthOptions = {
           credentials?.password === user.password
         ) {
           return await new Promise((resolve) =>
-            setTimeout(() => resolve(user), 3000)
+            setTimeout(() => resolve(user), 3000),
           );
         } else {
           return await new Promise((resolve) =>
-            setTimeout(() => resolve(null), 3000)
+            setTimeout(() => resolve(null), 3000),
           );
         }
       },
