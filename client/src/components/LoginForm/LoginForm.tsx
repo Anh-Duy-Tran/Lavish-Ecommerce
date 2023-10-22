@@ -10,6 +10,7 @@ import { Button } from "../Button";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useUIStore } from "@/context/useUIStore";
 
 export type LoginFormType = {
   email: string;
@@ -21,8 +22,11 @@ interface LoginFormProps {
   error?: string;
 }
 
-export function LoginForm({ callbackUrl, error }: LoginFormProps) {
+export function LoginForm({ error }: LoginFormProps) {
   const router = useRouter();
+
+  const { setLoadingModalContent } = useUIStore();
+
   const validationSchema = Yup.object().shape({
     email: Yup.string()
       .required("Required field.")
@@ -43,15 +47,19 @@ export function LoginForm({ callbackUrl, error }: LoginFormProps) {
   }, [error]);
 
   const onSubmit: SubmitHandler<LoginFormType> = async (data) => {
-    const signInResponse = await signIn("credentials", {
-      ...data,
-      redirect: false,
-    });
-
-    console.log(signInResponse);
+    const signInResponse = await setLoadingModalContent(
+      signIn("credentials", {
+        ...data,
+        redirect: false,
+      }),
+      (input) =>
+        input?.ok
+          ? null
+          : { title: "LOGIN FAILED", message: "Wrong credentials" },
+    );
 
     if (signInResponse?.ok) {
-      router.push(callbackUrl ? callbackUrl : "/");
+      router.back();
     }
   };
 
