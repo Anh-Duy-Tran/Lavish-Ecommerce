@@ -26,8 +26,8 @@ jobs:
 
       - name: Install dependencies and build
         run: |
-            npm install
-            npm run build
+          npm install
+          npm run build
 
   lint:
     runs-on: ubuntu-latest
@@ -53,5 +53,3 @@ jobs:
 
       - name: Run Prettier (check)
         run: npm run prettier
-
-
