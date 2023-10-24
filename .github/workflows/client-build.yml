@@ -13,7 +13,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: ./client
+        working-directory: .
 
     steps:
       - name: Checkout code
@@ -26,15 +26,15 @@ jobs:
 
       - name: Install dependencies and build
         run: |
-            npm install
-            npm run build
+          npm install
+          npm run build
 
   lint:
     runs-on: ubuntu-latest
 
     defaults:
       run:
-        working-directory: ./client
+        working-directory: .
 
     steps:
       - name: Checkout code
@@ -53,5 +53,3 @@ jobs:
 
       - name: Run Prettier (check)
         run: npm run prettier
-
-
