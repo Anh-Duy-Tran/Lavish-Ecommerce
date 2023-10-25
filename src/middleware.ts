@@ -17,8 +17,8 @@ function getLocale(request: NextRequest) {
 }
 
 export function middleware(request: NextRequest) {
-  // Check if the pathname ends with .svg
-  console.log(request.nextUrl.pathname);
+  // Check if the pathname ends with .svg or is requesting api
+
   if (
     request.nextUrl.pathname.startsWith("/api") ||
     request.nextUrl.pathname.endsWith(".svg")
@@ -29,7 +29,7 @@ export function middleware(request: NextRequest) {
   // Check if there is any supported locale in the pathname
   const { pathname } = request.nextUrl;
   const pathnameHasLocale = locales.some(
-    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
+    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`,
   );
 
   if (pathnameHasLocale) return;
