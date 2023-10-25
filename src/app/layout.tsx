@@ -8,9 +8,9 @@ import { Sidebar } from "@/components/Sidebar";
 import { AuthProvider } from "@/context/AuthProvider";
 import { MessageModal } from "@/components/MessageModal";
 import { getClient } from "@/lib/graphql";
-import { FetchCategoriesDocument } from "@/gql/graphql";
 import CategoryStoreInitializer from "@/hooks/CategoryStoreInitializer";
-import { useCategoryStore } from "@/context/useCategoryStore";
+import { CategoriesType, useCategoryStore } from "@/context/useCategoryStore";
+import { FetchCategoriesDocument } from "@/gql/graphql";
 
 export const font = Montserrat({
   weight: ["200", "400", "700"],
@@ -31,12 +31,16 @@ export default async function RootLayout({
     await getClient().query(FetchCategoriesDocument, {})
   ).data?.categories?.categoriesCollection?.items;
 
-  useCategoryStore.setState({ categories: fetchedCategories });
+  useCategoryStore.setState({
+    categories: fetchedCategories as CategoriesType,
+  });
 
   return (
     <html lang="en">
       <body>
-        <CategoryStoreInitializer categories={fetchedCategories} />
+        <CategoryStoreInitializer
+          categories={fetchedCategories as CategoriesType}
+        />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <AuthProvider>
             <main className={font.className}>

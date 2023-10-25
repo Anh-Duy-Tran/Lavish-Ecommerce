@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import "./loginForm.css";
 import { InputField } from "../InputField/InputField";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -17,12 +17,7 @@ export type LoginFormType = {
   password: string;
 };
 
-interface LoginFormProps {
-  callbackUrl?: string;
-  error?: string;
-}
-
-export function LoginForm({ error }: LoginFormProps) {
+export function LoginForm() {
   const router = useRouter();
 
   const { setLoadingModalContent } = useUIStore();
@@ -39,12 +34,6 @@ export function LoginForm({ error }: LoginFormProps) {
     resolver: yupResolver(validationSchema),
     reValidateMode: "onChange",
   });
-
-  useEffect(() => {
-    if (error) {
-      alert("Wrong credentials");
-    }
-  }, [error]);
 
   const onSubmit: SubmitHandler<LoginFormType> = async (data) => {
     const signInResponse = await setLoadingModalContent(
