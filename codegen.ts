@@ -13,15 +13,15 @@ const config: CodegenConfig = {
     },
   ],
 
-  config: {
-    nonOptionalTypename: false,
-  },
-
   documents: ["src/graphql/*.graphql"],
   ignoreNoDocuments: true, // for better experience with the watcher
   generates: {
     "./src/gql/": {
       preset: "client",
+      config: {
+        avoidOptionals: true,
+        skipTypeName: true,
+      },
     },
   },
 };
