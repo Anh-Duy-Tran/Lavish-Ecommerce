@@ -9,6 +9,8 @@ import { AuthProvider } from "@/context/AuthProvider";
 import { MessageModal } from "@/components/MessageModal";
 import { getClient } from "@/lib/graphql";
 import { FetchCategoriesDocument } from "@/gql/graphql";
+import CategoryStoreInitializer from "@/hooks/CategoryStoreInitializer";
+import { useCategoryStore } from "@/context/useCategoryStore";
 
 export const font = Montserrat({
   weight: ["200", "400", "700"],
@@ -25,18 +27,16 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const fetchedCategories = await getClient().query(
-    FetchCategoriesDocument,
-    {}
-  );
-  
-  console.log(fetchedCategories.data?.categories?.categoriesCollection?.items);
+  const fetchedCategories = (
+    await getClient().query(FetchCategoriesDocument, {})
+  ).data?.categories?.categoriesCollection?.items;
 
+  useCategoryStore.setState({ categories: fetchedCategories });
 
   return (
     <html lang="en">
       <body>
-        {/* <CategoryStoreInitializer categories={fetchedCategories} /> */}
+        <CategoryStoreInitializer categories={fetchedCategories} />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <AuthProvider>
             <main className={font.className}>
