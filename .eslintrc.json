@@ -7,7 +7,7 @@
     "plugin:react-hooks/recommended",
     "plugin:storybook/recommended"
   ],
-  "ignorePatterns": ["dist"],
+  "ignorePatterns": ["dist", "gql"],
   "parser": "@typescript-eslint/parser",
   "overrides": [
     // Only uses Testing Library lint rules in test files

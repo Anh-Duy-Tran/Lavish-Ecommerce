@@ -13,7 +13,7 @@ export default async function Home() {
       return a;
     },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    {} as { [key: string]: any }
+    {} as { [key: string]: any },
   );
 
   useCategoryStore.setState({ categoryHighlights: fetchedCategories });
