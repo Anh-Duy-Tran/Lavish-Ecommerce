@@ -1,0 +1,20 @@
+query FetchCategories {
+    categories(id: "1Dxj0jPKVb5TgkZ2RYRp7x") {
+        categoriesCollection(limit: 3) {
+            items {
+                name
+                isRootCategory
+                displayName
+                slug
+                subCategoriesCollection {
+                    items {
+                        name
+                        isRootCategory
+                        displayName
+                        slug
+                    }
+                }
+            }
+        }
+    }
+}

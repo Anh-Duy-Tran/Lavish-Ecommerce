@@ -1,0 +1,21 @@
+query FetchCategoryHighlights {
+  categoryHighlightCollection(limit: 3) {
+    items {
+      category {
+        slug
+      }
+      highlightSlidesCollection(limit: 10) {
+        items {
+          theme
+          media {
+            url
+          }
+          category {
+            slug
+            displayName
+          }
+        }
+      }
+    }
+  }
+}
