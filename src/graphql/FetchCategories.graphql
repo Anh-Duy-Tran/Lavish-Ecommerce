@@ -1,12 +1,12 @@
-query FetchCategories {
-  categories(id: "1Dxj0jPKVb5TgkZ2RYRp7x") {
-    categoriesCollection(limit: 5) {
+query FetchCategories($lang: String!) {
+  categories(id: "1Dxj0jPKVb5TgkZ2RYRp7x", locale: $lang) {
+    categoriesCollection(limit: 3) {
       items {
         name
         isRootCategory
         displayName
         slug
-        subCategoriesCollection(limit: 50) {
+        subCategoriesCollection {
           items {
             name
             isRootCategory

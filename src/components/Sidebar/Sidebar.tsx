@@ -6,6 +6,7 @@ import { useUIStore } from "@/context/useUIStore";
 import { usePathname } from "next/navigation";
 import React from "react";
 import { Button } from "@/components/Button";
+import { isRootPath } from "@/utils/isRootPath";
 
 export function Sidebar() {
   const { isSidebarOpen } = useUIStore();
@@ -20,7 +21,7 @@ export function Sidebar() {
           }`}
         >
           <div className="add-padding-top mt-[-20px] z-30 ml-3 tablet:ml-0">
-            {pathname !== "/" ? <SidebarCategoryButton /> : <div />}
+            {!isRootPath(pathname) ? <SidebarCategoryButton /> : <div />}
           </div>
         </div>
       </div>
@@ -40,7 +41,7 @@ export function SidebarCategoryButton() {
           key={i}
           onClick={() => setCurrentCategoryIndex(i)}
         >
-          {category.name}
+          {category.displayName}
         </Button>
       ))}
     </div>
