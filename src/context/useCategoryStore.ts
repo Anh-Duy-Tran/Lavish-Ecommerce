@@ -1,15 +1,19 @@
-import { FetchCategoriesQuery } from "@/gql/graphql";
+import {
+  FetchCategoriesQuery,
+  FetchCategoryHighlightsQuery,
+} from "@/gql/graphql";
 import { create } from "zustand";
+import { DeepNonNullable, ValuesType } from "utility-types";
 
-type CategoriesCollectionType = NonNullable<
-  FetchCategoriesQuery["categories"]
->["categoriesCollection"];
-type CategoriesType = NonNullable<CategoriesCollectionType>["items"];
+type CategoriesType =
+  DeepNonNullable<FetchCategoriesQuery>["categories"]["categoriesCollection"]["items"];
+export type HighLightsType = ValuesType<
+  DeepNonNullable<FetchCategoryHighlightsQuery>["categoryHighlightCollection"]["items"]
+>["highlightSlidesCollection"]["items"];
 
 export interface CategoryStoreType {
   categories: CategoriesType;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  categoryHighlights: Record<string, any>;
+  categoryHighlights: Record<string, HighLightsType>;
   setCategories: (categories: CategoriesType) => void;
 }
 

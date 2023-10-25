@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@emotion/styled": "^11.11.0",
+    "@graphql-codegen/typescript-document-nodes": "^4.0.1",
     "@hookform/resolvers": "^3.3.2",
     "@mui/base": "^5.0.0-beta.19",
     "@mui/system": "^5.14.13",
@@ -41,6 +42,7 @@
     "zustand": "^4.4.3"
   },
   "devDependencies": {
+    "utility-types": "^3.10.0",
     "@graphql-codegen/cli": "^5.0.0",
     "@graphql-codegen/client-preset": "^4.1.0",
     "@next/eslint-plugin-next": "^13.5.4",
