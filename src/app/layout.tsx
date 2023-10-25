@@ -4,12 +4,13 @@ import { Montserrat } from "next/font/google";
 import { ThemeProvider } from "./theme-prodiver";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
-import { useCategoryStore } from "@/context/useCategoryStore";
-import mockData from "./mockdata.json";
 import { Sidebar } from "@/components/Sidebar";
-import CategoryStoreInitializer from "@/hooks/CategoryStoreInitializer";
 import { AuthProvider } from "@/context/AuthProvider";
 import { MessageModal } from "@/components/MessageModal";
+import { getClient } from "@/lib/graphql";
+import CategoryStoreInitializer from "@/hooks/CategoryStoreInitializer";
+import { CategoriesType, useCategoryStore } from "@/context/useCategoryStore";
+import { FetchCategoriesDocument } from "@/gql/graphql";
 
 export const font = Montserrat({
   weight: ["200", "400", "700"],
@@ -26,14 +27,20 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const fetch = await Promise.resolve(mockData);
+  const fetchedCategories = (
+    await getClient().query(FetchCategoriesDocument, {})
+  ).data?.categories?.categoriesCollection?.items;
 
-  useCategoryStore.setState({ categories: fetch });
+  useCategoryStore.setState({
+    categories: fetchedCategories as CategoriesType,
+  });
 
   return (
     <html lang="en">
       <body>
-        <CategoryStoreInitializer categories={fetch} />
+        <CategoryStoreInitializer
+          categories={fetchedCategories as CategoriesType}
+        />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <AuthProvider>
             <main className={font.className}>

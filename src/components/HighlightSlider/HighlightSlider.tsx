@@ -6,8 +6,7 @@ import Image from "next/image";
 import { SidebarCategoryButton } from "../Sidebar/Sidebar";
 
 export function HighlightSlider() {
-  // const categories = useCategoryStore.getState().categories;
-  const categories = useCategoryStore.getState().categories;
+  const { categories, categoryHighlights } = useCategoryStore.getState();
 
   return (
     <>
@@ -19,7 +18,7 @@ export function HighlightSlider() {
       </div>
       <div className="w-screen h-screen overflow-hidden">
         <SliderSyncWithStore discreteInput arrow>
-          {categories.map((category, i) => (
+          {categories.map(({ slug }, i) => (
             <Slider
               type="overlay"
               direction="vertical"
@@ -28,8 +27,8 @@ export function HighlightSlider() {
               key={i}
               id={i}
             >
-              {category.highlightSrcs.map((src) => (
-                <div key={src} className="relative h-full w-auto">
+              {categoryHighlights[slug]?.map(({ media }) => (
+                <div key={media.url} className="relative h-full w-auto">
                   <Image
                     style={{
                       userSelect: "none",
@@ -38,8 +37,8 @@ export function HighlightSlider() {
                     }}
                     priority
                     fill
-                    src={src}
-                    alt={src}
+                    src={media.url}
+                    alt={media.url}
                   />
                 </div>
               ))}
