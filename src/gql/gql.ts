@@ -13,7 +13,7 @@ import { TypedDocumentNode as DocumentNode } from "@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-  'query FetchCategories {\n  categories(id: "1Dxj0jPKVb5TgkZ2RYRp7x") {\n    categoriesCollection(limit: 5) {\n      items {\n        name\n        isRootCategory\n        displayName\n        slug\n        subCategoriesCollection(limit: 50) {\n          items {\n            name\n            isRootCategory\n            displayName\n            slug\n          }\n        }\n      }\n    }\n  }\n}':
+  'query FetchCategories($lang: String!) {\n  categories(id: "1Dxj0jPKVb5TgkZ2RYRp7x", locale: $lang) {\n    categoriesCollection(limit: 3) {\n      items {\n        name\n        isRootCategory\n        displayName\n        slug\n        subCategoriesCollection {\n          items {\n            name\n            isRootCategory\n            displayName\n            slug\n          }\n        }\n      }\n    }\n  }\n}':
     types.FetchCategoriesDocument,
   "query FetchCategoryHighlights {\n  categoryHighlightCollection(limit: 3) {\n    items {\n      category {\n        slug\n      }\n      highlightSlidesCollection(limit: 10) {\n        items {\n          theme\n          media {\n            url\n          }\n          category {\n            slug\n            displayName\n          }\n        }\n      }\n    }\n  }\n}":
     types.FetchCategoryHighlightsDocument,
@@ -37,8 +37,8 @@ export function graphql(source: string): unknown;
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: 'query FetchCategories {\n  categories(id: "1Dxj0jPKVb5TgkZ2RYRp7x") {\n    categoriesCollection(limit: 5) {\n      items {\n        name\n        isRootCategory\n        displayName\n        slug\n        subCategoriesCollection(limit: 50) {\n          items {\n            name\n            isRootCategory\n            displayName\n            slug\n          }\n        }\n      }\n    }\n  }\n}',
-): (typeof documents)['query FetchCategories {\n  categories(id: "1Dxj0jPKVb5TgkZ2RYRp7x") {\n    categoriesCollection(limit: 5) {\n      items {\n        name\n        isRootCategory\n        displayName\n        slug\n        subCategoriesCollection(limit: 50) {\n          items {\n            name\n            isRootCategory\n            displayName\n            slug\n          }\n        }\n      }\n    }\n  }\n}'];
+  source: 'query FetchCategories($lang: String!) {\n  categories(id: "1Dxj0jPKVb5TgkZ2RYRp7x", locale: $lang) {\n    categoriesCollection(limit: 3) {\n      items {\n        name\n        isRootCategory\n        displayName\n        slug\n        subCategoriesCollection {\n          items {\n            name\n            isRootCategory\n            displayName\n            slug\n          }\n        }\n      }\n    }\n  }\n}',
+): (typeof documents)['query FetchCategories($lang: String!) {\n  categories(id: "1Dxj0jPKVb5TgkZ2RYRp7x", locale: $lang) {\n    categoriesCollection(limit: 3) {\n      items {\n        name\n        isRootCategory\n        displayName\n        slug\n        subCategoriesCollection {\n          items {\n            name\n            isRootCategory\n            displayName\n            slug\n          }\n        }\n      }\n    }\n  }\n}'];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

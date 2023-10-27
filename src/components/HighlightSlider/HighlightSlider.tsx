@@ -12,7 +12,7 @@ export function HighlightSlider() {
     <>
       <UseStartMouseListener />
       <div className="flex absolute w-full left-0 justify-center">
-        <div className="page-container mt-2 ml-[-17px] add-padding-top z-20">
+        <div className="page-container mt-2 ml-3 tablet:ml-[-17px] add-padding-top z-20">
           <SidebarCategoryButton />
         </div>
       </div>
@@ -39,6 +39,7 @@ export function HighlightSlider() {
                     fill
                     src={media.url}
                     alt={media.url}
+                    unoptimized
                   />
                 </div>
               ))}
