@@ -36,9 +36,9 @@ export function Sidebar() {
                 currentCategoryIndex
               ].subCategoriesCollection.items.map((category) => {
                 return (
-                  <Button variant="outlined" key={category.slug}>
-                    {category.displayName}
-                  </Button>
+                  <Link key={category.slug} href={`/${category.slug}`}>
+                    <Button variant="outlined">{category.displayName}</Button>
+                  </Link>
                 );
               })}
             </div>

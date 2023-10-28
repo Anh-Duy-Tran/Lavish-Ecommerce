@@ -1,0 +1,33 @@
+query FetchProductVariantsInCategory(
+  $intersectCondition: [ProductVariantFilter!]
+  $unionCondition: [ProductVariantFilter!]
+) {
+  productVariantCollection(
+    where: { AND: $intersectCondition, OR: $unionCondition }
+  ) {
+    items {
+      ref
+      linkedFrom {
+        productCollection(limit: 1) {
+          items {
+            name
+            variantsCollection(limit: 0) {
+              total
+            }
+          }
+        }
+      }
+      attributesCollection(limit: 10) {
+        items {
+          slug
+          name
+        }
+      }
+      mediaCollection(limit: 15) {
+        items {
+          url
+        }
+      }
+    }
+  }
+}
