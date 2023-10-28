@@ -23,7 +23,7 @@
 
   p {
     @apply font-normal 
-           text-sm laptopHD:text-base;
+           text-sm laptopHD:text-base dark:text-white text-black;
   }
 
   input {

@@ -11,7 +11,7 @@ export function UseStartMouseListener() {
       "mousemove",
       handleMouseMove,
     );
-
+    
     window.document.documentElement.addEventListener("mouseup", handleMouseUp);
 
     return () => {

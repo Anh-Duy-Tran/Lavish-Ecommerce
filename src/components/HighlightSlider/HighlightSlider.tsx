@@ -26,6 +26,9 @@ export function HighlightSlider() {
               buttonNav
               key={i}
               id={i}
+              shouldChangeToTheme={categoryHighlights[slug]?.map(
+                (highlight) => highlight.theme as "dark" | "light"
+              )}
             >
               {categoryHighlights[slug]?.map(({ media }) => (
                 <div key={media.url} className="relative h-full w-auto">

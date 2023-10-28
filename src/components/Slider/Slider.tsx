@@ -5,6 +5,7 @@ import "./slider.css";
 import { useElementSize } from "usehooks-ts";
 import { useMousePosition } from "@/context/useMousePositionStore";
 import { useUIStore } from "@/context/useUIStore";
+import { useTheme } from "next-themes";
 
 interface SliderProps {
   children: React.ReactNode;
@@ -19,11 +20,14 @@ interface SliderProps {
   // for arrow keyboard button navigation
   buttonNav?: boolean;
   id?: number;
+
+  shouldChangeToTheme?: ("dark" | "light")[];
 }
 
 export function SliderSyncWithStore(props: SliderProps) {
   // get current slide index from UIStore
   const { currentCategoryIndex, setCurrentCategoryIndex } = useUIStore();
+  const { theme } = useTheme();
 
   useEffect(() => {
     const totalSlide = Children.count(props.children);
@@ -31,14 +35,14 @@ export function SliderSyncWithStore(props: SliderProps) {
       switch (e.key) {
         case "ArrowLeft":
           setCurrentCategoryIndex(
-            currentCategoryIndex - 1 < 0 ? 0 : currentCategoryIndex - 1,
+            currentCategoryIndex - 1 < 0 ? 0 : currentCategoryIndex - 1
           );
           break;
         case "ArrowRight":
           setCurrentCategoryIndex(
             currentCategoryIndex + 1 > totalSlide - 1
               ? totalSlide - 1
-              : currentCategoryIndex + 1,
+              : currentCategoryIndex + 1
           );
           break;
         default:
@@ -51,8 +55,12 @@ export function SliderSyncWithStore(props: SliderProps) {
     // Remove the event listener on unmount
     return () => {
       document.removeEventListener("keydown", handleArrowKeyPress);
+      window.document.documentElement.classList.remove(
+        theme === "dark" ? "light" : "dark"
+      );
+      window.document.documentElement.classList.add(theme as string);
     };
-  }, [currentCategoryIndex, props.children, setCurrentCategoryIndex]);
+  }, [currentCategoryIndex, props.children, setCurrentCategoryIndex, theme]);
 
   return (
     <Slider
@@ -74,6 +82,7 @@ export function Slider({
   discreteInput = false,
   type = "slide",
   direction = "horizontal",
+  shouldChangeToTheme,
 }: SliderProps) {
   const { currentCategoryIndex } = useUIStore();
   const { dragging, dragDirection, mouse, handleMouseDown } =
@@ -97,7 +106,7 @@ export function Slider({
           break;
         case "ArrowDown":
           setCurrentSlide((prev) =>
-            prev + 1 > totalSlide - 1 ? totalSlide - 1 : prev + 1,
+            prev + 1 > totalSlide - 1 ? totalSlide - 1 : prev + 1
           );
           break;
         default:
@@ -121,14 +130,25 @@ export function Slider({
   useEffect(() => {
     onChange(currentSlide);
   }, [currentSlide, onChange]);
-  //
+
+  useEffect(() => {
+    if (currentCategoryIndex === id && shouldChangeToTheme) {
+      const theme = shouldChangeToTheme[currentSlide];
+      setTimeout(() => {
+        window.document.documentElement.classList.remove(
+          theme === "dark" ? "light" : "dark"
+        );
+        window.document.documentElement.classList.add(theme as string);
+      }, 0);
+    }
+  }, [currentCategoryIndex, currentSlide, id, shouldChangeToTheme]);
 
   useEffect(() => {
     const correctDiscreteInput = !discreteInput || direction === dragDirection;
     const totalSlide = Children.count(children);
     const handleChangeSlide = (n: number) => {
       setCurrentSlide((prev) =>
-        prev + n >= totalSlide ? totalSlide - 1 : prev + n < 0 ? 0 : prev + n,
+        prev + n >= totalSlide ? totalSlide - 1 : prev + n < 0 ? 0 : prev + n
       );
     };
     if (thisDragging && !dragging) {

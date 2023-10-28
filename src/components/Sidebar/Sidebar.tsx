@@ -18,8 +18,6 @@ export function Sidebar() {
   const { currentCategoryIndex } = useUIStore();
   const { theme, setTheme } = useTheme();
 
-  console.log(pathname);
-
   return (
     <div className={`sidebar-wrapper`}>
       <div className="page-container">
@@ -33,7 +31,7 @@ export function Sidebar() {
           </div>
 
           <div className="flex-grow">
-            <div className="flex justify-end flex-wrap gap-3 mt-16 p-4 pl-10 desktop:pl-20">
+            <div className="flex justify-end flex-wrap gap-3 mt-16 p-4 pl-20 desktop:pl-14 desktopHD:pl-24">
               {categories[
                 currentCategoryIndex
               ].subCategoriesCollection.items.map((category) => {
