@@ -1,6 +1,5 @@
 import React from "react";
 import "./navbar.css";
-import { ThemeSwitcher } from "../ThemeSwitcher";
 import Link from "next/link";
 import Image from "next/image";
 import { ToggleSidebarButton } from "./ToggleSidebarButton";
@@ -31,9 +30,7 @@ export function Navbar() {
         <ToggleSidebarButton />
         <div className="flex flex-col h-full justify-between items-end">
           <NavigationLinks />
-          <div>
-            <ThemeSwitcher />
-          </div>
+          <div></div>
         </div>
       </div>
     </div>
