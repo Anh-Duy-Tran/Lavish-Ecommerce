@@ -19,6 +19,7 @@
     "predev": "yarn generate"
   },
   "dependencies": {
+    "@boiseitguru/cookie-cutter": "^0.2.1",
     "@emotion/styled": "^11.11.0",
     "@formatjs/intl-localematcher": "^0.4.2",
     "@graphql-codegen/typescript-document-nodes": "^4.0.1",
@@ -29,10 +30,12 @@
     "@types/negotiator": "^0.6.2",
     "@urql/next": "^1.1.0",
     "graphql": "^16.8.1",
+    "i": "^0.3.7",
     "negotiator": "^0.6.3",
     "next": "13.5.4",
     "next-auth": "^4.24.3",
     "next-themes": "^0.2.1",
+    "npm": "^10.2.1",
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.47.0",
