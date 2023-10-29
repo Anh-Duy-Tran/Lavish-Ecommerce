@@ -4,12 +4,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { ToggleSidebarButton } from "./ToggleSidebarButton";
 import { NavigationLinks } from "./NavigationLinks";
-// import { useCategoryStore } from "@/context/useCategoryStore";
+import { Button } from "../Button";
+import { ViewSwitcher } from "./ViewSwitcher";
 
 export function Navbar() {
-  // const categories = useCategoryStore.getState().categories;
-  // console.log(categories);
-
   return (
     <div className="navbar-component">
       <div className="navbar-logo-wrapper">
@@ -30,7 +28,7 @@ export function Navbar() {
         <ToggleSidebarButton />
         <div className="flex flex-col h-full justify-between items-end">
           <NavigationLinks />
-          <div></div>
+          <ViewSwitcher />
         </div>
       </div>
     </div>

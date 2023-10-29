@@ -2,7 +2,7 @@
 
 @layer components {
   .navbar-component {
-    @apply fixed top-0 left-0 w-full h-[48px] z-30
+    @apply fixed top-0 left-0 w-full h-[48px] z-20
            tablet:h-[96px]
            laptopHD:h-[120px]
            desktop:h-[142px]

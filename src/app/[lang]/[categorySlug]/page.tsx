@@ -8,6 +8,8 @@ import React from "react";
 import { FetchProductVariantsInCategoryQuery } from "@/gql/graphql";
 import { DeepNonNullable, ValuesType } from "utility-types";
 import { ProductOverview } from "@/components/ProductOverview/ProductOverview";
+import { ProductFilter } from "@/components/ProductFilter";
+import { UseStartMouseListener } from "@/hooks/UseStartMouseListener";
 
 export type ProductVariantOverviewType = ValuesType<
   DeepNonNullable<FetchProductVariantsInCategoryQuery>["productVariantCollection"]["items"]
@@ -38,9 +40,15 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
       })) as any,
     })
   ).data?.productVariantCollection?.items;
-
-  console.log(productVariants);
-
+  
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return <ProductOverview productVariants={productVariants as any} />;
+  return (
+    <>
+      <ProductFilter/>
+      <UseStartMouseListener/>
+      <div className="add-padding-top mt-20">
+        <ProductOverview productVariants={productVariants as any} />
+      </div>
+    </>
+  );
 }

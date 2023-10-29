@@ -5,7 +5,7 @@ export default function page() {
   return (
     <div className="page-wrapper">
       <div className="page-container">
-        <LoginForm />;
+        <LoginForm />
       </div>
     </div>
   );

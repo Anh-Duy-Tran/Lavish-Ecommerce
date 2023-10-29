@@ -7,6 +7,9 @@ type MessageModalContent = {
 };
 
 interface UIStoreType {
+  viewmode: 0 | 1 | 2;
+  setViewMode: (mode: 0 | 1 | 2) => void;
+
   currentCategoryIndex: number;
   setCurrentCategoryIndex: (i: number) => void;
 
@@ -19,11 +22,14 @@ interface UIStoreType {
   setMessageModalContent: (content: MessageModalContent) => void;
   setLoadingModalContent: <T>(
     promise: Promise<T>,
-    resolver: (input: T) => MessageModalContent | null,
+    resolver: (input: T) => MessageModalContent | null
   ) => Promise<T>;
 }
 
 export const useUIStore = create<UIStoreType>()((set) => ({
+  viewmode: 2,
+  setViewMode: (mode) => set({ viewmode: mode }),
+
   currentCategoryIndex: 0,
   setCurrentCategoryIndex: (i) => set(() => ({ currentCategoryIndex: i })),
 
@@ -47,7 +53,7 @@ export const useUIStore = create<UIStoreType>()((set) => ({
     })),
   setLoadingModalContent: async <T>(
     promise: Promise<T>,
-    resolver: (input: T) => MessageModalContent | null,
+    resolver: (input: T) => MessageModalContent | null
   ) => {
     set(({ messageModalContent }) => ({
       isMessageModalOpen: true,

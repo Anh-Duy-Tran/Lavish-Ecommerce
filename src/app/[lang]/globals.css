@@ -8,32 +8,32 @@
   }
 
   main {
-    @apply relative;
+    @apply flex relative;
   }
 
   h1 {
     @apply font-normal 
-           text-sm laptop:text-base laptopHD:text-lg;
+           text-sm laptop:text-base desktop:text-lg;
   }
 
   h2 {
     @apply font-normal 
-           text-sm laptopHD:text-base;
+           text-sm desktop:text-base;
   }
 
   p {
     @apply font-normal 
-           text-sm laptopHD:text-base dark:text-white text-black;
+           text-sm desktop:text-base dark:text-white text-black;
   }
 
   input {
     @apply font-normal 
-           text-sm laptopHD:text-base;
+           text-sm desktop:text-base;
   }
 
   h3 {
-    @apply font-extralight 
-           text-xxs laptopHD:text-xs;
+    @apply font-normal 
+           text-xs desktop:text-xs;
   }
 }
 
