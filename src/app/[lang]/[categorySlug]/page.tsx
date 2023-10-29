@@ -39,15 +39,15 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       })) as any,
     })
-  ).data?.productVariantCollection?.items;
-  
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ).data?.productVariantCollection?.items as any;
+
   return (
     <>
-      <ProductFilter/>
-      <UseStartMouseListener/>
-      <div className="add-padding-top mt-20">
-        <ProductOverview productVariants={productVariants as any} />
+      <ProductFilter />
+      <UseStartMouseListener />
+      <div className="add-padding-top mt-20 w-full">
+        <ProductOverview productVariants={productVariants} />
       </div>
     </>
   );

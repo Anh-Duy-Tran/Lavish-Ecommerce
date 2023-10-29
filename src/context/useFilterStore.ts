@@ -3,5 +3,5 @@
 // interface FilterStoreType {
 //   attributes: string[],
 
-//   filter: 
+//   filter:
 // }

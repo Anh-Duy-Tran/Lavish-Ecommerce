@@ -13,11 +13,11 @@ export function ProductOverview({ productVariants }: ProductOverviewProps) {
   const { viewmode } = useUIStore();
 
   return (
-    <div className="flex flex-col w-screen justify-center overflow-x-hidden">
+    <div className="flex flex-col justify-center overflow-x-hidden">
       <div
         className={`grid ${
           viewmode === 1
-            ? "grid-cols-2 tablet:grid-cols-6"
+            ? "grid-cols-2 tablet:grid-cols-6 gap-2"
             : "grid-cols-4 tablet:grid-cols-10"
         }`}
       >

@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { ToggleSidebarButton } from "./ToggleSidebarButton";
 import { NavigationLinks } from "./NavigationLinks";
-import { Button } from "../Button";
 import { ViewSwitcher } from "./ViewSwitcher";
 
 export function Navbar() {

@@ -259,6 +259,8 @@ export enum AssetLinkingCollectionsProductVariantCollectionOrder {
   ColorCodeDesc = 'colorCode_DESC',
   ColorNameAsc = 'colorName_ASC',
   ColorNameDesc = 'colorName_DESC',
+  FirstMediaInOverviewAsc = 'firstMediaInOverview_ASC',
+  FirstMediaInOverviewDesc = 'firstMediaInOverview_DESC',
   PriceAsc = 'price_ASC',
   PriceDesc = 'price_DESC',
   RefAsc = 'ref_ASC',
@@ -1446,6 +1448,8 @@ export enum ProductAttributeLinkingCollectionsProductVariantCollectionOrder {
   ColorCodeDesc = 'colorCode_DESC',
   ColorNameAsc = 'colorName_ASC',
   ColorNameDesc = 'colorName_DESC',
+  FirstMediaInOverviewAsc = 'firstMediaInOverview_ASC',
+  FirstMediaInOverviewDesc = 'firstMediaInOverview_DESC',
   PriceAsc = 'price_ASC',
   PriceDesc = 'price_DESC',
   RefAsc = 'ref_ASC',
@@ -1683,6 +1687,8 @@ export enum ProductGroupProductVariantsCollectionOrder {
   ColorCodeDesc = 'colorCode_DESC',
   ColorNameAsc = 'colorName_ASC',
   ColorNameDesc = 'colorName_DESC',
+  FirstMediaInOverviewAsc = 'firstMediaInOverview_ASC',
+  FirstMediaInOverviewDesc = 'firstMediaInOverview_DESC',
   PriceAsc = 'price_ASC',
   PriceDesc = 'price_DESC',
   RefAsc = 'ref_ASC',
@@ -1732,6 +1738,7 @@ export type ProductVariant = Entry & {
   colorCode: Maybe<Scalars['String']['output']>;
   colorName: Maybe<Scalars['String']['output']>;
   contentfulMetadata: ContentfulMetadata;
+  firstMediaInOverview: Maybe<Scalars['Int']['output']>;
   linkedFrom: Maybe<ProductVariantLinkingCollections>;
   mediaCollection: Maybe<AssetCollection>;
   price: Maybe<Scalars['Int']['output']>;
@@ -1760,6 +1767,12 @@ export type ProductVariantColorCodeArgs = {
 
 /** [See type definition](https://app.contentful.com/spaces/nh559twm3d3o/content_types/productVariant) */
 export type ProductVariantColorNameArgs = {
+  locale: InputMaybe<Scalars['String']['input']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/nh559twm3d3o/content_types/productVariant) */
+export type ProductVariantFirstMediaInOverviewArgs = {
   locale: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -1847,6 +1860,15 @@ export type ProductVariantFilter = {
   colorName_not_contains: InputMaybe<Scalars['String']['input']>;
   colorName_not_in: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   contentfulMetadata: InputMaybe<ContentfulMetadataFilter>;
+  firstMediaInOverview: InputMaybe<Scalars['Int']['input']>;
+  firstMediaInOverview_exists: InputMaybe<Scalars['Boolean']['input']>;
+  firstMediaInOverview_gt: InputMaybe<Scalars['Int']['input']>;
+  firstMediaInOverview_gte: InputMaybe<Scalars['Int']['input']>;
+  firstMediaInOverview_in: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  firstMediaInOverview_lt: InputMaybe<Scalars['Int']['input']>;
+  firstMediaInOverview_lte: InputMaybe<Scalars['Int']['input']>;
+  firstMediaInOverview_not: InputMaybe<Scalars['Int']['input']>;
+  firstMediaInOverview_not_in: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   mediaCollection_exists: InputMaybe<Scalars['Boolean']['input']>;
   price: InputMaybe<Scalars['Int']['input']>;
   price_exists: InputMaybe<Scalars['Boolean']['input']>;
@@ -1937,6 +1959,8 @@ export enum ProductVariantOrder {
   ColorCodeDesc = 'colorCode_DESC',
   ColorNameAsc = 'colorName_ASC',
   ColorNameDesc = 'colorName_DESC',
+  FirstMediaInOverviewAsc = 'firstMediaInOverview_ASC',
+  FirstMediaInOverviewDesc = 'firstMediaInOverview_DESC',
   PriceAsc = 'price_ASC',
   PriceDesc = 'price_DESC',
   RefAsc = 'ref_ASC',
@@ -1964,6 +1988,8 @@ export enum ProductVariantsCollectionOrder {
   ColorCodeDesc = 'colorCode_DESC',
   ColorNameAsc = 'colorName_ASC',
   ColorNameDesc = 'colorName_DESC',
+  FirstMediaInOverviewAsc = 'firstMediaInOverview_ASC',
+  FirstMediaInOverviewDesc = 'firstMediaInOverview_DESC',
   PriceAsc = 'price_ASC',
   PriceDesc = 'price_DESC',
   RefAsc = 'ref_ASC',
@@ -2354,6 +2380,15 @@ export type CfProductVariantNestedFilter = {
   colorName_not_contains: InputMaybe<Scalars['String']['input']>;
   colorName_not_in: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   contentfulMetadata: InputMaybe<ContentfulMetadataFilter>;
+  firstMediaInOverview: InputMaybe<Scalars['Int']['input']>;
+  firstMediaInOverview_exists: InputMaybe<Scalars['Boolean']['input']>;
+  firstMediaInOverview_gt: InputMaybe<Scalars['Int']['input']>;
+  firstMediaInOverview_gte: InputMaybe<Scalars['Int']['input']>;
+  firstMediaInOverview_in: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
+  firstMediaInOverview_lt: InputMaybe<Scalars['Int']['input']>;
+  firstMediaInOverview_lte: InputMaybe<Scalars['Int']['input']>;
+  firstMediaInOverview_not: InputMaybe<Scalars['Int']['input']>;
+  firstMediaInOverview_not_in: InputMaybe<Array<InputMaybe<Scalars['Int']['input']>>>;
   mediaCollection_exists: InputMaybe<Scalars['Boolean']['input']>;
   price: InputMaybe<Scalars['Int']['input']>;
   price_exists: InputMaybe<Scalars['Boolean']['input']>;
@@ -2403,10 +2438,10 @@ export type FetchProductVariantsInCategoryQueryVariables = Exact<{
 }>;
 
 
-export type FetchProductVariantsInCategoryQuery = { __typename?: 'Query', productVariantCollection: { __typename?: 'ProductVariantCollection', items: Array<{ __typename?: 'ProductVariant', ref: string | null, linkedFrom: { __typename?: 'ProductVariantLinkingCollections', productCollection: { __typename?: 'ProductCollection', items: Array<{ __typename?: 'Product', name: string | null, variantsCollection: { __typename?: 'ProductVariantsCollection', total: number } | null } | null> } | null } | null, attributesCollection: { __typename?: 'ProductVariantAttributesCollection', items: Array<{ __typename?: 'ProductAttribute', slug: string | null, name: string | null } | null> } | null, mediaCollection: { __typename?: 'AssetCollection', items: Array<{ __typename?: 'Asset', url: string | null } | null> } | null } | null> } | null };
+export type FetchProductVariantsInCategoryQuery = { __typename?: 'Query', productVariantCollection: { __typename?: 'ProductVariantCollection', items: Array<{ __typename?: 'ProductVariant', ref: string | null, price: number | null, firstMediaInOverview: number | null, linkedFrom: { __typename?: 'ProductVariantLinkingCollections', productCollection: { __typename?: 'ProductCollection', items: Array<{ __typename?: 'Product', name: string | null, variantsCollection: { __typename?: 'ProductVariantsCollection', total: number } | null } | null> } | null } | null, attributesCollection: { __typename?: 'ProductVariantAttributesCollection', items: Array<{ __typename?: 'ProductAttribute', slug: string | null, name: string | null } | null> } | null, mediaCollection: { __typename?: 'AssetCollection', items: Array<{ __typename?: 'Asset', url: string | null } | null> } | null } | null> } | null };
 
 
 export const FetchCategoriesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"FetchCategories"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"lang"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"categories"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"StringValue","value":"1Dxj0jPKVb5TgkZ2RYRp7x","block":false}},{"kind":"Argument","name":{"kind":"Name","value":"locale"},"value":{"kind":"Variable","name":{"kind":"Name","value":"lang"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"categoriesCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"3"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"sys"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"isRootCategory"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"subCategoriesCollection"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"sys"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"isRootCategory"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<FetchCategoriesQuery, FetchCategoriesQueryVariables>;
 export const FetchCategoryAttributesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"FetchCategoryAttributes"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"categorySlug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"categoryCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"categorySlug"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"unionAttributesCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"20"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"sys"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"intersectAttributesCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"20"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"sys"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<FetchCategoryAttributesQuery, FetchCategoryAttributesQueryVariables>;
 export const FetchCategoryHighlightsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"FetchCategoryHighlights"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"categoryHighlightCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"3"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"category"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}},{"kind":"Field","name":{"kind":"Name","value":"highlightSlidesCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"10"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"theme"}},{"kind":"Field","name":{"kind":"Name","value":"media"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}},{"kind":"Field","name":{"kind":"Name","value":"category"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<FetchCategoryHighlightsQuery, FetchCategoryHighlightsQueryVariables>;
-export const FetchProductVariantsInCategoryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"FetchProductVariantsInCategory"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"intersectCondition"}},"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ProductVariantFilter"}}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"unionCondition"}},"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ProductVariantFilter"}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"productVariantCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"AND"},"value":{"kind":"Variable","name":{"kind":"Name","value":"intersectCondition"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"OR"},"value":{"kind":"Variable","name":{"kind":"Name","value":"unionCondition"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"ref"}},{"kind":"Field","name":{"kind":"Name","value":"linkedFrom"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"productCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"1"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"variantsCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"0"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"total"}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"attributesCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"10"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"mediaCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"15"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<FetchProductVariantsInCategoryQuery, FetchProductVariantsInCategoryQueryVariables>;
+export const FetchProductVariantsInCategoryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"FetchProductVariantsInCategory"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"intersectCondition"}},"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ProductVariantFilter"}}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"unionCondition"}},"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ProductVariantFilter"}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"productVariantCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"AND"},"value":{"kind":"Variable","name":{"kind":"Name","value":"intersectCondition"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"OR"},"value":{"kind":"Variable","name":{"kind":"Name","value":"unionCondition"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"ref"}},{"kind":"Field","name":{"kind":"Name","value":"price"}},{"kind":"Field","name":{"kind":"Name","value":"firstMediaInOverview"}},{"kind":"Field","name":{"kind":"Name","value":"linkedFrom"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"productCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"1"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"variantsCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"0"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"total"}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"attributesCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"10"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"mediaCollection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"15"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<FetchProductVariantsInCategoryQuery, FetchProductVariantsInCategoryQueryVariables>;

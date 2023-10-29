@@ -13,7 +13,7 @@ import Link from "next/link";
 import cookieCutter from "@boiseitguru/cookie-cutter";
 
 export function Sidebar() {
-  const { isSidebarOpen } = useUIStore();
+  const { isSidebarOpen, toggleSidebar } = useUIStore();
   const pathname = usePathname() || "/";
   const { categories } = useCategoryStore();
   const { currentCategoryIndex } = useUIStore();
@@ -30,8 +30,8 @@ export function Sidebar() {
       opacity: 0,
     },
     config: {
-      duration: 100
-    }
+      duration: 200,
+    },
   });
 
   return (
@@ -39,12 +39,16 @@ export function Sidebar() {
       {transition((style, isSidebarOpen) => (
         <>
           {isSidebarOpen ? (
-            <div
-              className={`sidebar-wrapper`}
-              style={{ opacity: style.opacity }}
+            <animated.div
+              className={`sidebar-wrapper h-full`}
+              style={style}
+              onClick={toggleSidebar}
             >
               <div className="page-container">
-                <div className={`sidebar-container`} style={{ opacity: style.opacity}}>
+                <div
+                  className={`sidebar-container`}
+                  onClick={(e) => e.stopPropagation()}
+                >
                   <div className="add-padding-top z-30 ml-3 tablet:ml-0 h-16">
                     {!isRootPath(pathname) ? (
                       <SidebarCategoryButton />
@@ -104,7 +108,7 @@ export function Sidebar() {
                   </div>
                 </div>
               </div>
-            </div>
+            </animated.div>
           ) : null}
         </>
       ))}
