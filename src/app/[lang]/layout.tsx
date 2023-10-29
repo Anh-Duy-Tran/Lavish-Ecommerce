@@ -45,7 +45,7 @@ export default async function RootLayout({
         <CategoryStoreInitializer
           categories={fetchedCategories as CategoriesType}
         />
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <AuthProvider>
             <main className={font.className}>
               <MessageModal />
