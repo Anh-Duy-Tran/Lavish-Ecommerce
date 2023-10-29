@@ -7,6 +7,9 @@ type MessageModalContent = {
 };
 
 interface UIStoreType {
+  viewmode: 0 | 1 | 2;
+  setViewMode: (mode: 0 | 1 | 2) => void;
+
   currentCategoryIndex: number;
   setCurrentCategoryIndex: (i: number) => void;
 
@@ -24,6 +27,9 @@ interface UIStoreType {
 }
 
 export const useUIStore = create<UIStoreType>()((set) => ({
+  viewmode: 2,
+  setViewMode: (mode) => set({ viewmode: mode }),
+
   currentCategoryIndex: 0,
   setCurrentCategoryIndex: (i) => set(() => ({ currentCategoryIndex: i })),
 

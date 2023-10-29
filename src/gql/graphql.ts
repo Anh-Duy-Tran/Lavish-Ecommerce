@@ -185,6 +185,7 @@ export type AssetLinkingCollections = {
   __typename?: "AssetLinkingCollections";
   entryCollection: Maybe<EntryCollection>;
   highlightSlideCollection: Maybe<HighlightSlideCollection>;
+  productGroupCollection: Maybe<ProductGroupCollection>;
   productVariantCollection: Maybe<ProductVariantCollection>;
 };
 
@@ -200,6 +201,16 @@ export type AssetLinkingCollectionsHighlightSlideCollectionArgs = {
   locale: InputMaybe<Scalars["String"]["input"]>;
   order: InputMaybe<
     Array<InputMaybe<AssetLinkingCollectionsHighlightSlideCollectionOrder>>
+  >;
+  preview: InputMaybe<Scalars["Boolean"]["input"]>;
+  skip?: InputMaybe<Scalars["Int"]["input"]>;
+};
+
+export type AssetLinkingCollectionsProductGroupCollectionArgs = {
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  locale: InputMaybe<Scalars["String"]["input"]>;
+  order: InputMaybe<
+    Array<InputMaybe<AssetLinkingCollectionsProductGroupCollectionOrder>>
   >;
   preview: InputMaybe<Scalars["Boolean"]["input"]>;
   skip?: InputMaybe<Scalars["Int"]["input"]>;
@@ -236,11 +247,26 @@ export enum AssetLinkingCollectionsHighlightSlideCollectionOrder {
   ThemeDesc = "theme_DESC",
 }
 
+export enum AssetLinkingCollectionsProductGroupCollectionOrder {
+  SysFirstPublishedAtAsc = "sys_firstPublishedAt_ASC",
+  SysFirstPublishedAtDesc = "sys_firstPublishedAt_DESC",
+  SysIdAsc = "sys_id_ASC",
+  SysIdDesc = "sys_id_DESC",
+  SysPublishedAtAsc = "sys_publishedAt_ASC",
+  SysPublishedAtDesc = "sys_publishedAt_DESC",
+  SysPublishedVersionAsc = "sys_publishedVersion_ASC",
+  SysPublishedVersionDesc = "sys_publishedVersion_DESC",
+  TypeAsc = "type_ASC",
+  TypeDesc = "type_DESC",
+}
+
 export enum AssetLinkingCollectionsProductVariantCollectionOrder {
   ColorCodeAsc = "colorCode_ASC",
   ColorCodeDesc = "colorCode_DESC",
   ColorNameAsc = "colorName_ASC",
   ColorNameDesc = "colorName_DESC",
+  FirstMediaInOverviewAsc = "firstMediaInOverview_ASC",
+  FirstMediaInOverviewDesc = "firstMediaInOverview_DESC",
   PriceAsc = "price_ASC",
   PriceDesc = "price_DESC",
   RefAsc = "ref_ASC",
@@ -317,6 +343,8 @@ export type CategoriesCategoriesCollection = {
 };
 
 export enum CategoriesCategoriesCollectionOrder {
+  AutoFillSchemaAsc = "autoFillSchema_ASC",
+  AutoFillSchemaDesc = "autoFillSchema_DESC",
   DisplayNameAsc = "displayName_ASC",
   DisplayNameDesc = "displayName_DESC",
   IsRootCategoryAsc = "isRootCategory_ASC",
@@ -387,19 +415,52 @@ export enum CategoriesOrder {
 /** App category [See type definition](https://app.contentful.com/spaces/nh559twm3d3o/content_types/category) */
 export type Category = Entry & {
   __typename?: "Category";
+  autoFillSchema: Maybe<Scalars["String"]["output"]>;
   contentfulMetadata: ContentfulMetadata;
+  customProductGroupCollection: Maybe<CategoryCustomProductGroupCollection>;
   displayName: Maybe<Scalars["String"]["output"]>;
+  intersectAttributesCollection: Maybe<CategoryIntersectAttributesCollection>;
   isRootCategory: Maybe<Scalars["Boolean"]["output"]>;
   linkedFrom: Maybe<CategoryLinkingCollections>;
   name: Maybe<Scalars["String"]["output"]>;
   slug: Maybe<Scalars["String"]["output"]>;
   subCategoriesCollection: Maybe<CategorySubCategoriesCollection>;
   sys: Sys;
+  unionAttributesCollection: Maybe<CategoryUnionAttributesCollection>;
+};
+
+/** App category [See type definition](https://app.contentful.com/spaces/nh559twm3d3o/content_types/category) */
+export type CategoryAutoFillSchemaArgs = {
+  locale: InputMaybe<Scalars["String"]["input"]>;
+};
+
+/** App category [See type definition](https://app.contentful.com/spaces/nh559twm3d3o/content_types/category) */
+export type CategoryCustomProductGroupCollectionArgs = {
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  locale: InputMaybe<Scalars["String"]["input"]>;
+  order: InputMaybe<
+    Array<InputMaybe<CategoryCustomProductGroupCollectionOrder>>
+  >;
+  preview: InputMaybe<Scalars["Boolean"]["input"]>;
+  skip?: InputMaybe<Scalars["Int"]["input"]>;
+  where: InputMaybe<ProductGroupFilter>;
 };
 
 /** App category [See type definition](https://app.contentful.com/spaces/nh559twm3d3o/content_types/category) */
 export type CategoryDisplayNameArgs = {
   locale: InputMaybe<Scalars["String"]["input"]>;
+};
+
+/** App category [See type definition](https://app.contentful.com/spaces/nh559twm3d3o/content_types/category) */
+export type CategoryIntersectAttributesCollectionArgs = {
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  locale: InputMaybe<Scalars["String"]["input"]>;
+  order: InputMaybe<
+    Array<InputMaybe<CategoryIntersectAttributesCollectionOrder>>
+  >;
+  preview: InputMaybe<Scalars["Boolean"]["input"]>;
+  skip?: InputMaybe<Scalars["Int"]["input"]>;
+  where: InputMaybe<ProductAttributeFilter>;
 };
 
 /** App category [See type definition](https://app.contentful.com/spaces/nh559twm3d3o/content_types/category) */
@@ -432,6 +493,16 @@ export type CategorySubCategoriesCollectionArgs = {
   where: InputMaybe<CategoryFilter>;
 };
 
+/** App category [See type definition](https://app.contentful.com/spaces/nh559twm3d3o/content_types/category) */
+export type CategoryUnionAttributesCollectionArgs = {
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  locale: InputMaybe<Scalars["String"]["input"]>;
+  order: InputMaybe<Array<InputMaybe<CategoryUnionAttributesCollectionOrder>>>;
+  preview: InputMaybe<Scalars["Boolean"]["input"]>;
+  skip?: InputMaybe<Scalars["Int"]["input"]>;
+  where: InputMaybe<ProductAttributeFilter>;
+};
+
 export type CategoryCollection = {
   __typename?: "CategoryCollection";
   items: Array<Maybe<Category>>;
@@ -440,10 +511,42 @@ export type CategoryCollection = {
   total: Scalars["Int"]["output"];
 };
 
+export type CategoryCustomProductGroupCollection = {
+  __typename?: "CategoryCustomProductGroupCollection";
+  items: Array<Maybe<ProductGroup>>;
+  limit: Scalars["Int"]["output"];
+  skip: Scalars["Int"]["output"];
+  total: Scalars["Int"]["output"];
+};
+
+export enum CategoryCustomProductGroupCollectionOrder {
+  SysFirstPublishedAtAsc = "sys_firstPublishedAt_ASC",
+  SysFirstPublishedAtDesc = "sys_firstPublishedAt_DESC",
+  SysIdAsc = "sys_id_ASC",
+  SysIdDesc = "sys_id_DESC",
+  SysPublishedAtAsc = "sys_publishedAt_ASC",
+  SysPublishedAtDesc = "sys_publishedAt_DESC",
+  SysPublishedVersionAsc = "sys_publishedVersion_ASC",
+  SysPublishedVersionDesc = "sys_publishedVersion_DESC",
+  TypeAsc = "type_ASC",
+  TypeDesc = "type_DESC",
+}
+
 export type CategoryFilter = {
   AND: InputMaybe<Array<InputMaybe<CategoryFilter>>>;
   OR: InputMaybe<Array<InputMaybe<CategoryFilter>>>;
+  autoFillSchema: InputMaybe<Scalars["String"]["input"]>;
+  autoFillSchema_contains: InputMaybe<Scalars["String"]["input"]>;
+  autoFillSchema_exists: InputMaybe<Scalars["Boolean"]["input"]>;
+  autoFillSchema_in: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
+  autoFillSchema_not: InputMaybe<Scalars["String"]["input"]>;
+  autoFillSchema_not_contains: InputMaybe<Scalars["String"]["input"]>;
+  autoFillSchema_not_in: InputMaybe<
+    Array<InputMaybe<Scalars["String"]["input"]>>
+  >;
   contentfulMetadata: InputMaybe<ContentfulMetadataFilter>;
+  customProductGroup: InputMaybe<CfProductGroupNestedFilter>;
+  customProductGroupCollection_exists: InputMaybe<Scalars["Boolean"]["input"]>;
   displayName: InputMaybe<Scalars["String"]["input"]>;
   displayName_contains: InputMaybe<Scalars["String"]["input"]>;
   displayName_exists: InputMaybe<Scalars["Boolean"]["input"]>;
@@ -451,6 +554,8 @@ export type CategoryFilter = {
   displayName_not: InputMaybe<Scalars["String"]["input"]>;
   displayName_not_contains: InputMaybe<Scalars["String"]["input"]>;
   displayName_not_in: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
+  intersectAttributes: InputMaybe<CfProductAttributeNestedFilter>;
+  intersectAttributesCollection_exists: InputMaybe<Scalars["Boolean"]["input"]>;
   isRootCategory: InputMaybe<Scalars["Boolean"]["input"]>;
   isRootCategory_exists: InputMaybe<Scalars["Boolean"]["input"]>;
   isRootCategory_not: InputMaybe<Scalars["Boolean"]["input"]>;
@@ -471,6 +576,8 @@ export type CategoryFilter = {
   subCategories: InputMaybe<CfCategoryNestedFilter>;
   subCategoriesCollection_exists: InputMaybe<Scalars["Boolean"]["input"]>;
   sys: InputMaybe<SysFilter>;
+  unionAttributes: InputMaybe<CfProductAttributeNestedFilter>;
+  unionAttributesCollection_exists: InputMaybe<Scalars["Boolean"]["input"]>;
 };
 
 /** [See type definition](https://app.contentful.com/spaces/nh559twm3d3o/content_types/categoryHighlight) */
@@ -597,6 +704,29 @@ export enum CategoryHighlightOrder {
   SysPublishedVersionDesc = "sys_publishedVersion_DESC",
 }
 
+export type CategoryIntersectAttributesCollection = {
+  __typename?: "CategoryIntersectAttributesCollection";
+  items: Array<Maybe<ProductAttribute>>;
+  limit: Scalars["Int"]["output"];
+  skip: Scalars["Int"]["output"];
+  total: Scalars["Int"]["output"];
+};
+
+export enum CategoryIntersectAttributesCollectionOrder {
+  NameAsc = "name_ASC",
+  NameDesc = "name_DESC",
+  SlugAsc = "slug_ASC",
+  SlugDesc = "slug_DESC",
+  SysFirstPublishedAtAsc = "sys_firstPublishedAt_ASC",
+  SysFirstPublishedAtDesc = "sys_firstPublishedAt_DESC",
+  SysIdAsc = "sys_id_ASC",
+  SysIdDesc = "sys_id_DESC",
+  SysPublishedAtAsc = "sys_publishedAt_ASC",
+  SysPublishedAtDesc = "sys_publishedAt_DESC",
+  SysPublishedVersionAsc = "sys_publishedVersion_ASC",
+  SysPublishedVersionDesc = "sys_publishedVersion_DESC",
+}
+
 export type CategoryLinkingCollections = {
   __typename?: "CategoryLinkingCollections";
   categoriesCollection: Maybe<CategoriesCollection>;
@@ -669,6 +799,8 @@ export enum CategoryLinkingCollectionsCategoriesCollectionOrder {
 }
 
 export enum CategoryLinkingCollectionsCategoryCollectionOrder {
+  AutoFillSchemaAsc = "autoFillSchema_ASC",
+  AutoFillSchemaDesc = "autoFillSchema_DESC",
   DisplayNameAsc = "displayName_ASC",
   DisplayNameDesc = "displayName_DESC",
   IsRootCategoryAsc = "isRootCategory_ASC",
@@ -722,6 +854,8 @@ export enum CategoryLinkingCollectionsHighlightSlideCollectionOrder {
 }
 
 export enum CategoryOrder {
+  AutoFillSchemaAsc = "autoFillSchema_ASC",
+  AutoFillSchemaDesc = "autoFillSchema_DESC",
   DisplayNameAsc = "displayName_ASC",
   DisplayNameDesc = "displayName_DESC",
   IsRootCategoryAsc = "isRootCategory_ASC",
@@ -749,10 +883,35 @@ export type CategorySubCategoriesCollection = {
 };
 
 export enum CategorySubCategoriesCollectionOrder {
+  AutoFillSchemaAsc = "autoFillSchema_ASC",
+  AutoFillSchemaDesc = "autoFillSchema_DESC",
   DisplayNameAsc = "displayName_ASC",
   DisplayNameDesc = "displayName_DESC",
   IsRootCategoryAsc = "isRootCategory_ASC",
   IsRootCategoryDesc = "isRootCategory_DESC",
+  NameAsc = "name_ASC",
+  NameDesc = "name_DESC",
+  SlugAsc = "slug_ASC",
+  SlugDesc = "slug_DESC",
+  SysFirstPublishedAtAsc = "sys_firstPublishedAt_ASC",
+  SysFirstPublishedAtDesc = "sys_firstPublishedAt_DESC",
+  SysIdAsc = "sys_id_ASC",
+  SysIdDesc = "sys_id_DESC",
+  SysPublishedAtAsc = "sys_publishedAt_ASC",
+  SysPublishedAtDesc = "sys_publishedAt_DESC",
+  SysPublishedVersionAsc = "sys_publishedVersion_ASC",
+  SysPublishedVersionDesc = "sys_publishedVersion_DESC",
+}
+
+export type CategoryUnionAttributesCollection = {
+  __typename?: "CategoryUnionAttributesCollection";
+  items: Array<Maybe<ProductAttribute>>;
+  limit: Scalars["Int"]["output"];
+  skip: Scalars["Int"]["output"];
+  total: Scalars["Int"]["output"];
+};
+
+export enum CategoryUnionAttributesCollectionOrder {
   NameAsc = "name_ASC",
   NameDesc = "name_DESC",
   SlugAsc = "slug_ASC",
@@ -1200,9 +1359,20 @@ export type ProductAttributeFilter = {
 
 export type ProductAttributeLinkingCollections = {
   __typename?: "ProductAttributeLinkingCollections";
+  categoryCollection: Maybe<CategoryCollection>;
   entryCollection: Maybe<EntryCollection>;
   productAttributeCollection: Maybe<ProductAttributeCollection>;
   productVariantCollection: Maybe<ProductVariantCollection>;
+};
+
+export type ProductAttributeLinkingCollectionsCategoryCollectionArgs = {
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  locale: InputMaybe<Scalars["String"]["input"]>;
+  order: InputMaybe<
+    Array<InputMaybe<ProductAttributeLinkingCollectionsCategoryCollectionOrder>>
+  >;
+  preview: InputMaybe<Scalars["Boolean"]["input"]>;
+  skip?: InputMaybe<Scalars["Int"]["input"]>;
 };
 
 export type ProductAttributeLinkingCollectionsEntryCollectionArgs = {
@@ -1236,6 +1406,27 @@ export type ProductAttributeLinkingCollectionsProductVariantCollectionArgs = {
   skip?: InputMaybe<Scalars["Int"]["input"]>;
 };
 
+export enum ProductAttributeLinkingCollectionsCategoryCollectionOrder {
+  AutoFillSchemaAsc = "autoFillSchema_ASC",
+  AutoFillSchemaDesc = "autoFillSchema_DESC",
+  DisplayNameAsc = "displayName_ASC",
+  DisplayNameDesc = "displayName_DESC",
+  IsRootCategoryAsc = "isRootCategory_ASC",
+  IsRootCategoryDesc = "isRootCategory_DESC",
+  NameAsc = "name_ASC",
+  NameDesc = "name_DESC",
+  SlugAsc = "slug_ASC",
+  SlugDesc = "slug_DESC",
+  SysFirstPublishedAtAsc = "sys_firstPublishedAt_ASC",
+  SysFirstPublishedAtDesc = "sys_firstPublishedAt_DESC",
+  SysIdAsc = "sys_id_ASC",
+  SysIdDesc = "sys_id_DESC",
+  SysPublishedAtAsc = "sys_publishedAt_ASC",
+  SysPublishedAtDesc = "sys_publishedAt_DESC",
+  SysPublishedVersionAsc = "sys_publishedVersion_ASC",
+  SysPublishedVersionDesc = "sys_publishedVersion_DESC",
+}
+
 export enum ProductAttributeLinkingCollectionsProductAttributeCollectionOrder {
   NameAsc = "name_ASC",
   NameDesc = "name_DESC",
@@ -1256,6 +1447,8 @@ export enum ProductAttributeLinkingCollectionsProductVariantCollectionOrder {
   ColorCodeDesc = "colorCode_DESC",
   ColorNameAsc = "colorName_ASC",
   ColorNameDesc = "colorName_DESC",
+  FirstMediaInOverviewAsc = "firstMediaInOverview_ASC",
+  FirstMediaInOverviewDesc = "firstMediaInOverview_DESC",
   PriceAsc = "price_ASC",
   PriceDesc = "price_DESC",
   RefAsc = "ref_ASC",
@@ -1346,6 +1539,172 @@ export type ProductFilter = {
   variantsCollection_exists: InputMaybe<Scalars["Boolean"]["input"]>;
 };
 
+/** [See type definition](https://app.contentful.com/spaces/nh559twm3d3o/content_types/productGroup) */
+export type ProductGroup = Entry & {
+  __typename?: "ProductGroup";
+  contentfulMetadata: ContentfulMetadata;
+  firstMediaOfEachVariant: Maybe<Array<Maybe<Scalars["String"]["output"]>>>;
+  highlightMedia: Maybe<Asset>;
+  linkedFrom: Maybe<ProductGroupLinkingCollections>;
+  productVariantsCollection: Maybe<ProductGroupProductVariantsCollection>;
+  sys: Sys;
+  type: Maybe<Scalars["String"]["output"]>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/nh559twm3d3o/content_types/productGroup) */
+export type ProductGroupFirstMediaOfEachVariantArgs = {
+  locale: InputMaybe<Scalars["String"]["input"]>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/nh559twm3d3o/content_types/productGroup) */
+export type ProductGroupHighlightMediaArgs = {
+  locale: InputMaybe<Scalars["String"]["input"]>;
+  preview: InputMaybe<Scalars["Boolean"]["input"]>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/nh559twm3d3o/content_types/productGroup) */
+export type ProductGroupLinkedFromArgs = {
+  allowedLocales: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/nh559twm3d3o/content_types/productGroup) */
+export type ProductGroupProductVariantsCollectionArgs = {
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  locale: InputMaybe<Scalars["String"]["input"]>;
+  order: InputMaybe<
+    Array<InputMaybe<ProductGroupProductVariantsCollectionOrder>>
+  >;
+  preview: InputMaybe<Scalars["Boolean"]["input"]>;
+  skip?: InputMaybe<Scalars["Int"]["input"]>;
+  where: InputMaybe<ProductVariantFilter>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/nh559twm3d3o/content_types/productGroup) */
+export type ProductGroupTypeArgs = {
+  locale: InputMaybe<Scalars["String"]["input"]>;
+};
+
+export type ProductGroupCollection = {
+  __typename?: "ProductGroupCollection";
+  items: Array<Maybe<ProductGroup>>;
+  limit: Scalars["Int"]["output"];
+  skip: Scalars["Int"]["output"];
+  total: Scalars["Int"]["output"];
+};
+
+export type ProductGroupFilter = {
+  AND: InputMaybe<Array<InputMaybe<ProductGroupFilter>>>;
+  OR: InputMaybe<Array<InputMaybe<ProductGroupFilter>>>;
+  contentfulMetadata: InputMaybe<ContentfulMetadataFilter>;
+  firstMediaOfEachVariant_contains_all: InputMaybe<
+    Array<InputMaybe<Scalars["String"]["input"]>>
+  >;
+  firstMediaOfEachVariant_contains_none: InputMaybe<
+    Array<InputMaybe<Scalars["String"]["input"]>>
+  >;
+  firstMediaOfEachVariant_contains_some: InputMaybe<
+    Array<InputMaybe<Scalars["String"]["input"]>>
+  >;
+  firstMediaOfEachVariant_exists: InputMaybe<Scalars["Boolean"]["input"]>;
+  highlightMedia_exists: InputMaybe<Scalars["Boolean"]["input"]>;
+  productVariants: InputMaybe<CfProductVariantNestedFilter>;
+  productVariantsCollection_exists: InputMaybe<Scalars["Boolean"]["input"]>;
+  sys: InputMaybe<SysFilter>;
+  type: InputMaybe<Scalars["String"]["input"]>;
+  type_contains: InputMaybe<Scalars["String"]["input"]>;
+  type_exists: InputMaybe<Scalars["Boolean"]["input"]>;
+  type_in: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
+  type_not: InputMaybe<Scalars["String"]["input"]>;
+  type_not_contains: InputMaybe<Scalars["String"]["input"]>;
+  type_not_in: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
+};
+
+export type ProductGroupLinkingCollections = {
+  __typename?: "ProductGroupLinkingCollections";
+  categoryCollection: Maybe<CategoryCollection>;
+  entryCollection: Maybe<EntryCollection>;
+};
+
+export type ProductGroupLinkingCollectionsCategoryCollectionArgs = {
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  locale: InputMaybe<Scalars["String"]["input"]>;
+  order: InputMaybe<
+    Array<InputMaybe<ProductGroupLinkingCollectionsCategoryCollectionOrder>>
+  >;
+  preview: InputMaybe<Scalars["Boolean"]["input"]>;
+  skip?: InputMaybe<Scalars["Int"]["input"]>;
+};
+
+export type ProductGroupLinkingCollectionsEntryCollectionArgs = {
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  locale: InputMaybe<Scalars["String"]["input"]>;
+  preview: InputMaybe<Scalars["Boolean"]["input"]>;
+  skip?: InputMaybe<Scalars["Int"]["input"]>;
+};
+
+export enum ProductGroupLinkingCollectionsCategoryCollectionOrder {
+  AutoFillSchemaAsc = "autoFillSchema_ASC",
+  AutoFillSchemaDesc = "autoFillSchema_DESC",
+  DisplayNameAsc = "displayName_ASC",
+  DisplayNameDesc = "displayName_DESC",
+  IsRootCategoryAsc = "isRootCategory_ASC",
+  IsRootCategoryDesc = "isRootCategory_DESC",
+  NameAsc = "name_ASC",
+  NameDesc = "name_DESC",
+  SlugAsc = "slug_ASC",
+  SlugDesc = "slug_DESC",
+  SysFirstPublishedAtAsc = "sys_firstPublishedAt_ASC",
+  SysFirstPublishedAtDesc = "sys_firstPublishedAt_DESC",
+  SysIdAsc = "sys_id_ASC",
+  SysIdDesc = "sys_id_DESC",
+  SysPublishedAtAsc = "sys_publishedAt_ASC",
+  SysPublishedAtDesc = "sys_publishedAt_DESC",
+  SysPublishedVersionAsc = "sys_publishedVersion_ASC",
+  SysPublishedVersionDesc = "sys_publishedVersion_DESC",
+}
+
+export enum ProductGroupOrder {
+  SysFirstPublishedAtAsc = "sys_firstPublishedAt_ASC",
+  SysFirstPublishedAtDesc = "sys_firstPublishedAt_DESC",
+  SysIdAsc = "sys_id_ASC",
+  SysIdDesc = "sys_id_DESC",
+  SysPublishedAtAsc = "sys_publishedAt_ASC",
+  SysPublishedAtDesc = "sys_publishedAt_DESC",
+  SysPublishedVersionAsc = "sys_publishedVersion_ASC",
+  SysPublishedVersionDesc = "sys_publishedVersion_DESC",
+  TypeAsc = "type_ASC",
+  TypeDesc = "type_DESC",
+}
+
+export type ProductGroupProductVariantsCollection = {
+  __typename?: "ProductGroupProductVariantsCollection";
+  items: Array<Maybe<ProductVariant>>;
+  limit: Scalars["Int"]["output"];
+  skip: Scalars["Int"]["output"];
+  total: Scalars["Int"]["output"];
+};
+
+export enum ProductGroupProductVariantsCollectionOrder {
+  ColorCodeAsc = "colorCode_ASC",
+  ColorCodeDesc = "colorCode_DESC",
+  ColorNameAsc = "colorName_ASC",
+  ColorNameDesc = "colorName_DESC",
+  FirstMediaInOverviewAsc = "firstMediaInOverview_ASC",
+  FirstMediaInOverviewDesc = "firstMediaInOverview_DESC",
+  PriceAsc = "price_ASC",
+  PriceDesc = "price_DESC",
+  RefAsc = "ref_ASC",
+  RefDesc = "ref_DESC",
+  SysFirstPublishedAtAsc = "sys_firstPublishedAt_ASC",
+  SysFirstPublishedAtDesc = "sys_firstPublishedAt_DESC",
+  SysIdAsc = "sys_id_ASC",
+  SysIdDesc = "sys_id_DESC",
+  SysPublishedAtAsc = "sys_publishedAt_ASC",
+  SysPublishedAtDesc = "sys_publishedAt_DESC",
+  SysPublishedVersionAsc = "sys_publishedVersion_ASC",
+  SysPublishedVersionDesc = "sys_publishedVersion_DESC",
+}
+
 export type ProductLinkingCollections = {
   __typename?: "ProductLinkingCollections";
   entryCollection: Maybe<EntryCollection>;
@@ -1380,6 +1739,7 @@ export type ProductVariant = Entry & {
   colorCode: Maybe<Scalars["String"]["output"]>;
   colorName: Maybe<Scalars["String"]["output"]>;
   contentfulMetadata: ContentfulMetadata;
+  firstMediaInOverview: Maybe<Scalars["Int"]["output"]>;
   linkedFrom: Maybe<ProductVariantLinkingCollections>;
   mediaCollection: Maybe<AssetCollection>;
   price: Maybe<Scalars["Int"]["output"]>;
@@ -1405,6 +1765,11 @@ export type ProductVariantColorCodeArgs = {
 
 /** [See type definition](https://app.contentful.com/spaces/nh559twm3d3o/content_types/productVariant) */
 export type ProductVariantColorNameArgs = {
+  locale: InputMaybe<Scalars["String"]["input"]>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/nh559twm3d3o/content_types/productVariant) */
+export type ProductVariantFirstMediaInOverviewArgs = {
   locale: InputMaybe<Scalars["String"]["input"]>;
 };
 
@@ -1487,6 +1852,19 @@ export type ProductVariantFilter = {
   colorName_not_contains: InputMaybe<Scalars["String"]["input"]>;
   colorName_not_in: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
   contentfulMetadata: InputMaybe<ContentfulMetadataFilter>;
+  firstMediaInOverview: InputMaybe<Scalars["Int"]["input"]>;
+  firstMediaInOverview_exists: InputMaybe<Scalars["Boolean"]["input"]>;
+  firstMediaInOverview_gt: InputMaybe<Scalars["Int"]["input"]>;
+  firstMediaInOverview_gte: InputMaybe<Scalars["Int"]["input"]>;
+  firstMediaInOverview_in: InputMaybe<
+    Array<InputMaybe<Scalars["Int"]["input"]>>
+  >;
+  firstMediaInOverview_lt: InputMaybe<Scalars["Int"]["input"]>;
+  firstMediaInOverview_lte: InputMaybe<Scalars["Int"]["input"]>;
+  firstMediaInOverview_not: InputMaybe<Scalars["Int"]["input"]>;
+  firstMediaInOverview_not_in: InputMaybe<
+    Array<InputMaybe<Scalars["Int"]["input"]>>
+  >;
   mediaCollection_exists: InputMaybe<Scalars["Boolean"]["input"]>;
   price: InputMaybe<Scalars["Int"]["input"]>;
   price_exists: InputMaybe<Scalars["Boolean"]["input"]>;
@@ -1521,6 +1899,7 @@ export type ProductVariantLinkingCollections = {
   __typename?: "ProductVariantLinkingCollections";
   entryCollection: Maybe<EntryCollection>;
   productCollection: Maybe<ProductCollection>;
+  productGroupCollection: Maybe<ProductGroupCollection>;
 };
 
 export type ProductVariantLinkingCollectionsEntryCollectionArgs = {
@@ -1535,6 +1914,18 @@ export type ProductVariantLinkingCollectionsProductCollectionArgs = {
   locale: InputMaybe<Scalars["String"]["input"]>;
   order: InputMaybe<
     Array<InputMaybe<ProductVariantLinkingCollectionsProductCollectionOrder>>
+  >;
+  preview: InputMaybe<Scalars["Boolean"]["input"]>;
+  skip?: InputMaybe<Scalars["Int"]["input"]>;
+};
+
+export type ProductVariantLinkingCollectionsProductGroupCollectionArgs = {
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  locale: InputMaybe<Scalars["String"]["input"]>;
+  order: InputMaybe<
+    Array<
+      InputMaybe<ProductVariantLinkingCollectionsProductGroupCollectionOrder>
+    >
   >;
   preview: InputMaybe<Scalars["Boolean"]["input"]>;
   skip?: InputMaybe<Scalars["Int"]["input"]>;
@@ -1555,11 +1946,26 @@ export enum ProductVariantLinkingCollectionsProductCollectionOrder {
   SysPublishedVersionDesc = "sys_publishedVersion_DESC",
 }
 
+export enum ProductVariantLinkingCollectionsProductGroupCollectionOrder {
+  SysFirstPublishedAtAsc = "sys_firstPublishedAt_ASC",
+  SysFirstPublishedAtDesc = "sys_firstPublishedAt_DESC",
+  SysIdAsc = "sys_id_ASC",
+  SysIdDesc = "sys_id_DESC",
+  SysPublishedAtAsc = "sys_publishedAt_ASC",
+  SysPublishedAtDesc = "sys_publishedAt_DESC",
+  SysPublishedVersionAsc = "sys_publishedVersion_ASC",
+  SysPublishedVersionDesc = "sys_publishedVersion_DESC",
+  TypeAsc = "type_ASC",
+  TypeDesc = "type_DESC",
+}
+
 export enum ProductVariantOrder {
   ColorCodeAsc = "colorCode_ASC",
   ColorCodeDesc = "colorCode_DESC",
   ColorNameAsc = "colorName_ASC",
   ColorNameDesc = "colorName_DESC",
+  FirstMediaInOverviewAsc = "firstMediaInOverview_ASC",
+  FirstMediaInOverviewDesc = "firstMediaInOverview_DESC",
   PriceAsc = "price_ASC",
   PriceDesc = "price_DESC",
   RefAsc = "ref_ASC",
@@ -1587,6 +1993,8 @@ export enum ProductVariantsCollectionOrder {
   ColorCodeDesc = "colorCode_DESC",
   ColorNameAsc = "colorName_ASC",
   ColorNameDesc = "colorName_DESC",
+  FirstMediaInOverviewAsc = "firstMediaInOverview_ASC",
+  FirstMediaInOverviewDesc = "firstMediaInOverview_DESC",
   PriceAsc = "price_ASC",
   PriceDesc = "price_DESC",
   RefAsc = "ref_ASC",
@@ -1618,6 +2026,8 @@ export type Query = {
   productAttribute: Maybe<ProductAttribute>;
   productAttributeCollection: Maybe<ProductAttributeCollection>;
   productCollection: Maybe<ProductCollection>;
+  productGroup: Maybe<ProductGroup>;
+  productGroupCollection: Maybe<ProductGroupCollection>;
   productVariant: Maybe<ProductVariant>;
   productVariantCollection: Maybe<ProductVariantCollection>;
 };
@@ -1736,6 +2146,21 @@ export type QueryProductCollectionArgs = {
   where: InputMaybe<ProductFilter>;
 };
 
+export type QueryProductGroupArgs = {
+  id: Scalars["String"]["input"];
+  locale: InputMaybe<Scalars["String"]["input"]>;
+  preview: InputMaybe<Scalars["Boolean"]["input"]>;
+};
+
+export type QueryProductGroupCollectionArgs = {
+  limit?: InputMaybe<Scalars["Int"]["input"]>;
+  locale: InputMaybe<Scalars["String"]["input"]>;
+  order: InputMaybe<Array<InputMaybe<ProductGroupOrder>>>;
+  preview: InputMaybe<Scalars["Boolean"]["input"]>;
+  skip?: InputMaybe<Scalars["Int"]["input"]>;
+  where: InputMaybe<ProductGroupFilter>;
+};
+
 export type QueryProductVariantArgs = {
   id: Scalars["String"]["input"];
   locale: InputMaybe<Scalars["String"]["input"]>;
@@ -1809,7 +2234,17 @@ export type SysFilter = {
 export type CfCategoryNestedFilter = {
   AND: InputMaybe<Array<InputMaybe<CfCategoryNestedFilter>>>;
   OR: InputMaybe<Array<InputMaybe<CfCategoryNestedFilter>>>;
+  autoFillSchema: InputMaybe<Scalars["String"]["input"]>;
+  autoFillSchema_contains: InputMaybe<Scalars["String"]["input"]>;
+  autoFillSchema_exists: InputMaybe<Scalars["Boolean"]["input"]>;
+  autoFillSchema_in: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
+  autoFillSchema_not: InputMaybe<Scalars["String"]["input"]>;
+  autoFillSchema_not_contains: InputMaybe<Scalars["String"]["input"]>;
+  autoFillSchema_not_in: InputMaybe<
+    Array<InputMaybe<Scalars["String"]["input"]>>
+  >;
   contentfulMetadata: InputMaybe<ContentfulMetadataFilter>;
+  customProductGroupCollection_exists: InputMaybe<Scalars["Boolean"]["input"]>;
   displayName: InputMaybe<Scalars["String"]["input"]>;
   displayName_contains: InputMaybe<Scalars["String"]["input"]>;
   displayName_exists: InputMaybe<Scalars["Boolean"]["input"]>;
@@ -1817,6 +2252,7 @@ export type CfCategoryNestedFilter = {
   displayName_not: InputMaybe<Scalars["String"]["input"]>;
   displayName_not_contains: InputMaybe<Scalars["String"]["input"]>;
   displayName_not_in: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
+  intersectAttributesCollection_exists: InputMaybe<Scalars["Boolean"]["input"]>;
   isRootCategory: InputMaybe<Scalars["Boolean"]["input"]>;
   isRootCategory_exists: InputMaybe<Scalars["Boolean"]["input"]>;
   isRootCategory_not: InputMaybe<Scalars["Boolean"]["input"]>;
@@ -1836,6 +2272,7 @@ export type CfCategoryNestedFilter = {
   slug_not_in: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
   subCategoriesCollection_exists: InputMaybe<Scalars["Boolean"]["input"]>;
   sys: InputMaybe<SysFilter>;
+  unionAttributesCollection_exists: InputMaybe<Scalars["Boolean"]["input"]>;
 };
 
 export type CfHighlightSlideNestedFilter = {
@@ -1904,6 +2341,32 @@ export type CfProductAttributeNestedFilter = {
   valuesCollection_exists: InputMaybe<Scalars["Boolean"]["input"]>;
 };
 
+export type CfProductGroupNestedFilter = {
+  AND: InputMaybe<Array<InputMaybe<CfProductGroupNestedFilter>>>;
+  OR: InputMaybe<Array<InputMaybe<CfProductGroupNestedFilter>>>;
+  contentfulMetadata: InputMaybe<ContentfulMetadataFilter>;
+  firstMediaOfEachVariant_contains_all: InputMaybe<
+    Array<InputMaybe<Scalars["String"]["input"]>>
+  >;
+  firstMediaOfEachVariant_contains_none: InputMaybe<
+    Array<InputMaybe<Scalars["String"]["input"]>>
+  >;
+  firstMediaOfEachVariant_contains_some: InputMaybe<
+    Array<InputMaybe<Scalars["String"]["input"]>>
+  >;
+  firstMediaOfEachVariant_exists: InputMaybe<Scalars["Boolean"]["input"]>;
+  highlightMedia_exists: InputMaybe<Scalars["Boolean"]["input"]>;
+  productVariantsCollection_exists: InputMaybe<Scalars["Boolean"]["input"]>;
+  sys: InputMaybe<SysFilter>;
+  type: InputMaybe<Scalars["String"]["input"]>;
+  type_contains: InputMaybe<Scalars["String"]["input"]>;
+  type_exists: InputMaybe<Scalars["Boolean"]["input"]>;
+  type_in: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
+  type_not: InputMaybe<Scalars["String"]["input"]>;
+  type_not_contains: InputMaybe<Scalars["String"]["input"]>;
+  type_not_in: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
+};
+
 export type CfProductVariantNestedFilter = {
   AND: InputMaybe<Array<InputMaybe<CfProductVariantNestedFilter>>>;
   OR: InputMaybe<Array<InputMaybe<CfProductVariantNestedFilter>>>;
@@ -1923,6 +2386,19 @@ export type CfProductVariantNestedFilter = {
   colorName_not_contains: InputMaybe<Scalars["String"]["input"]>;
   colorName_not_in: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
   contentfulMetadata: InputMaybe<ContentfulMetadataFilter>;
+  firstMediaInOverview: InputMaybe<Scalars["Int"]["input"]>;
+  firstMediaInOverview_exists: InputMaybe<Scalars["Boolean"]["input"]>;
+  firstMediaInOverview_gt: InputMaybe<Scalars["Int"]["input"]>;
+  firstMediaInOverview_gte: InputMaybe<Scalars["Int"]["input"]>;
+  firstMediaInOverview_in: InputMaybe<
+    Array<InputMaybe<Scalars["Int"]["input"]>>
+  >;
+  firstMediaInOverview_lt: InputMaybe<Scalars["Int"]["input"]>;
+  firstMediaInOverview_lte: InputMaybe<Scalars["Int"]["input"]>;
+  firstMediaInOverview_not: InputMaybe<Scalars["Int"]["input"]>;
+  firstMediaInOverview_not_in: InputMaybe<
+    Array<InputMaybe<Scalars["Int"]["input"]>>
+  >;
   mediaCollection_exists: InputMaybe<Scalars["Boolean"]["input"]>;
   price: InputMaybe<Scalars["Int"]["input"]>;
   price_exists: InputMaybe<Scalars["Boolean"]["input"]>;
@@ -1969,6 +2445,7 @@ export type FetchCategoriesQuery = {
         isRootCategory: boolean | null;
         displayName: string | null;
         slug: string | null;
+        sys: { __typename?: "Sys"; id: string };
         subCategoriesCollection: {
           __typename?: "CategorySubCategoriesCollection";
           items: Array<{
@@ -1977,10 +2454,41 @@ export type FetchCategoriesQuery = {
             isRootCategory: boolean | null;
             displayName: string | null;
             slug: string | null;
+            sys: { __typename?: "Sys"; id: string };
           } | null>;
         } | null;
       } | null>;
     } | null;
+  } | null;
+};
+
+export type FetchCategoryAttributesQueryVariables = Exact<{
+  categorySlug: Scalars["String"]["input"];
+}>;
+
+export type FetchCategoryAttributesQuery = {
+  __typename?: "Query";
+  categoryCollection: {
+    __typename?: "CategoryCollection";
+    items: Array<{
+      __typename?: "Category";
+      unionAttributesCollection: {
+        __typename?: "CategoryUnionAttributesCollection";
+        items: Array<{
+          __typename?: "ProductAttribute";
+          slug: string | null;
+          sys: { __typename?: "Sys"; id: string };
+        } | null>;
+      } | null;
+      intersectAttributesCollection: {
+        __typename?: "CategoryIntersectAttributesCollection";
+        items: Array<{
+          __typename?: "ProductAttribute";
+          slug: string | null;
+          sys: { __typename?: "Sys"; id: string };
+        } | null>;
+      } | null;
+    } | null>;
   } | null;
 };
 
@@ -2007,6 +2515,54 @@ export type FetchCategoryHighlightsQuery = {
             displayName: string | null;
           } | null;
         } | null>;
+      } | null;
+    } | null>;
+  } | null;
+};
+
+export type FetchProductVariantsInCategoryQueryVariables = Exact<{
+  intersectCondition: InputMaybe<
+    Array<ProductVariantFilter> | ProductVariantFilter
+  >;
+  unionCondition: InputMaybe<
+    Array<ProductVariantFilter> | ProductVariantFilter
+  >;
+}>;
+
+export type FetchProductVariantsInCategoryQuery = {
+  __typename?: "Query";
+  productVariantCollection: {
+    __typename?: "ProductVariantCollection";
+    items: Array<{
+      __typename?: "ProductVariant";
+      ref: string | null;
+      price: number | null;
+      firstMediaInOverview: number | null;
+      linkedFrom: {
+        __typename?: "ProductVariantLinkingCollections";
+        productCollection: {
+          __typename?: "ProductCollection";
+          items: Array<{
+            __typename?: "Product";
+            name: string | null;
+            variantsCollection: {
+              __typename?: "ProductVariantsCollection";
+              total: number;
+            } | null;
+          } | null>;
+        } | null;
+      } | null;
+      attributesCollection: {
+        __typename?: "ProductVariantAttributesCollection";
+        items: Array<{
+          __typename?: "ProductAttribute";
+          slug: string | null;
+          name: string | null;
+        } | null>;
+      } | null;
+      mediaCollection: {
+        __typename?: "AssetCollection";
+        items: Array<{ __typename?: "Asset"; url: string | null } | null>;
       } | null;
     } | null>;
   } | null;
@@ -2081,6 +2637,19 @@ export const FetchCategoriesDocument = {
                           selections: [
                             {
                               kind: "Field",
+                              name: { kind: "Name", value: "sys" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "id" },
+                                  },
+                                ],
+                              },
+                            },
+                            {
+                              kind: "Field",
                               name: { kind: "Name", value: "name" },
                             },
                             {
@@ -2110,6 +2679,22 @@ export const FetchCategoriesDocument = {
                                     selectionSet: {
                                       kind: "SelectionSet",
                                       selections: [
+                                        {
+                                          kind: "Field",
+                                          name: { kind: "Name", value: "sys" },
+                                          selectionSet: {
+                                            kind: "SelectionSet",
+                                            selections: [
+                                              {
+                                                kind: "Field",
+                                                name: {
+                                                  kind: "Name",
+                                                  value: "id",
+                                                },
+                                              },
+                                            ],
+                                          },
+                                        },
                                         {
                                           kind: "Field",
                                           name: { kind: "Name", value: "name" },
@@ -2154,6 +2739,167 @@ export const FetchCategoriesDocument = {
 } as unknown as DocumentNode<
   FetchCategoriesQuery,
   FetchCategoriesQueryVariables
+>;
+export const FetchCategoryAttributesDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "FetchCategoryAttributes" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: {
+            kind: "Variable",
+            name: { kind: "Name", value: "categorySlug" },
+          },
+          type: {
+            kind: "NonNullType",
+            type: {
+              kind: "NamedType",
+              name: { kind: "Name", value: "String" },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "categoryCollection" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "where" },
+                value: {
+                  kind: "ObjectValue",
+                  fields: [
+                    {
+                      kind: "ObjectField",
+                      name: { kind: "Name", value: "slug" },
+                      value: {
+                        kind: "Variable",
+                        name: { kind: "Name", value: "categorySlug" },
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "items" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: {
+                          kind: "Name",
+                          value: "unionAttributesCollection",
+                        },
+                        arguments: [
+                          {
+                            kind: "Argument",
+                            name: { kind: "Name", value: "limit" },
+                            value: { kind: "IntValue", value: "20" },
+                          },
+                        ],
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "items" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "slug" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "sys" },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        {
+                                          kind: "Field",
+                                          name: { kind: "Name", value: "id" },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: "Field",
+                        name: {
+                          kind: "Name",
+                          value: "intersectAttributesCollection",
+                        },
+                        arguments: [
+                          {
+                            kind: "Argument",
+                            name: { kind: "Name", value: "limit" },
+                            value: { kind: "IntValue", value: "20" },
+                          },
+                        ],
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "items" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "sys" },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        {
+                                          kind: "Field",
+                                          name: { kind: "Name", value: "id" },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "slug" },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  FetchCategoryAttributesQuery,
+  FetchCategoryAttributesQueryVariables
 >;
 export const FetchCategoryHighlightsDocument = {
   kind: "Document",
@@ -2275,4 +3021,244 @@ export const FetchCategoryHighlightsDocument = {
 } as unknown as DocumentNode<
   FetchCategoryHighlightsQuery,
   FetchCategoryHighlightsQueryVariables
+>;
+export const FetchProductVariantsInCategoryDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "FetchProductVariantsInCategory" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: {
+            kind: "Variable",
+            name: { kind: "Name", value: "intersectCondition" },
+          },
+          type: {
+            kind: "ListType",
+            type: {
+              kind: "NonNullType",
+              type: {
+                kind: "NamedType",
+                name: { kind: "Name", value: "ProductVariantFilter" },
+              },
+            },
+          },
+        },
+        {
+          kind: "VariableDefinition",
+          variable: {
+            kind: "Variable",
+            name: { kind: "Name", value: "unionCondition" },
+          },
+          type: {
+            kind: "ListType",
+            type: {
+              kind: "NonNullType",
+              type: {
+                kind: "NamedType",
+                name: { kind: "Name", value: "ProductVariantFilter" },
+              },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "productVariantCollection" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "where" },
+                value: {
+                  kind: "ObjectValue",
+                  fields: [
+                    {
+                      kind: "ObjectField",
+                      name: { kind: "Name", value: "AND" },
+                      value: {
+                        kind: "Variable",
+                        name: { kind: "Name", value: "intersectCondition" },
+                      },
+                    },
+                    {
+                      kind: "ObjectField",
+                      name: { kind: "Name", value: "OR" },
+                      value: {
+                        kind: "Variable",
+                        name: { kind: "Name", value: "unionCondition" },
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "items" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "ref" } },
+                      { kind: "Field", name: { kind: "Name", value: "price" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "firstMediaInOverview" },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "linkedFrom" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: {
+                                kind: "Name",
+                                value: "productCollection",
+                              },
+                              arguments: [
+                                {
+                                  kind: "Argument",
+                                  name: { kind: "Name", value: "limit" },
+                                  value: { kind: "IntValue", value: "1" },
+                                },
+                              ],
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "items" },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        {
+                                          kind: "Field",
+                                          name: { kind: "Name", value: "name" },
+                                        },
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "variantsCollection",
+                                          },
+                                          arguments: [
+                                            {
+                                              kind: "Argument",
+                                              name: {
+                                                kind: "Name",
+                                                value: "limit",
+                                              },
+                                              value: {
+                                                kind: "IntValue",
+                                                value: "0",
+                                              },
+                                            },
+                                          ],
+                                          selectionSet: {
+                                            kind: "SelectionSet",
+                                            selections: [
+                                              {
+                                                kind: "Field",
+                                                name: {
+                                                  kind: "Name",
+                                                  value: "total",
+                                                },
+                                              },
+                                            ],
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "attributesCollection" },
+                        arguments: [
+                          {
+                            kind: "Argument",
+                            name: { kind: "Name", value: "limit" },
+                            value: { kind: "IntValue", value: "10" },
+                          },
+                        ],
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "items" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "slug" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "name" },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "mediaCollection" },
+                        arguments: [
+                          {
+                            kind: "Argument",
+                            name: { kind: "Name", value: "limit" },
+                            value: { kind: "IntValue", value: "15" },
+                          },
+                        ],
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "items" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "url" },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  FetchProductVariantsInCategoryQuery,
+  FetchProductVariantsInCategoryQueryVariables
 >;

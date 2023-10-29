@@ -2,12 +2,18 @@ query FetchCategories($lang: String!) {
   categories(id: "1Dxj0jPKVb5TgkZ2RYRp7x", locale: $lang) {
     categoriesCollection(limit: 3) {
       items {
+        sys {
+          id
+        }
         name
         isRootCategory
         displayName
         slug
         subCategoriesCollection {
           items {
+            sys {
+              id
+            }
             name
             isRootCategory
             displayName

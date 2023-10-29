@@ -49,8 +49,8 @@ export default async function RootLayout({
           <AuthProvider>
             <main className={font.className}>
               <MessageModal />
-              <Navbar />
               <Sidebar />
+              <Navbar />
               {children}
             </main>
           </AuthProvider>

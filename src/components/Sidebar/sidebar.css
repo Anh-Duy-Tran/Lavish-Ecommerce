@@ -2,7 +2,7 @@
 
 @layer components {
   .sidebar-wrapper {
-    @apply absolute flex w-full top-0 tablet:top-2 left-0 justify-center;
+    @apply fixed flex w-full top-0 tablet:top-2 left-0 justify-center z-20;
   }
 
   .sidebar-container {
@@ -10,7 +10,6 @@
            z-20 tablet:ml-[-10px] tablet:h-[80vh]
            border border-black dark:border-white
            bg-white dark:bg-black
-           transition-opacity duration-config
            tablet:w-[330px]
            laptopHD:w-[400px]
            desktop:w-[500px]

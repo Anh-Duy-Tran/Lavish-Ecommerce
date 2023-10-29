@@ -2,6 +2,7 @@
 
 import { useCategoryStore } from "@/context/useCategoryStore";
 import "./sidebar.css";
+import { useTransition, animated } from "@react-spring/web";
 import { useUIStore } from "@/context/useUIStore";
 import { usePathname } from "next/navigation";
 import React from "react";
@@ -12,68 +13,110 @@ import Link from "next/link";
 import cookieCutter from "@boiseitguru/cookie-cutter";
 
 export function Sidebar() {
-  const { isSidebarOpen } = useUIStore();
+  const { isSidebarOpen, toggleSidebar } = useUIStore();
   const pathname = usePathname() || "/";
   const { categories } = useCategoryStore();
   const { currentCategoryIndex } = useUIStore();
   const { theme, setTheme } = useTheme();
 
-  return (
-    <div className={`sidebar-wrapper`}>
-      <div className="page-container">
-        <div
-          className={`sidebar-container${
-            isSidebarOpen ? " opacity-100 visible" : " opacity-0 invisible"
-          }`}
-        >
-          <div className="add-padding-top z-30 ml-3 tablet:ml-0">
-            {!isRootPath(pathname) ? <SidebarCategoryButton /> : <div />}
-          </div>
+  const transition = useTransition(isSidebarOpen, {
+    from: {
+      opacity: 0,
+    },
+    enter: {
+      opacity: 1,
+    },
+    leave: {
+      opacity: 0,
+    },
+    config: {
+      duration: 200,
+    },
+  });
 
-          <div className="flex-grow">
-            <div className="flex justify-end flex-wrap gap-3 mt-16 p-4 pl-20 desktop:pl-14 desktopHD:pl-24">
-              {categories[
-                currentCategoryIndex
-              ].subCategoriesCollection.items.map((category) => {
-                return (
-                  <Button variant="outlined" key={category.slug}>
-                    {category.displayName}
-                  </Button>
-                );
-              })}
-            </div>
-          </div>
-          <div className="flex justify-between p-3">
-            <div className="flex items-end gap-6">
-              <Link
-                href={`${pathname.replace("vi", "en")}`}
-                onClick={() =>
-                  cookieCutter.set("preferred-locale", "en", { path: "/" })
-                }
-              >
-                <p>English</p>
-              </Link>
-              <Link
-                href={`${pathname.replace("en", "vi")}`}
-                onClick={() =>
-                  cookieCutter.set("preferred-locale", "vi", { path: "/" })
-                }
-              >
-                <p>Tieng Viet</p>
-              </Link>
-            </div>
-            <label className="switch">
-              <input
-                onChange={() => setTheme(theme === "dark" ? "light" : "dark")}
-                checked={theme === "dark"}
-                type="checkbox"
-              />
-              <span className="slider"></span>
-            </label>
-          </div>
-        </div>
-      </div>
-    </div>
+  return (
+    <>
+      {transition((style, isSidebarOpen) => (
+        <>
+          {isSidebarOpen ? (
+            <animated.div
+              className={`sidebar-wrapper h-full`}
+              style={style}
+              onClick={toggleSidebar}
+            >
+              <div className="page-container">
+                <div
+                  className={`sidebar-container`}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <div className="add-padding-top z-30 ml-3 tablet:ml-0 h-16">
+                    {!isRootPath(pathname) ? (
+                      <SidebarCategoryButton />
+                    ) : (
+                      <div />
+                    )}
+                  </div>
+
+                  <div className="flex-grow">
+                    <div className="flex justify-end flex-wrap gap-3 mt-16 p-4 pl-20 desktop:pl-14 desktopHD:pl-24">
+                      {categories[
+                        currentCategoryIndex
+                      ].subCategoriesCollection.items.map((category) => {
+                        return (
+                          <Link
+                            key={category.slug}
+                            href={`/${category.slug}`}
+                            onClick={toggleSidebar}
+                          >
+                            <Button size="compact" variant="outlined">
+                              {category.displayName}
+                            </Button>
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </div>
+                  <div className="flex justify-between p-3">
+                    <div className="flex items-end gap-6">
+                      <Link
+                        href={`${pathname.replace("vi", "en")}`}
+                        onClick={() =>
+                          cookieCutter.set("preferred-locale", "en", {
+                            path: "/",
+                          })
+                        }
+                      >
+                        <p>English</p>
+                      </Link>
+                      <Link
+                        href={`${pathname.replace("en", "vi")}`}
+                        onClick={() =>
+                          cookieCutter.set("preferred-locale", "vi", {
+                            path: "/",
+                          })
+                        }
+                      >
+                        <p>Tieng Viet</p>
+                      </Link>
+                    </div>
+                    <label className="switch">
+                      <input
+                        onChange={() =>
+                          setTheme(theme === "dark" ? "light" : "dark")
+                        }
+                        checked={theme === "dark"}
+                        type="checkbox"
+                      />
+                      <span className="slider"></span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </animated.div>
+          ) : null}
+        </>
+      ))}
+    </>
   );
 }
 

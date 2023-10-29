@@ -1,0 +1,22 @@
+query FetchCategoryAttributes($categorySlug: String!) {
+  categoryCollection(where: { slug: $categorySlug }) {
+    items {
+      unionAttributesCollection(limit: 20) {
+        items {
+          slug
+          sys {
+            id
+          }
+        }
+      }
+      intersectAttributesCollection(limit: 20) {
+        items {
+          sys {
+            id
+          }
+          slug
+        }
+      }
+    }
+  }
+}
