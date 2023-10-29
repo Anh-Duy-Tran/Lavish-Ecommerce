@@ -50,9 +50,9 @@ export function ProductItem({ productVariant, viewmode }: ProductItemProps) {
         <div className="flex justify-between py-4 px-1">
           <div className="flex flex-col">
             <h3>{`${productName} ${
-              numPeerVariant > 1 ? `+${numPeerVariant}` : ""
+              numPeerVariant > 1 ? `+${numPeerVariant-1}` : ""
             }`}</h3>
-            <h3>{`${productVariant.price / 100}`}</h3>
+            <h3>{`${productVariant.price / 100} EUR`}</h3>
           </div>
           <div>
             <svg

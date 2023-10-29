@@ -1,0 +1,14 @@
+@tailwind components;
+
+@layer components {
+  .filter-modal-wrapper {
+    @apply fixed flex w-full left-0 justify-center z-10;
+  }
+
+  .filter-modal-container {
+    @apply flex flex-col w-full p-3 mx-4 tablet:mx-0 tablet:w-[350px] desktop:w-[500px]
+           z-30
+           border border-black dark:border-white
+           bg-white dark:bg-black;
+  }
+}

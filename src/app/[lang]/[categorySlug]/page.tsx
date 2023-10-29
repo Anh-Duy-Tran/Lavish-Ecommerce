@@ -9,8 +9,9 @@ import React from "react";
 import { FetchProductVariantsInCategoryQuery } from "@/gql/graphql";
 import { DeepNonNullable, ValuesType } from "utility-types";
 import { ProductOverview } from "@/components/ProductOverview/ProductOverview";
-import { ProductFilter } from "@/components/ProductFilter";
+import { ProductFilter, ProductFilterModal } from "@/components/ProductFilter";
 import { UseStartMouseListener } from "@/hooks/UseStartMouseListener";
+import { FilterType } from "@/context/useFilterStore";
 
 export type ProductVariantOverviewType = ValuesType<
   DeepNonNullable<FetchProductVariantsInCategoryQuery>["productVariantCollection"]["items"]
@@ -37,14 +38,34 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         attributes: { slug: attribute?.slug as string },
       })) as any,
     })
-  ).data?.productVariantCollection?.items as any;
+  ).data?.productVariantCollection?.items;
+
+  const filter: FilterType = {};
+  productVariants?.forEach((variant) => {
+    variant?.attributesCollection?.items.forEach((attribute) => {
+      const value = attribute?.name as string;
+      const name = attribute?.type as string;
+
+      if (!(name in filter)) {
+        filter[name] = {};
+      }
+      if (!(value in filter[name])) {
+        filter[name][value] = [];
+      }
+      filter[name][value].push(variant.ref as string);
+    });
+  });
 
   return (
     <>
+      <ProductFilterModal />
       <ProductFilter />
       <UseStartMouseListener />
       <div className="add-padding-top mt-20 w-full">
-        <ProductOverview productVariants={productVariants} />
+        <ProductOverview
+          filters={filter}
+          productVariants={productVariants as any}
+        />
       </div>
     </>
   );

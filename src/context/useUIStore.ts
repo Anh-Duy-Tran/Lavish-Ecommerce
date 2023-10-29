@@ -27,7 +27,7 @@ interface UIStoreType {
 }
 
 export const useUIStore = create<UIStoreType>()((set) => ({
-  viewmode: 2,
+  viewmode: 0,
   setViewMode: (mode) => set({ viewmode: mode }),
 
   currentCategoryIndex: 0,
