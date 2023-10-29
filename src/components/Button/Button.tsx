@@ -35,7 +35,11 @@ export function Button({
         -translate-y-1/2 left-1/2 bottom-0 h-[2px] transition-width duration-100`}
         style={{ width: active ? "25px" : "0px" }}
       />
-      <h2 style={{ whiteSpace: "nowrap"}}>{children}</h2>
+      <h2
+        style={{ whiteSpace: "nowrap", fontWeight: active ? "bold" : "normal" }}
+      >
+        {children}
+      </h2>
     </button>
   );
 }

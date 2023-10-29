@@ -16,11 +16,13 @@ export function ProductOverview({
   filters,
 }: ProductOverviewProps) {
   const { viewmode } = useUIStore();
-  const { setFilters } = useFilterStore();
+  const { filteredProductVariantRefs, setFilters, clearSelectedFilter } =
+    useFilterStore();
 
   useEffect(() => {
     setFilters(filters);
-  }, [filters, setFilters]);
+    clearSelectedFilter();
+  }, [clearSelectedFilter, filters, setFilters]);
 
   return (
     <div className="flex flex-col justify-center overflow-x-hidden">
@@ -33,13 +35,19 @@ export function ProductOverview({
             : "grid-cols-4 tablet:grid-cols-10"
         }`}
       >
-        {productVariants.map((variant) => (
-          <ProductItem
-            viewmode={viewmode}
-            key={variant.ref}
-            productVariant={variant}
-          />
-        ))}
+        {productVariants
+          .filter((variant) =>
+            filteredProductVariantRefs.length > 0
+              ? filteredProductVariantRefs.includes(variant.ref)
+              : true,
+          )
+          .map((variant) => (
+            <ProductItem
+              viewmode={viewmode}
+              key={variant.ref}
+              productVariant={variant}
+            />
+          ))}
       </div>
     </div>
   );

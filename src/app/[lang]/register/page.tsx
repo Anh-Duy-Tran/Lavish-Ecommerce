@@ -5,7 +5,7 @@ export default function RegisterPage() {
   return (
     <div className="page-wrapper">
       <div className="page-container">
-        <RegisterForm />;
+        <RegisterForm />
       </div>
     </div>
   );

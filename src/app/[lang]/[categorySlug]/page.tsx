@@ -50,9 +50,9 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         filter[name] = {};
       }
       if (!(value in filter[name])) {
-        filter[name][value] = [];
+        filter[name][value] = { selected: false, value: [] };
       }
-      filter[name][value].push(variant.ref as string);
+      filter[name][value].value.push(variant.ref as string);
     });
   });
 

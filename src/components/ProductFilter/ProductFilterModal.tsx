@@ -2,13 +2,18 @@
 
 import "./sidebar.css";
 import { useTransition, animated } from "@react-spring/web";
-import React, { useEffect } from "react";
+import React from "react";
 import { useFilterStore } from "@/context/useFilterStore";
 import { Button } from "../Button";
 
 export function ProductFilterModal() {
-  const { filters, currentOpenFilter, isFilterOpen, closeFilter } =
-    useFilterStore();
+  const {
+    filters,
+    currentOpenFilter,
+    isFilterOpen,
+    closeFilter,
+    toggleFilter,
+  } = useFilterStore();
 
   const transition = useTransition(isFilterOpen, {
     from: {
@@ -35,7 +40,11 @@ export function ProductFilterModal() {
                 className="fixed w-full h-full z-10"
                 onClick={closeFilter}
               ></div>
-              <animated.div className={`filter-modal-wrapper`} style={style}>
+              <animated.div
+                className={`filter-modal-wrapper`}
+                style={style}
+                onClick={closeFilter}
+              >
                 <div
                   className="flex page-container add-padding-top mt-12"
                   onClick={closeFilter}
@@ -48,7 +57,7 @@ export function ProductFilterModal() {
                       style={{
                         display: "grid",
                         gridTemplateColumns:
-                          "repeat(auto-fit, minmax(100px, 1fr))",
+                          "repeat(auto-fit, minmax(120px, 1fr))",
                         // gridAutoRows: "20px",
                         gridGap: "5px",
                       }}
@@ -56,9 +65,21 @@ export function ProductFilterModal() {
                       {Object.keys(filters[currentOpenFilter as string]).map(
                         (value) => (
                           <div key={value}>
-                            <Button fullWidth variant="outlined">{value}</Button>
+                            <Button
+                              fullWidth
+                              variant="outlined"
+                              active={
+                                filters[currentOpenFilter as string][value]
+                                  .selected
+                              }
+                              onClick={() =>
+                                toggleFilter(currentOpenFilter as string, value)
+                              }
+                            >
+                              {value}
+                            </Button>
                           </div>
-                        )
+                        ),
                       )}
                     </div>
                   </div>
