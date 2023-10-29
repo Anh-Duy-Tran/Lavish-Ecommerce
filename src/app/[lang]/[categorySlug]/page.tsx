@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   FetchCategoryAttributesDocument,
   FetchProductVariantsInCategoryDocument,
@@ -27,22 +28,16 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
   const intersectAttributes = categoryAttributes?.intersectAttributesCollection;
   const unionAttributes = categoryAttributes?.unionAttributesCollection;
-
-  const productVariants =
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (
-      await getClient().query(FetchProductVariantsInCategoryDocument, {
-        intersectCondition: intersectAttributes?.items.map((attribute) => ({
-          attributes: { slug: attribute?.slug as string },
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        })) as any,
-        unionCondition: unionAttributes?.items.map((attribute) => ({
-          attributes: { slug: attribute?.slug as string },
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        })) as any,
-      })
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    ).data?.productVariantCollection?.items as any;
+  const productVariants = (
+    await getClient().query(FetchProductVariantsInCategoryDocument, {
+      intersectCondition: intersectAttributes?.items.map((attribute) => ({
+        attributes: { slug: attribute?.slug as string },
+      })) as any,
+      unionCondition: unionAttributes?.items.map((attribute) => ({
+        attributes: { slug: attribute?.slug as string },
+      })) as any,
+    })
+  ).data?.productVariantCollection?.items as any;
 
   return (
     <>
