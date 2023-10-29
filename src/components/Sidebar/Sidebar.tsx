@@ -63,7 +63,11 @@ export function Sidebar() {
                         currentCategoryIndex
                       ].subCategoriesCollection.items.map((category) => {
                         return (
-                          <Link key={category.slug} href={`/${category.slug}`}>
+                          <Link
+                            key={category.slug}
+                            href={`/${category.slug}`}
+                            onClick={toggleSidebar}
+                          >
                             <Button size="compact" variant="outlined">
                               {category.displayName}
                             </Button>

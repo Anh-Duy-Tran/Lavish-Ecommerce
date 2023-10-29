@@ -34,7 +34,11 @@ export function ProductItem({ productVariant, viewmode }: ProductItemProps) {
               priority
               fill
               sizes="(max-width: 768px) 25vw, 10vw"
-              src={productVariant.mediaCollection.items[productVariant.firstMediaInOverview || 0].url}
+              src={
+                productVariant.mediaCollection.items[
+                  productVariant.firstMediaInOverview || 0
+                ].url
+              }
               alt={productVariant.ref}
             />
           </div>

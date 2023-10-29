@@ -27,7 +27,7 @@ export function ProductSlider({ direction, srcs }: ProductSliderProps) {
     const totalSlide = srcs.length;
     const handleChangeSlide = (n: number) => {
       setCurrentSlide((prev) =>
-        prev + n >= totalSlide ? totalSlide - 1 : prev + n < 0 ? 0 : prev + n
+        prev + n >= totalSlide ? totalSlide - 1 : prev + n < 0 ? 0 : prev + n,
       );
     };
 
@@ -50,6 +50,7 @@ export function ProductSlider({ direction, srcs }: ProductSliderProps) {
 
       setThisDragging(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [thisDragging, dragging]);
 
   const offsetHorizontal = thisDragging
