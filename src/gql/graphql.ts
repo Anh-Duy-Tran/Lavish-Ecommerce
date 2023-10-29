@@ -725,6 +725,8 @@ export enum CategoryIntersectAttributesCollectionOrder {
   SysPublishedAtDesc = "sys_publishedAt_DESC",
   SysPublishedVersionAsc = "sys_publishedVersion_ASC",
   SysPublishedVersionDesc = "sys_publishedVersion_DESC",
+  TypeAsc = "type_ASC",
+  TypeDesc = "type_DESC",
 }
 
 export type CategoryLinkingCollections = {
@@ -924,6 +926,8 @@ export enum CategoryUnionAttributesCollectionOrder {
   SysPublishedAtDesc = "sys_publishedAt_DESC",
   SysPublishedVersionAsc = "sys_publishedVersion_ASC",
   SysPublishedVersionDesc = "sys_publishedVersion_DESC",
+  TypeAsc = "type_ASC",
+  TypeDesc = "type_DESC",
 }
 
 export type ContentfulMetadata = {
@@ -1298,6 +1302,7 @@ export type ProductAttribute = Entry & {
   name: Maybe<Scalars["String"]["output"]>;
   slug: Maybe<Scalars["String"]["output"]>;
   sys: Sys;
+  type: Maybe<Scalars["String"]["output"]>;
   valuesCollection: Maybe<ProductAttributeValuesCollection>;
 };
 
@@ -1313,6 +1318,11 @@ export type ProductAttributeNameArgs = {
 
 /** [See type definition](https://app.contentful.com/spaces/nh559twm3d3o/content_types/productAttribute) */
 export type ProductAttributeSlugArgs = {
+  locale: InputMaybe<Scalars["String"]["input"]>;
+};
+
+/** [See type definition](https://app.contentful.com/spaces/nh559twm3d3o/content_types/productAttribute) */
+export type ProductAttributeTypeArgs = {
   locale: InputMaybe<Scalars["String"]["input"]>;
 };
 
@@ -1353,6 +1363,13 @@ export type ProductAttributeFilter = {
   slug_not_contains: InputMaybe<Scalars["String"]["input"]>;
   slug_not_in: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
   sys: InputMaybe<SysFilter>;
+  type: InputMaybe<Scalars["String"]["input"]>;
+  type_contains: InputMaybe<Scalars["String"]["input"]>;
+  type_exists: InputMaybe<Scalars["Boolean"]["input"]>;
+  type_in: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
+  type_not: InputMaybe<Scalars["String"]["input"]>;
+  type_not_contains: InputMaybe<Scalars["String"]["input"]>;
+  type_not_in: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
   values: InputMaybe<CfProductAttributeNestedFilter>;
   valuesCollection_exists: InputMaybe<Scalars["Boolean"]["input"]>;
 };
@@ -1440,6 +1457,8 @@ export enum ProductAttributeLinkingCollectionsProductAttributeCollectionOrder {
   SysPublishedAtDesc = "sys_publishedAt_DESC",
   SysPublishedVersionAsc = "sys_publishedVersion_ASC",
   SysPublishedVersionDesc = "sys_publishedVersion_DESC",
+  TypeAsc = "type_ASC",
+  TypeDesc = "type_DESC",
 }
 
 export enum ProductAttributeLinkingCollectionsProductVariantCollectionOrder {
@@ -1476,6 +1495,8 @@ export enum ProductAttributeOrder {
   SysPublishedAtDesc = "sys_publishedAt_DESC",
   SysPublishedVersionAsc = "sys_publishedVersion_ASC",
   SysPublishedVersionDesc = "sys_publishedVersion_DESC",
+  TypeAsc = "type_ASC",
+  TypeDesc = "type_DESC",
 }
 
 export type ProductAttributeValuesCollection = {
@@ -1499,6 +1520,8 @@ export enum ProductAttributeValuesCollectionOrder {
   SysPublishedAtDesc = "sys_publishedAt_DESC",
   SysPublishedVersionAsc = "sys_publishedVersion_ASC",
   SysPublishedVersionDesc = "sys_publishedVersion_DESC",
+  TypeAsc = "type_ASC",
+  TypeDesc = "type_DESC",
 }
 
 export type ProductCollection = {
@@ -1822,6 +1845,8 @@ export enum ProductVariantAttributesCollectionOrder {
   SysPublishedAtDesc = "sys_publishedAt_DESC",
   SysPublishedVersionAsc = "sys_publishedVersion_ASC",
   SysPublishedVersionDesc = "sys_publishedVersion_DESC",
+  TypeAsc = "type_ASC",
+  TypeDesc = "type_DESC",
 }
 
 export type ProductVariantCollection = {
@@ -2338,6 +2363,13 @@ export type CfProductAttributeNestedFilter = {
   slug_not_contains: InputMaybe<Scalars["String"]["input"]>;
   slug_not_in: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
   sys: InputMaybe<SysFilter>;
+  type: InputMaybe<Scalars["String"]["input"]>;
+  type_contains: InputMaybe<Scalars["String"]["input"]>;
+  type_exists: InputMaybe<Scalars["Boolean"]["input"]>;
+  type_in: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
+  type_not: InputMaybe<Scalars["String"]["input"]>;
+  type_not_contains: InputMaybe<Scalars["String"]["input"]>;
+  type_not_in: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
   valuesCollection_exists: InputMaybe<Scalars["Boolean"]["input"]>;
 };
 
@@ -2557,6 +2589,7 @@ export type FetchProductVariantsInCategoryQuery = {
         items: Array<{
           __typename?: "ProductAttribute";
           slug: string | null;
+          type: string | null;
           name: string | null;
         } | null>;
       } | null;
@@ -3208,6 +3241,10 @@ export const FetchProductVariantsInCategoryDocument = {
                                   {
                                     kind: "Field",
                                     name: { kind: "Name", value: "slug" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "type" },
                                   },
                                   {
                                     kind: "Field",

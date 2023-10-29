@@ -22,6 +22,7 @@ query FetchProductVariantsInCategory(
       attributesCollection(limit: 10) {
         items {
           slug
+          type
           name
         }
       }
