@@ -24,16 +24,17 @@ export function ProductSlider({ direction, srcs }: ProductSliderProps) {
   }, [currentSlide]);
 
   useEffect(() => {
-    setThisDragging((prev) => (dragging === true ? prev : false));
-  }, [dragging]);
-
-  useEffect(() => {
     const totalSlide = srcs.length;
     const handleChangeSlide = (n: number) => {
       setCurrentSlide((prev) =>
-        prev + n >= totalSlide ? totalSlide - 1 : prev + n < 0 ? 0 : prev + n,
+        prev + n >= totalSlide ? totalSlide - 1 : prev + n < 0 ? 0 : prev + n
       );
     };
+
+    if (!dragging) {
+      setThisDragging(false);
+    }
+
     if (thisDragging && !dragging) {
       const threshold = 0.35;
       const prevOffset =
@@ -49,7 +50,6 @@ export function ProductSlider({ direction, srcs }: ProductSliderProps) {
 
       setThisDragging(false);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [thisDragging, dragging]);
 
   const offsetHorizontal = thisDragging
@@ -63,6 +63,9 @@ export function ProductSlider({ direction, srcs }: ProductSliderProps) {
   return (
     <div
       onMouseDown={(e) => {
+        if (e.button !== 0) {
+          return;
+        }
         setThisDragging(true);
         e.preventDefault();
         handleMouseDown(e);
