@@ -5,7 +5,7 @@ Welcome to LAVISH, a web platform inspired by the Zara website's aesthetic and f
 
 
 ### Main Features
-- **System reads data directly from Zara API:** Meticulously crafted self-defined data schema to capture Zara product data structure.
+- **Data replicated from Zara API:** Meticulously crafted self-defined data schema to capture Zara product data structure.
 
 - **Efficient Data Rendering**: For each product item in the main page, this app employs a lazy rendering technique (only fetch the first 2 images in the slider, fetch the rest only if the user interact with it). This significantly reduces latency, ensuring a swift browsing experience even with a large amount of product images and details.
 
