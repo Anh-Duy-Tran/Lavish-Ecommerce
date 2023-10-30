@@ -1,4 +1,32 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+# LAVISH ECOMERCIAL - FULL STACK NEXTJS version 13
+
+Welcome to LAVISH, a web platform inspired by the Zara website's aesthetic and functionality. Built with the power of Nextjs version 13 and integrated with Contentful CMS, this app delivers a modern, user-centric shopping experience.
+
+
+### Main Features
+- **System reads data directly from Zara API:** Meticulously crafted self-defined data schema to capture Zara product data structure.
+
+- **Efficient Data Rendering**: For each product item in the main page, this app employs a lazy rendering technique (only fetch the first 2 images in the slider, fetch the rest only if the user interact with it). This significantly reduces latency, ensuring a swift browsing experience even with a large amount of product images and details.
+
+- **View Switcher and Dark Mode:** Customize browsing experience with view and theme switcher, allowing you to toggle between different display layouts (the dark mode sync between tabs).
+
+- **Image Slider:** A self-implemented, user-friendly image slider inspired by the Zara website ensures seamless navigation through the app product's image previews and main page.
+
+- **Product Filters:** Our product page offers advanced filtering options. Users can easily filter out products based on their fundamental property, streamlining the shopping experience.
+
+- **Contentful CMS:** A powerful content management system lets you manage your site's content effortlessly. It's act as admin content panel for a smooth administrative experience on a rich UI system.
+
+- **User Authentication:** With dedicated login and registration system, users are assured a secure experience with cart and favourite item saving functionality.
+
+- **Bilingual Languages:** LAVISH support two languages: English and Vietnamese through internationalization of content in the CMS
+
+
+## Tech Stack
+
+**Client:** React (Next.js), Zustand, TailwindCSS.
+
+**Server:** Next.js (Node), Contentful Headless CMS.
 
 ## Getting Started
 
