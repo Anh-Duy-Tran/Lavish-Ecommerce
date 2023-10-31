@@ -41,8 +41,8 @@ export function LoginForm() {
         ...data,
         redirect: false,
       }),
-      (input) =>
-        input?.ok
+      (res) =>
+        res?.ok
           ? null
           : { title: "LOGIN FAILED", message: "Wrong credentials" },
     );

@@ -9,6 +9,8 @@ import * as Yup from "yup";
 import { Button } from "../Button";
 
 import prefixes from "./allowedPrefix.json";
+import { myAction } from "./action";
+import { useUIStore } from "@/context/useUIStore";
 
 export type RegisterFormType = {
   email: string;
@@ -21,6 +23,8 @@ export type RegisterFormType = {
 };
 
 export function RegisterForm() {
+  const { setLoadingModalContent } = useUIStore();
+
   const validationSchema = Yup.object().shape({
     email: Yup.string()
       .required("Required field.")
@@ -50,6 +54,11 @@ export function RegisterForm() {
 
   const onSubmit: SubmitHandler<RegisterFormType> = async (data) => {
     console.log(data);
+    await setLoadingModalContent(myAction(data), (res) =>
+      res.ok
+        ? { title: "REGISTER SUCCESS", message: res.message }
+        : { title: "REGISTER FAILED", message: res.message }
+    );
   };
 
   return (
@@ -126,6 +135,7 @@ export function RegisterForm() {
                 title="PREFIX"
                 type="text"
                 name="prefix"
+                defaultValue={"+"}
                 register={register("prefix")}
                 control={control}
               />
