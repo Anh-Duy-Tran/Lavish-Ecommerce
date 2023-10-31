@@ -47,7 +47,7 @@ export function RegisterForm() {
       .required("Required field.")
       .notOneOf(
         takenPhoneNums,
-        "This phone number is used by another account."
+        "This phone number is used by another account.",
       ),
     prefix: Yup.string()
       .required("Required field.")

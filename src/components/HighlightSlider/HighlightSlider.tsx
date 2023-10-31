@@ -27,7 +27,7 @@ export function HighlightSlider() {
               key={i}
               id={i}
               shouldChangeToTheme={categoryHighlights[slug]?.map(
-                (highlight) => highlight.theme as "dark" | "light"
+                (highlight) => highlight.theme as "dark" | "light",
               )}
             >
               {categoryHighlights[slug]?.map(({ media }) => (

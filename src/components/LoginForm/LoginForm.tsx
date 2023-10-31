@@ -41,13 +41,16 @@ export function LoginForm() {
         ...data,
         redirect: false,
       }),
-      (input) =>
-        input?.ok
+      (res) =>
+        res?.ok
           ? null
           : { title: "LOGIN FAILED", message: "Wrong credentials" },
     );
 
-    console.log(signInResponse);
+    if (signInResponse?.ok) {
+      // this should not back to /register page, don't know how to check
+      router.back();
+    }
   };
 
   return (
