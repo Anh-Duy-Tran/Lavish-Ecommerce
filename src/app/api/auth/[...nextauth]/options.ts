@@ -3,7 +3,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import prisma from "@/lib/prisma";
 
-console.log(process.env);
+console.log(process.env.NODE_ENV === "production");
 
 export const options: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
@@ -15,7 +15,7 @@ export const options: NextAuthOptions = {
         sameSite: "lax",
         path: "/",
         maxAge: 30 * 24 * 60 * 60, // 30 days
-        secure: process.env.VERCEL_ENV === "production",
+        secure: process.env.NODE_ENV === "production",
       },
     },
     callbackUrl: {
@@ -25,7 +25,7 @@ export const options: NextAuthOptions = {
         sameSite: "lax",
         path: "/",
         maxAge: 30 * 24 * 60 * 60,
-        secure: process.env.VERCEL_ENV === "production",
+        secure: process.env.NODE_ENV === "production",
       },
     },
     csrfToken: {
@@ -35,7 +35,7 @@ export const options: NextAuthOptions = {
         sameSite: "lax",
         path: "/",
         maxAge: 30 * 24 * 60 * 60,
-        secure: process.env.VERCEL_ENV === "production",
+        secure: process.env.NODE_ENV === "production",
       },
     },
   },
