@@ -3,10 +3,12 @@
 import prisma from "@/lib/prisma";
 import { RegisterFormType } from "./RegisterForm";
 import bcrypt from "bcryptjs";
+import { Path } from "react-hook-form";
 
 export async function myAction(formData: RegisterFormType): Promise<{
   ok: boolean;
   message: string;
+  errorField?: Path<RegisterFormType>;
 }> {
   const {
     prefix,
@@ -30,6 +32,26 @@ export async function myAction(formData: RegisterFormType): Promise<{
   const hashedPassword = await bcrypt.hash(password, 10);
 
   try {
+    if (await prisma.user.findFirst({ where: { email: email } })) {
+      return {
+        ok: false,
+        errorField: "email",
+        message: `Email: ${email} has already been taken by another account.`,
+      };
+    }
+
+    if (
+      await prisma.user.findFirst({
+        where: { phoneNumber: phone_number.toString() },
+      })
+    ) {
+      return {
+        ok: false,
+        errorField: "phone_number",
+        message: `Phone number: ${phone_number} has already been taken by another account.`,
+      };
+    }
+
     // Create a new user
     const newUser = await prisma.user.create({
       data: {
@@ -44,9 +66,10 @@ export async function myAction(formData: RegisterFormType): Promise<{
 
     return {
       ok: true,
-      message: "New account created.",
+      message: `Welcome ${newUser.firstName}, your account has been successfully created.`,
     };
   } catch (error) {
+    console.log(error);
     return {
       ok: false,
       message: "Something went wrong.",
