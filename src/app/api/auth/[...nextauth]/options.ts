@@ -3,6 +3,8 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import prisma from "@/lib/prisma";
 
+console.log(process.env);
+
 export const options: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   cookies: {
@@ -64,7 +66,6 @@ export const options: NextAuthOptions = {
           return null;
         }
 
-        console.log(credentials.password, user?.password);
         if (bcrypt.compareSync(credentials.password, user?.password)) {
           return user;
         }
