@@ -12,11 +12,11 @@ export function HighlightSlider() {
     <>
       <UseStartMouseListener />
       <div className="flex absolute w-full left-0 justify-center">
-        <div className="page-container mt-2 ml-3 tablet:ml-[-17px] add-padding-top z-20">
+        <div className="fixed page-container mt-2 ml-3 tablet:ml-[-17px] add-padding-top z-20">
           <SidebarCategoryButton />
         </div>
       </div>
-      <div className="w-screen h-screen overflow-hidden">
+      <div className="fixed w-screen h-screen overflow-hidden">
         <SliderSyncWithStore discreteInput arrow>
           {categories.map(({ slug }, i) => (
             <Slider

@@ -88,7 +88,7 @@ export function ProductSlider({ direction, srcs }: ProductSliderProps) {
       {srcs.map((src, i) => (
         <>
           {loadAll || i < 2 ? (
-            <Slide key={src}>
+            <Slide key={i}>
               <div className="relative h-full w-full">
                 <Image
                   style={{

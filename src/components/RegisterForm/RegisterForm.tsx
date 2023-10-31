@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import "./registerForm.css";
 import { InputField } from "../InputField/InputField";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -9,6 +9,8 @@ import * as Yup from "yup";
 import { Button } from "../Button";
 
 import prefixes from "./allowedPrefix.json";
+import { myAction } from "./action";
+import { useUIStore } from "@/context/useUIStore";
 
 export type RegisterFormType = {
   email: string;
@@ -21,10 +23,15 @@ export type RegisterFormType = {
 };
 
 export function RegisterForm() {
+  const { setLoadingModalContent } = useUIStore();
+  const [takenEmails, setTakenEmails] = useState<string[]>([]);
+  const [takenPhoneNums, setTakenPhoneNums] = useState<number[]>([]);
+
   const validationSchema = Yup.object().shape({
     email: Yup.string()
       .required("Required field.")
-      .email("Enter a valid e-mail address."),
+      .email("Enter a valid e-mail address.")
+      .notOneOf(takenEmails, "This email address is used by another account."),
     password: Yup.string()
       .required("Required field.")
       .min(8, "Password must be at least 8 characters long.")
@@ -36,20 +43,39 @@ export function RegisterForm() {
       .oneOf([Yup.ref("password")], "Passwords must match"),
     first_name: Yup.string().required("Required field."),
     last_name: Yup.string().required("Required field."),
-    phone_number: Yup.number().required("Required field."),
+    phone_number: Yup.number()
+      .required("Required field.")
+      .notOneOf(
+        takenPhoneNums,
+        "This phone number is used by another account.",
+      ),
     prefix: Yup.string()
       .required("Required field.")
       .oneOf(prefixes, "Enter an valid prefix!"),
   });
 
-  const { handleSubmit, register, control } = useForm<RegisterFormType>({
-    mode: "all",
-    resolver: yupResolver(validationSchema),
-    reValidateMode: "onChange",
-  });
+  const { handleSubmit, register, control, setError } =
+    useForm<RegisterFormType>({
+      mode: "all",
+      resolver: yupResolver(validationSchema),
+      reValidateMode: "onChange",
+    });
 
   const onSubmit: SubmitHandler<RegisterFormType> = async (data) => {
-    console.log(data);
+    await setLoadingModalContent(myAction(data), (res) => {
+      if (res.errorField) {
+        if (res.errorField === "email") {
+          setTakenEmails((prev) => prev.concat(data.email));
+        }
+        if (res.errorField === "phone_number") {
+          setTakenPhoneNums((prev) => prev.concat(data.phone_number));
+        }
+        setError(res.errorField, { message: res.message, type: "manual" });
+      }
+      return res.ok
+        ? { title: "REGISTER SUCCESS", message: res.message }
+        : { title: "REGISTER FAILED", message: res.message };
+    });
   };
 
   return (
