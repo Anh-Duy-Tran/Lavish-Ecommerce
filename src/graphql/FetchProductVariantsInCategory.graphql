@@ -12,6 +12,7 @@ query FetchProductVariantsInCategory(
       linkedFrom {
         productCollection(limit: 1) {
           items {
+            slug
             name
             variantsCollection(limit: 0) {
               total
@@ -31,6 +32,7 @@ query FetchProductVariantsInCategory(
           url
         }
       }
+      skuList
     }
   }
 }

@@ -5,6 +5,7 @@ export type MousePositionType = {
   y: number;
   offSetX: number;
   offSetY: number;
+  maxOffSet: number;
 };
 
 type MousePositionStore = {
@@ -19,6 +20,7 @@ type MousePositionStore = {
 const defaultValue: MousePositionType = {
   x: 0,
   y: 0,
+  maxOffSet: 0,
   offSetX: 0,
   offSetY: 0,
 };
@@ -38,6 +40,7 @@ export const useMousePosition = create<MousePositionStore>()((set) => ({
         y: e.clientY,
         offSetX: 0,
         offSetY: 0,
+        maxOffSet: 0,
       },
       dragging: true,
       dragDirection: undefined,
@@ -59,6 +62,11 @@ export const useMousePosition = create<MousePositionStore>()((set) => ({
         return {
           mouse: {
             ...mouse,
+            maxOffSet: Math.max(
+              mouse.maxOffSet,
+              Math.abs(offset.offSetX),
+              Math.abs(offset.offSetY)
+            ),
             ...offset,
           },
         };
@@ -67,6 +75,7 @@ export const useMousePosition = create<MousePositionStore>()((set) => ({
       return {
         mouse: {
           ...mouse,
+          maxOffSet: Math.max(mouse.maxOffSet, offset.offSetX, offset.offSetY),
           ...offset,
         },
         dragDirection:

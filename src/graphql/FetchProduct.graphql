@@ -1,0 +1,30 @@
+query FetchProduct($productSlug: String!) {
+  productCollection(where: { slug: $productSlug }, limit: 1) {
+    items {
+      name
+      description
+      slug
+      variantsCollection(limit: 20) {
+        items {
+          ref
+          colorName
+          colorCode
+          price
+          skuList
+          firstMediaInOverview
+          attributesCollection {
+            items {
+              slug
+              name
+            }
+          }
+          mediaCollection {
+            items {
+              url
+            }
+          }
+        }
+      }
+    }
+  }
+}

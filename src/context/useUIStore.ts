@@ -1,8 +1,15 @@
+import { ProductVariantOverviewType } from "@/app/[lang]/[categorySlug]/page";
 import { create } from "zustand";
+
+type ProductAddedToCart = {
+  productVariant: ProductVariantOverviewType;
+  sku: string;
+};
 
 type MessageModalContent = {
   title: string;
   message: string;
+  productAddedToCart?: ProductAddedToCart;
   loading?: boolean;
 };
 
@@ -22,7 +29,7 @@ interface UIStoreType {
   setMessageModalContent: (content: MessageModalContent) => void;
   setLoadingModalContent: <T>(
     promise: Promise<T>,
-    resolver: (input: T) => MessageModalContent | null,
+    resolver: (input: T) => MessageModalContent | null
   ) => Promise<T>;
 }
 
@@ -53,7 +60,7 @@ export const useUIStore = create<UIStoreType>()((set) => ({
     })),
   setLoadingModalContent: async <T>(
     promise: Promise<T>,
-    resolver: (input: T) => MessageModalContent | null,
+    resolver: (input: T) => MessageModalContent | null
   ) => {
     set(({ messageModalContent }) => ({
       isMessageModalOpen: true,

@@ -2,13 +2,13 @@
 
 @layer components {
   .modal-backdrop {
-    @apply absolute top-0 left-0 w-screen h-screen z-50 bg-white/40 dark:bg-black/60;
+    @apply fixed top-0 left-0 w-screen h-screen z-50 bg-white/40 dark:bg-black/60;
   }
   .message-modal-container {
     @apply relative flex flex-col translate-x-[-50%] translate-y-[-50%] top-[50%] left-[50%] w-[500px] max-h-[400px] bg-white dark:bg-black;
   }
 
   .loading-modal-container {
-    @apply relative w-24 h-24 m-7 translate-x-[-50%] translate-y-[-50%] top-[50%] left-[50%] border border-black dark:border-white bg-white dark:bg-black;
+    @apply relative w-24 h-24 origin-center translate-x-[-50%] translate-y-[-50%] top-[50%] left-[50%] border border-black dark:border-white bg-white dark:bg-black;
   }
 }
