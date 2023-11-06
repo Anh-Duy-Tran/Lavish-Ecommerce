@@ -6,7 +6,7 @@
   }
 
   .sidebar-container {
-    @apply w-screen min-h-[-webkit-fill-available] flex flex-col
+    @apply w-screen h-[-webkit-fill-available] flex flex-col
            z-20 tablet:ml-[-10px] tablet:h-[80vh]
            border border-black dark:border-white
            bg-white dark:bg-black
