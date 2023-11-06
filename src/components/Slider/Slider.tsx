@@ -223,6 +223,9 @@ export function Slider({
         // type slide
         <div
           onMouseDown={(e) => {
+            if (e.button !== 0) {
+              return;
+            }
             setThisDragging(true);
             handleMouseDown(e);
           }}
@@ -252,6 +255,9 @@ export function Slider({
         // type overlay
         <div
           onMouseDown={(e) => {
+            if (e.button !== 0) {
+              return;
+            }
             setThisDragging(true);
             handleMouseDown(e);
           }}

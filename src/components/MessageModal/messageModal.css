@@ -2,7 +2,7 @@
 
 @layer components {
   .modal-backdrop {
-    @apply fixed top-0 left-0 w-screen z-50 h-screen bg-white/40 dark:bg-black/60 backdrop-blur-[2px] desktopHD:backdrop-blur-[3px];
+    @apply fixed top-0 left-0 w-screen z-50 h-screen bg-white/40 dark:bg-black/60 backdrop-blur-[2px] desktopHD:backdrop-blur-[3px] touch-none;
   }
   .message-modal-container {
     @apply relative flex flex-col translate-x-[-50%] translate-y-[-50%] top-[50%] left-[50%] w-[500px] max-h-[400px] bg-white dark:bg-black;
