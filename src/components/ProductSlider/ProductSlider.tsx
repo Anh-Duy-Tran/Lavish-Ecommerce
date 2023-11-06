@@ -109,11 +109,11 @@ export function ProductSlider({ href, direction, srcs }: ProductSliderProps) {
               : `translate3d(0, ${offsetVertical}%, 0)`,
         }}
         ref={squareRef}
-        className={`touch-none ${
+        className={
           direction === "horizontal"
-            ? "slider-container"
-            : "slider-vertical-container"
-        }`}
+            ? "slider-container touch-pan-y"
+            : "slider-vertical-container touch-pan-x"
+        }
       >
         {srcs.map((src, i) => (
           <>
