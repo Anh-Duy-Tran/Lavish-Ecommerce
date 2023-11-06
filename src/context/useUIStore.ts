@@ -1,8 +1,15 @@
+import { ProductVariantOverviewType } from "@/app/[lang]/[categorySlug]/page";
 import { create } from "zustand";
+
+type ProductAddedToCart = {
+  productVariant: ProductVariantOverviewType;
+  sku: string;
+};
 
 type MessageModalContent = {
   title: string;
   message: string;
+  productAddedToCart?: ProductAddedToCart;
   loading?: boolean;
 };
 

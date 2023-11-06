@@ -1,17 +1,20 @@
 "use client";
 
 import { useMousePosition } from "@/context/useMousePositionStore";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import "./slider.css";
 import { useElementSize } from "usehooks-ts";
+import Link from "next/link";
 interface ProductSliderProps {
   direction?: "horizontal" | "vertical";
   srcs: string[];
+  href?: string;
 }
 
-export function ProductSlider({ direction, srcs }: ProductSliderProps) {
-  const { dragging, mouse, handleMouseDown } = useMousePosition();
+export function ProductSlider({ href, direction, srcs }: ProductSliderProps) {
+  const { dragging, mouse, handleMouseDown, handleTouchStart } =
+    useMousePosition();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [squareRef, { width, height }] = useElementSize();
   const [thisDragging, setThisDragging] = useState(false);
@@ -61,53 +64,81 @@ export function ProductSlider({ direction, srcs }: ProductSliderProps) {
     ? (mouse.offSetY * 100) / height - 100 * currentSlide
     : -100 * currentSlide;
 
+  const Wrapper = useMemo(() => {
+    return href
+      ? ({
+          children,
+          onClick,
+        }: {
+          children: React.ReactNode;
+          onClick: React.MouseEventHandler;
+        }) => (
+          <Link href={href} onClick={onClick}>
+            {children}
+          </Link>
+        )
+      : ({ children }: { children: React.ReactNode }) => <>{children}</>;
+  }, [href]);
+
   return (
-    <div
-      onMouseDown={(e) => {
-        if (e.button !== 0) {
-          return;
+    <Wrapper
+      onClick={(e) => {
+        if (mouse.maxOffSet > 1) {
+          e.preventDefault();
         }
-        setThisDragging(true);
-        e.preventDefault();
-        handleMouseDown(e);
       }}
-      style={{
-        transition: "transform 700ms cubic-bezier(.17,.79,.42,1)",
-        transform:
-          direction === "horizontal"
-            ? `translate3d(${offsetHorizontal}%, 0, 0)`
-            : `translate3d(0, ${offsetVertical}%, 0)`,
-      }}
-      ref={squareRef}
-      className={
-        direction === "horizontal"
-          ? "slider-container"
-          : "slider-vertical-container"
-      }
     >
-      {srcs.map((src, i) => (
-        <>
-          {loadAll || i < 2 ? (
-            <Slide key={i}>
-              <div className="relative h-full w-full">
-                <Image
-                  style={{
-                    userSelect: "none",
-                    pointerEvents: "none",
-                    objectFit: "cover",
-                  }}
-                  priority
-                  fill
-                  sizes="25vw"
-                  src={src}
-                  alt={src}
-                />
-              </div>
-            </Slide>
-          ) : null}
-        </>
-      ))}
-    </div>
+      <div
+        onMouseDown={(e) => {
+          if (e.button !== 0) {
+            return;
+          }
+          setThisDragging(true);
+          e.preventDefault();
+          handleMouseDown(e);
+        }}
+        onTouchStart={(e) => {
+          setThisDragging(true);
+          handleTouchStart(e);
+        }}
+        style={{
+          transition: "transform 700ms cubic-bezier(.17,.79,.42,1)",
+          transform:
+            direction === "horizontal"
+              ? `translate3d(${offsetHorizontal}%, 0, 0)`
+              : `translate3d(0, ${offsetVertical}%, 0)`,
+        }}
+        ref={squareRef}
+        className={
+          direction === "horizontal"
+            ? "slider-container touch-pan-y"
+            : "slider-vertical-container touch-pan-x"
+        }
+      >
+        {srcs.map((src, i) => (
+          <>
+            {loadAll || i < 2 ? (
+              <Slide key={i}>
+                <div className="relative h-full w-full">
+                  <Image
+                    style={{
+                      userSelect: "none",
+                      pointerEvents: "none",
+                      objectFit: "cover",
+                    }}
+                    priority
+                    fill
+                    sizes="25vw"
+                    src={src}
+                    alt={src}
+                  />
+                </div>
+              </Slide>
+            ) : null}
+          </>
+        ))}
+      </div>
+    </Wrapper>
   );
 }
 

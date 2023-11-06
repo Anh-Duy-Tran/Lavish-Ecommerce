@@ -2552,6 +2552,47 @@ export type FetchCategoryHighlightsQuery = {
   } | null;
 };
 
+export type FetchProductQueryVariables = Exact<{
+  productSlug: Scalars["String"]["input"];
+}>;
+
+export type FetchProductQuery = {
+  __typename?: "Query";
+  productCollection: {
+    __typename?: "ProductCollection";
+    items: Array<{
+      __typename?: "Product";
+      name: string | null;
+      description: string | null;
+      slug: string | null;
+      variantsCollection: {
+        __typename?: "ProductVariantsCollection";
+        items: Array<{
+          __typename?: "ProductVariant";
+          ref: string | null;
+          colorName: string | null;
+          colorCode: string | null;
+          price: number | null;
+          skuList: Array<string | null> | null;
+          firstMediaInOverview: number | null;
+          attributesCollection: {
+            __typename?: "ProductVariantAttributesCollection";
+            items: Array<{
+              __typename?: "ProductAttribute";
+              slug: string | null;
+              name: string | null;
+            } | null>;
+          } | null;
+          mediaCollection: {
+            __typename?: "AssetCollection";
+            items: Array<{ __typename?: "Asset"; url: string | null } | null>;
+          } | null;
+        } | null>;
+      } | null;
+    } | null>;
+  } | null;
+};
+
 export type FetchProductVariantsInCategoryQueryVariables = Exact<{
   intersectCondition: InputMaybe<
     Array<ProductVariantFilter> | ProductVariantFilter
@@ -2570,12 +2611,14 @@ export type FetchProductVariantsInCategoryQuery = {
       ref: string | null;
       price: number | null;
       firstMediaInOverview: number | null;
+      skuList: Array<string | null> | null;
       linkedFrom: {
         __typename?: "ProductVariantLinkingCollections";
         productCollection: {
           __typename?: "ProductCollection";
           items: Array<{
             __typename?: "Product";
+            slug: string | null;
             name: string | null;
             variantsCollection: {
               __typename?: "ProductVariantsCollection";
@@ -3055,6 +3098,206 @@ export const FetchCategoryHighlightsDocument = {
   FetchCategoryHighlightsQuery,
   FetchCategoryHighlightsQueryVariables
 >;
+export const FetchProductDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "FetchProduct" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: {
+            kind: "Variable",
+            name: { kind: "Name", value: "productSlug" },
+          },
+          type: {
+            kind: "NonNullType",
+            type: {
+              kind: "NamedType",
+              name: { kind: "Name", value: "String" },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "productCollection" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "where" },
+                value: {
+                  kind: "ObjectValue",
+                  fields: [
+                    {
+                      kind: "ObjectField",
+                      name: { kind: "Name", value: "slug" },
+                      value: {
+                        kind: "Variable",
+                        name: { kind: "Name", value: "productSlug" },
+                      },
+                    },
+                  ],
+                },
+              },
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "limit" },
+                value: { kind: "IntValue", value: "1" },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "items" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "name" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "description" },
+                      },
+                      { kind: "Field", name: { kind: "Name", value: "slug" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "variantsCollection" },
+                        arguments: [
+                          {
+                            kind: "Argument",
+                            name: { kind: "Name", value: "limit" },
+                            value: { kind: "IntValue", value: "20" },
+                          },
+                        ],
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "Field",
+                              name: { kind: "Name", value: "items" },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "ref" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "colorName" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "colorCode" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "price" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "skuList" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: {
+                                      kind: "Name",
+                                      value: "firstMediaInOverview",
+                                    },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: {
+                                      kind: "Name",
+                                      value: "attributesCollection",
+                                    },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "items",
+                                          },
+                                          selectionSet: {
+                                            kind: "SelectionSet",
+                                            selections: [
+                                              {
+                                                kind: "Field",
+                                                name: {
+                                                  kind: "Name",
+                                                  value: "slug",
+                                                },
+                                              },
+                                              {
+                                                kind: "Field",
+                                                name: {
+                                                  kind: "Name",
+                                                  value: "name",
+                                                },
+                                              },
+                                            ],
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: {
+                                      kind: "Name",
+                                      value: "mediaCollection",
+                                    },
+                                    selectionSet: {
+                                      kind: "SelectionSet",
+                                      selections: [
+                                        {
+                                          kind: "Field",
+                                          name: {
+                                            kind: "Name",
+                                            value: "items",
+                                          },
+                                          selectionSet: {
+                                            kind: "SelectionSet",
+                                            selections: [
+                                              {
+                                                kind: "Field",
+                                                name: {
+                                                  kind: "Name",
+                                                  value: "url",
+                                                },
+                                              },
+                                            ],
+                                          },
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<FetchProductQuery, FetchProductQueryVariables>;
 export const FetchProductVariantsInCategoryDocument = {
   kind: "Document",
   definitions: [
@@ -3176,6 +3419,10 @@ export const FetchProductVariantsInCategoryDocument = {
                                       selections: [
                                         {
                                           kind: "Field",
+                                          name: { kind: "Name", value: "slug" },
+                                        },
+                                        {
+                                          kind: "Field",
                                           name: { kind: "Name", value: "name" },
                                         },
                                         {
@@ -3284,6 +3531,10 @@ export const FetchProductVariantsInCategoryDocument = {
                             },
                           ],
                         },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "skuList" },
                       },
                     ],
                   },

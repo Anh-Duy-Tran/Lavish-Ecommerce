@@ -3,6 +3,8 @@ import React from "react";
 import Image from "next/image";
 
 import { ProductSlider } from "../ProductSlider";
+import { AddToCartModal } from "./AddToCartModal";
+import Link from "next/link";
 
 interface ProductItemProps {
   productVariant: ProductVariantOverviewType;
@@ -21,29 +23,38 @@ export function ProductItem({ productVariant, viewmode }: ProductItemProps) {
   }
 
   return (
-    <div>
-      <div style={{ aspectRatio: "2/3", width: "100%", overflow: "hidden" }}>
+    <div className="">
+      <div className="relative aspect-[2/3] w-full overflow-hidden">
+        <AddToCartModal productVariant={productVariant} />
         {viewmode === 2 ? (
-          <div className="relative h-full w-full">
-            <Image
-              style={{
-                userSelect: "none",
-                pointerEvents: "none",
-                objectFit: "cover",
-              }}
-              priority
-              fill
-              sizes="(max-width: 768px) 25vw, 10vw"
-              src={
-                productVariant.mediaCollection.items[
-                  productVariant.firstMediaInOverview || 0
-                ].url
-              }
-              alt={productVariant.ref}
-            />
-          </div>
+          <Link
+            href={`/product/${productVariant.linkedFrom.productCollection.items[0].slug}?v1=${productVariant.ref}`}
+          >
+            <div className="relative h-full w-full">
+              <Image
+                style={{
+                  userSelect: "none",
+                  pointerEvents: "none",
+                  objectFit: "cover",
+                }}
+                priority
+                fill
+                sizes="(max-width: 768px) 25vw, 10vw"
+                src={
+                  productVariant.mediaCollection.items[
+                    productVariant.firstMediaInOverview || 0
+                  ].url
+                }
+                alt={productVariant.ref}
+              />
+            </div>
+          </Link>
         ) : (
-          <ProductSlider direction="horizontal" srcs={media} />
+          <ProductSlider
+            href={`/product/${productVariant.linkedFrom.productCollection.items[0].slug}?v1=${productVariant.ref}`}
+            direction="horizontal"
+            srcs={media}
+          />
         )}
       </div>
       {viewmode !== 2 ? (

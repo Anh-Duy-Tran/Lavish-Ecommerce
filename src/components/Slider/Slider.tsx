@@ -85,7 +85,7 @@ export function Slider({
   shouldChangeToTheme,
 }: SliderProps) {
   const { currentCategoryIndex } = useUIStore();
-  const { dragging, dragDirection, mouse, handleMouseDown } =
+  const { dragging, dragDirection, mouse, handleMouseDown, handleTouchStart } =
     useMousePosition();
   const [currentSlide, setCurrentSlide] = useState(crrSlide);
   const [squareRef, { width, height }] = useElementSize();
@@ -223,8 +223,15 @@ export function Slider({
         // type slide
         <div
           onMouseDown={(e) => {
+            if (e.button !== 0) {
+              return;
+            }
             setThisDragging(true);
             handleMouseDown(e);
+          }}
+          onTouchStart={(e) => {
+            setThisDragging(true);
+            handleTouchStart(e);
           }}
           style={{
             transition: "transform 700ms cubic-bezier(.17,.79,.42,1)",
@@ -248,8 +255,15 @@ export function Slider({
         // type overlay
         <div
           onMouseDown={(e) => {
+            if (e.button !== 0) {
+              return;
+            }
             setThisDragging(true);
             handleMouseDown(e);
+          }}
+          onTouchStart={(e) => {
+            setThisDragging(true);
+            handleTouchStart(e);
           }}
           ref={squareRef}
           className="slider-overlay-container"

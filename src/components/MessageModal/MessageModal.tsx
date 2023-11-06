@@ -15,7 +15,13 @@ export function MessageModal() {
       {isMessageModalOpen ? (
         <div className="modal-backdrop" onClick={closeMessageModal}>
           {!messageModalContent.loading ? (
-            <div className="message-modal-container">
+            <div
+              className="message-modal-container"
+              onClick={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
+              }}
+            >
               <div className="min-h-[150px] border border-black dark:border-white">
                 <h1 className="p-2 border-b border-black dark:border-white">
                   {messageModalContent.title}
