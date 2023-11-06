@@ -11,7 +11,7 @@ interface AddToCartModalProps {
 }
 
 export function AddToCartModal({ productVariant }: AddToCartModalProps) {
-  const { viewmode, setLoadingModalContent } = useUIStore();
+  const { viewmode } = useUIStore();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedSku, setSelectedSku] = useState<string>();
 

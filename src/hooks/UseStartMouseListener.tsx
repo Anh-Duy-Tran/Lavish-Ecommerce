@@ -15,35 +15,35 @@ export function UseStartMouseListener() {
 
     window.document.documentElement.addEventListener(
       "mousemove",
-      throttledFuncMouse
+      throttledFuncMouse,
     );
     window.document.documentElement.addEventListener(
       "touchmove",
-      throttledFuncTouch
+      throttledFuncTouch,
     );
 
     window.document.documentElement.addEventListener("mouseup", handleMouseUp);
     window.document.documentElement.addEventListener(
       "touchend",
-      handleTouchEnd
+      handleTouchEnd,
     );
 
     return () => {
       window.document.documentElement.removeEventListener(
         "mousemove",
-        throttledFuncMouse
+        throttledFuncMouse,
       );
       window.document.documentElement.removeEventListener(
         "touchmove",
-        throttledFuncTouch
+        throttledFuncTouch,
       );
       window.document.documentElement.removeEventListener(
         "mouseup",
-        handleMouseUp
+        handleMouseUp,
       );
       window.document.documentElement.removeEventListener(
         "touchend",
-        handleTouchEnd
+        handleTouchEnd,
       );
 
       window.document.documentElement;

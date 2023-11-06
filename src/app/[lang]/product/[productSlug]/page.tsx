@@ -26,7 +26,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
             direction="vertical"
             srcs={
               product?.variantsCollection?.items[0]?.mediaCollection?.items.map(
-                (src) => src?.url
+                (src) => src?.url,
               ) as string[]
             }
           />

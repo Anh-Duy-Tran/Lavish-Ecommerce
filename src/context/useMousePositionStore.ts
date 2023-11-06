@@ -69,7 +69,7 @@ export const useMousePosition = create<MousePositionStore>()((set) => ({
             maxOffSet: Math.max(
               mouse.maxOffSet,
               Math.abs(offset.offSetX),
-              Math.abs(offset.offSetY)
+              Math.abs(offset.offSetY),
             ),
             ...offset,
           },
@@ -128,7 +128,7 @@ export const useMousePosition = create<MousePositionStore>()((set) => ({
             maxOffSet: Math.max(
               mouse.maxOffSet,
               Math.abs(offset.offSetX),
-              Math.abs(offset.offSetY)
+              Math.abs(offset.offSetY),
             ),
             ...offset,
           },
