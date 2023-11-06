@@ -1,7 +1,7 @@
 "use client";
 
 import { useMousePosition } from "@/context/useMousePositionStore";
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import "./slider.css";
 import { useElementSize } from "usehooks-ts";
@@ -13,7 +13,8 @@ interface ProductSliderProps {
 }
 
 export function ProductSlider({ href, direction, srcs }: ProductSliderProps) {
-  const { dragging, mouse, handleMouseDown } = useMousePosition();
+  const { dragging, mouse, handleMouseDown, handleTouchStart } =
+    useMousePosition();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [squareRef, { width, height }] = useElementSize();
   const [thisDragging, setThisDragging] = useState(false);
@@ -95,6 +96,10 @@ export function ProductSlider({ href, direction, srcs }: ProductSliderProps) {
           setThisDragging(true);
           e.preventDefault();
           handleMouseDown(e);
+        }}
+        onTouchStart={(e) => {
+          setThisDragging(true);
+          handleTouchStart(e);
         }}
         style={{
           transition: "transform 700ms cubic-bezier(.17,.79,.42,1)",

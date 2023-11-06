@@ -35,14 +35,14 @@ export function SliderSyncWithStore(props: SliderProps) {
       switch (e.key) {
         case "ArrowLeft":
           setCurrentCategoryIndex(
-            currentCategoryIndex - 1 < 0 ? 0 : currentCategoryIndex - 1,
+            currentCategoryIndex - 1 < 0 ? 0 : currentCategoryIndex - 1
           );
           break;
         case "ArrowRight":
           setCurrentCategoryIndex(
             currentCategoryIndex + 1 > totalSlide - 1
               ? totalSlide - 1
-              : currentCategoryIndex + 1,
+              : currentCategoryIndex + 1
           );
           break;
         default:
@@ -56,7 +56,7 @@ export function SliderSyncWithStore(props: SliderProps) {
     return () => {
       document.removeEventListener("keydown", handleArrowKeyPress);
       window.document.documentElement.classList.remove(
-        theme === "dark" ? "light" : "dark",
+        theme === "dark" ? "light" : "dark"
       );
       window.document.documentElement.classList.add(theme as string);
     };
@@ -85,7 +85,7 @@ export function Slider({
   shouldChangeToTheme,
 }: SliderProps) {
   const { currentCategoryIndex } = useUIStore();
-  const { dragging, dragDirection, mouse, handleMouseDown } =
+  const { dragging, dragDirection, mouse, handleMouseDown, handleTouchStart } =
     useMousePosition();
   const [currentSlide, setCurrentSlide] = useState(crrSlide);
   const [squareRef, { width, height }] = useElementSize();
@@ -106,7 +106,7 @@ export function Slider({
           break;
         case "ArrowDown":
           setCurrentSlide((prev) =>
-            prev + 1 > totalSlide - 1 ? totalSlide - 1 : prev + 1,
+            prev + 1 > totalSlide - 1 ? totalSlide - 1 : prev + 1
           );
           break;
         default:
@@ -136,7 +136,7 @@ export function Slider({
       const theme = shouldChangeToTheme[currentSlide];
       setTimeout(() => {
         window.document.documentElement.classList.remove(
-          theme === "dark" ? "light" : "dark",
+          theme === "dark" ? "light" : "dark"
         );
         window.document.documentElement.classList.add(theme as string);
       }, 0);
@@ -148,7 +148,7 @@ export function Slider({
     const totalSlide = Children.count(children);
     const handleChangeSlide = (n: number) => {
       setCurrentSlide((prev) =>
-        prev + n >= totalSlide ? totalSlide - 1 : prev + n < 0 ? 0 : prev + n,
+        prev + n >= totalSlide ? totalSlide - 1 : prev + n < 0 ? 0 : prev + n
       );
     };
     if (thisDragging && !dragging) {
@@ -226,6 +226,10 @@ export function Slider({
             setThisDragging(true);
             handleMouseDown(e);
           }}
+          onTouchStart={(e) => {
+            setThisDragging(true);
+            handleTouchStart(e);
+          }}
           style={{
             transition: "transform 700ms cubic-bezier(.17,.79,.42,1)",
             transform:
@@ -250,6 +254,10 @@ export function Slider({
           onMouseDown={(e) => {
             setThisDragging(true);
             handleMouseDown(e);
+          }}
+          onTouchStart={(e) => {
+            setThisDragging(true);
+            handleTouchStart(e);
           }}
           ref={squareRef}
           className="slider-overlay-container"

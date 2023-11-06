@@ -48,10 +48,10 @@ export default async function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <AuthProvider>
             <main className={font.className}>
-              <MessageModal />
               <Sidebar />
               <Navbar />
               {children}
+              <MessageModal />
             </main>
           </AuthProvider>
         </ThemeProvider>

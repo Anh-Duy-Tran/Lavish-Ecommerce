@@ -34,9 +34,11 @@ export default async function ProductPage({ params }: ProductPageProps) {
         <div className="flex invisible tablet:visible tablet:w-[160px] laptop:w-[210px] laptopHD:w-[280px] desktop:w-[330px] desktopHD:w-[370px] border border-green-500">
           <div className="flex flex-col gap-4 p-3 border border-white">
             <h1>{product?.name}</h1>
-            <h2>{`${
-              product?.variantsCollection?.items[0]?.price / 100
-            } EUR`}</h2>
+            {product?.variantsCollection?.items[0]?.price ? (
+              <h2>{`${
+                product?.variantsCollection?.items[0]?.price / 100
+              } EUR`}</h2>
+            ) : null}
             <h2>{product?.description}</h2>
           </div>
         </div>
