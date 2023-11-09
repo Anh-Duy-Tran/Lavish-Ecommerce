@@ -19,6 +19,7 @@
     "predev": "yarn generate"
   },
   "dependencies": {
+    "@boiseitguru/cookie-cutter": "^0.2.1",
     "@emotion/styled": "^11.11.0",
     "@formatjs/intl-localematcher": "^0.4.2",
     "@graphql-codegen/typescript-document-nodes": "^4.0.1",
