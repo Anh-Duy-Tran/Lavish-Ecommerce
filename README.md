@@ -2,6 +2,10 @@
 
 Welcome to LAVISH, a web platform inspired by the Zara website's aesthetic and functionality. Built with the power of Nextjs version 13 and integrated with Contentful CMS, this app delivers a modern, user-centric shopping experience.
 
+### Data Diagram
+
+![Screenshot 2023-11-09 at 7 29 56](https://github.com/Anh-Duy-Tran/Lavish-Ecommerce/assets/113171462/4c374f26-a073-4048-86b1-dfa5df4fa791)
+
 ### Demo
 
 - **Main functionalities**
