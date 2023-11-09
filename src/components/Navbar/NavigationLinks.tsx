@@ -11,8 +11,8 @@ interface NavigationLinksProps {
 
 export function NavigationLinks({ name }: NavigationLinksProps) {
   const [username, setUsername] = useState(name);
-  const pathname = usePathname() || "";
   const { data: session } = useSession();
+  const pathname = usePathname() || "";
 
   useEffect(() => {
     // session is not yet loaded
