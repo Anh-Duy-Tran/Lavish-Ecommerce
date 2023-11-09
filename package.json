@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@emotion/styled": "^11.11.0",
+    "@formatjs/intl-localematcher": "^0.4.2",
     "@graphql-codegen/typescript-document-nodes": "^4.0.1",
     "@hookform/resolvers": "^3.3.2",
     "@parcel/watcher": "^2.3.0",
