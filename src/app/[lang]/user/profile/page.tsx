@@ -4,6 +4,7 @@ import React from "react";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { Signout } from "./Signout";
+import prisma from "@/lib/prisma";
 
 export default async function page() {
   const session = await getServerSession(options);
