@@ -1,6 +1,5 @@
 import React from "react";
-interface pageProps {}
 
-export default function page({}: pageProps) {
+export default function page() {
   return <div>PROFILE</div>;
 }

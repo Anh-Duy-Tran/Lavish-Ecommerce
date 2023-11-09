@@ -1,11 +1,20 @@
 import { Button } from "@/components/Button";
+import { getServerSession } from "next-auth";
 import Link from "next/link";
 import React from "react";
+import { options } from "@/app/api/auth/[...nextauth]/options";
+import { redirect } from "next/navigation";
 interface PageProps {
   children: React.ReactNode;
 }
 
-export default function layout({ children }: PageProps) {
+export default async function layout({ children }: PageProps) {
+  const session = await getServerSession(options);
+
+  if (!session) {
+    redirect("/login");
+  }
+
   return (
     <div className="page-wrapper">
       <div className="page-container">
@@ -21,8 +30,8 @@ export default function layout({ children }: PageProps) {
             </Button>
           </Link>
         </div>
-        {children}
       </div>
+      {children}
     </div>
   );
 }

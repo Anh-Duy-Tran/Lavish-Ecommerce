@@ -8,35 +8,29 @@ export function ViewSwitcher() {
   const { viewmode, setViewMode } = useUIStore();
   const pathname = usePathname();
 
+  const shouldNotRenderViewSwitcher =
+    pathname === "/en" ||
+    pathname === "/vi" ||
+    pathname.includes("login") ||
+    pathname.includes("user") ||
+    pathname.includes("cart") ||
+    pathname.includes("help");
+
+  if (shouldNotRenderViewSwitcher) {
+    return null;
+  }
+
   return (
-    <>
-      {pathname === "/en" ||
-      pathname === "/vi" ||
-      pathname.includes("login") ||
-      pathname.includes("cart") ||
-      pathname.includes("help") ? null : (
-        <div className="flex mb-[-5px] mr-[-5px] gap-3">
-          <button className="relative" onClick={() => setViewMode(0)}>
-            {viewmode0}
-            {viewmode === 0 ? (
-              <div className="absolute bottom-[-12px] left-[9px]">-</div>
-            ) : null}
-          </button>
-          <button className="relative" onClick={() => setViewMode(1)}>
-            {viewmode1}
-            {viewmode === 1 ? (
-              <div className="absolute bottom-[-12px] left-[9px]">-</div>
-            ) : null}
-          </button>
-          <button className="relative" onClick={() => setViewMode(2)}>
-            {viewmode2}
-            {viewmode === 2 ? (
-              <div className="absolute bottom-[-12px] left-[9px]">-</div>
-            ) : null}
-          </button>
-        </div>
-      )}
-    </>
+    <div className="flex mb-[-5px] mr-[-5px] gap-3">
+      {[viewmode0, viewmode1, viewmode2].map((viewmodeSvg, i) => (
+        <button key={i} className="relative" onClick={() => setViewMode(i)}>
+          {viewmodeSvg}
+          {viewmode === i ? (
+            <div className="absolute bottom-[-12px] left-[9px]">-</div>
+          ) : null}
+        </button>
+      ))}
+    </div>
   );
 }
 

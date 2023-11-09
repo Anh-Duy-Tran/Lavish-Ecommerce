@@ -30,7 +30,7 @@ export async function Navbar() {
       <div className="navbar-content-wrapper">
         <ToggleSidebarButton />
         <div className="flex flex-col h-full justify-between items-end">
-          <NavigationLinks user={session?.user} />
+          <NavigationLinks name={session?.user?.name} />
           <ViewSwitcher />
         </div>
       </div>

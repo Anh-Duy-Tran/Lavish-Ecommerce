@@ -14,8 +14,8 @@ type MessageModalContent = {
 };
 
 interface UIStoreType {
-  viewmode: 0 | 1 | 2;
-  setViewMode: (mode: 0 | 1 | 2) => void;
+  viewmode: number;
+  setViewMode: (mode: number) => void;
 
   currentCategoryIndex: number;
   setCurrentCategoryIndex: (i: number) => void;
