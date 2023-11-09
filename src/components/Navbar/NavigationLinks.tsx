@@ -3,6 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 interface NavigationLinksProps {
   name?: string | null;
@@ -10,13 +11,14 @@ interface NavigationLinksProps {
 
 export function NavigationLinks({ name }: NavigationLinksProps) {
   const pathname = usePathname() || "";
+  const { data: session } = useSession();
 
   return (
     <div id="navigation-links" className="flex gap-7 select-none">
       {!pathname.includes("/login") ? (
-        name ? (
+        session?.user?.name || name ? (
           <Link href="/user/profile">
-            <p>{name.toUpperCase()}</p>
+            <p>{name?.toUpperCase() || session?.user?.name?.toUpperCase()}</p>
           </Link>
         ) : (
           <Link href="/login">
