@@ -51,6 +51,7 @@ export const options: NextAuthOptions = {
           type: "password",
         },
       },
+
       async authorize(credentials) {
         if (!credentials) {
           return null;
@@ -64,7 +65,6 @@ export const options: NextAuthOptions = {
           return null;
         }
 
-        console.log(credentials.password, user?.password);
         if (bcrypt.compareSync(credentials.password, user?.password)) {
           return user;
         }
@@ -73,6 +73,23 @@ export const options: NextAuthOptions = {
       },
     }),
   ],
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.email = user.email;
+        token.firstName = user.firstName;
+      }
+
+      return token;
+    },
+    async session({ session, token }) {
+      if (session?.user) {
+        session.user.email = token.email;
+        session.user.firstName = token.firstName;
+      }
+      return session;
+    },
+  },
   pages: {
     signIn: "/login",
   },

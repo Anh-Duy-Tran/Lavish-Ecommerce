@@ -3,16 +3,27 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { User } from "next-auth";
 
-export function NavigationLinks() {
+interface NavigationLinksProps {
+  user?: User;
+}
+
+export function NavigationLinks({ user }: NavigationLinksProps) {
   const pathname = usePathname() || "";
 
   return (
     <div id="navigation-links" className="flex gap-7 select-none">
       {!pathname.includes("/login") ? (
-        <Link href="/login">
-          <p>LOGIN</p>
-        </Link>
+        user ? (
+          <Link href="/login">
+            <p>{user.firstName.toUpperCase()}</p>
+          </Link>
+        ) : (
+          <Link href="/login">
+            <p>LOGIN</p>
+          </Link>
+        )
       ) : null}
       {!pathname.includes("/help") ? (
         <Link href="/help">
