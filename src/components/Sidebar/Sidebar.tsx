@@ -68,7 +68,11 @@ export function Sidebar() {
                             href={`/${category.slug}`}
                             onClick={toggleSidebar}
                           >
-                            <Button size="compact" variant="outlined">
+                            <Button
+                              className="px-5"
+                              size="compact"
+                              variant="outlined"
+                            >
                               {category.displayName}
                             </Button>
                           </Link>
