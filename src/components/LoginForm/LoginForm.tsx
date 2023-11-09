@@ -48,7 +48,6 @@ export function LoginForm() {
     );
 
     if (signInResponse?.ok) {
-      // this should not back to /register page, don't know how to check
       router.back();
     }
   };

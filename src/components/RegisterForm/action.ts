@@ -55,6 +55,7 @@ export async function myAction(formData: RegisterFormType): Promise<{
     // Create a new user
     const newUser = await prisma.user.create({
       data: {
+        name: first_name,
         firstName: first_name,
         lastName: last_name,
         email: email,

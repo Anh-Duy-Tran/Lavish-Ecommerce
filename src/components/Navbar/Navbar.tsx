@@ -5,8 +5,12 @@ import Image from "next/image";
 import { ToggleSidebarButton } from "./ToggleSidebarButton";
 import { NavigationLinks } from "./NavigationLinks";
 import { ViewSwitcher } from "./ViewSwitcher";
+import { getServerSession } from "next-auth";
+import { options } from "@/app/api/auth/[...nextauth]/options";
 
-export function Navbar() {
+export async function Navbar() {
+  const session = await getServerSession(options);
+
   return (
     <div className="navbar-component">
       <div className="navbar-logo-wrapper">
@@ -26,7 +30,7 @@ export function Navbar() {
       <div className="navbar-content-wrapper">
         <ToggleSidebarButton />
         <div className="flex flex-col h-full justify-between items-end">
-          <NavigationLinks />
+          <NavigationLinks name={session?.user?.name} />
           <ViewSwitcher />
         </div>
       </div>

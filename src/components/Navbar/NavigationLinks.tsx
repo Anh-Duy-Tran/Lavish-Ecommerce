@@ -1,18 +1,44 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useSession } from "next-auth/react";
 
-export function NavigationLinks() {
+interface NavigationLinksProps {
+  name?: string | null;
+}
+
+export function NavigationLinks({ name }: NavigationLinksProps) {
+  const [username, setUsername] = useState(name);
+  const { data: session } = useSession();
   const pathname = usePathname() || "";
+
+  useEffect(() => {
+    // session is not yet loaded
+    if (session === undefined) {
+      return;
+    }
+
+    if (session) {
+      setUsername(session.user?.name);
+    } else {
+      setUsername(undefined);
+    }
+  }, [session]);
 
   return (
     <div id="navigation-links" className="flex gap-7 select-none">
       {!pathname.includes("/login") ? (
-        <Link href="/login">
-          <p>LOGIN</p>
-        </Link>
+        username ? (
+          <Link href="/user/profile">
+            <p>{username.toUpperCase()}</p>
+          </Link>
+        ) : (
+          <Link href="/login">
+            <p>LOGIN</p>
+          </Link>
+        )
       ) : null}
       {!pathname.includes("/help") ? (
         <Link href="/help">
