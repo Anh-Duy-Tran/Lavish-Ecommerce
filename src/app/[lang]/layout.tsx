@@ -11,6 +11,12 @@ import { getClient } from "@/lib/graphql";
 import CategoryStoreInitializer from "@/hooks/CategoryStoreInitializer";
 import { CategoriesType, useCategoryStore } from "@/context/useCategoryStore";
 import { FetchCategoriesDocument } from "@/gql/graphql";
+import { getServerSession } from "next-auth";
+import { options } from "../api/auth/[...nextauth]/options";
+import { getCart } from "@/actions/getCart";
+import { useCartStore } from "@/context/useCartStore";
+import CartStoreInitializer from "@/hooks/CartStoreInitializer";
+import GuestCartStoreInitializer from "@/hooks/GuestCartStoreInitializer";
 
 export const font = Montserrat({
   weight: ["200", "400", "700"],
@@ -32,6 +38,7 @@ export default async function RootLayout({
   params,
 }: RootLayoutProps) {
   const { lang } = params;
+  const session = await getServerSession(options);
 
   const fetchedCategories = (
     await getClient().query(FetchCategoriesDocument, { lang })
@@ -41,24 +48,35 @@ export default async function RootLayout({
     categories: fetchedCategories as CategoriesType,
   });
 
-
+  let userCart = undefined;
+  if (session) {
+    userCart = await getCart();
+    if (userCart) {
+      useCartStore.setState({ cart: userCart });
+    } else {
+      // handle this error
+      console.log("some thing wrong");
+    }
+  }
 
   return (
     <html lang="en">
       <body>
-        <CategoryStoreInitializer
-          categories={fetchedCategories as CategoriesType}
-        />
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-          <AuthProvider>
-            <main className={font.className}>
+        <main className={font.className}>
+          <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+            <AuthProvider>
+              <CategoryStoreInitializer
+                categories={fetchedCategories as CategoriesType}
+              />
+              {session ? <CartStoreInitializer cart={userCart} /> : null}
+              <GuestCartStoreInitializer />
               <Sidebar />
               <Navbar />
               {children}
               <MessageModal />
-            </main>
-          </AuthProvider>
-        </ThemeProvider>
+            </AuthProvider>
+          </ThemeProvider>
+        </main>
       </body>
     </html>
   );

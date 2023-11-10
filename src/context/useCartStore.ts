@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { CartItem } from "@prisma/client";
 
-interface CartStoreType {
+export interface CartStoreType {
   cart: CartItem[];
   setInitialCart: (cart: CartItem[]) => void;
   clearCart: () => void;

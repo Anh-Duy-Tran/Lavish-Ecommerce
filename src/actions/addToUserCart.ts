@@ -5,7 +5,7 @@ import { CartItem } from "@prisma/client";
 import { getServerSession } from "next-auth/next";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 
-export async function addProductToCart(cartItemData: CartItem) {
+export async function addToUserCart(cartItemData: CartItem) {
   const session = await getServerSession(options);
 
   if (session?.user?.email) {
@@ -17,6 +17,7 @@ export async function addProductToCart(cartItemData: CartItem) {
       const cartItem = await prisma.cartItem.create({
         data: {
           ...cartItemData,
+          userId: user.id,
         },
       });
       console.log("Added to account cart:", cartItem);

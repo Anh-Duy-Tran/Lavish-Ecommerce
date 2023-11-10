@@ -1,5 +1,6 @@
 "use client";
 
+import { useCartStore } from "@/context/useCartStore";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
@@ -7,11 +8,13 @@ import React from "react";
 
 export function Signout() {
   const router = useRouter();
+  const { clearCart } = useCartStore();
 
   return (
     <div
       onClick={async () => {
         await signOut({ redirect: false });
+        clearCart();
         router.push("/");
       }}
     >

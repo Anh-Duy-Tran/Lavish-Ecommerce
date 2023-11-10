@@ -1,18 +1,20 @@
 "use client";
 
+import { addToUserCart } from "@/actions/addToUserCart";
+import { useGuestCartStore } from "@/context/useGuestCartStore";
 import { CartItem } from "@prisma/client";
 import { useSession } from "next-auth/react";
 
 export function useAddToCart() {
   const { data: session } = useSession();
+  const { addToGuestCart } = useGuestCartStore();
 
-  const addToCart = (cartItem: CartItem) => {
+  const addToCart = async (cartItem: CartItem) => {
     if (session) {
-      console.log("Add to account");
+      return await addToUserCart(cartItem);
     } else {
-      console.log("Add to local storage");
+      return addToGuestCart(cartItem);
     }
-    console.log(cartItem);
   };
 
   return { addToCart };
