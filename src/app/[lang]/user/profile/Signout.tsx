@@ -15,7 +15,9 @@ export function Signout() {
         router.push("/");
       }}
     >
-      <h3 className="underline text-black/50 w-fit cursor-pointer">Sign out</h3>
+      <h3 className="underline text-black/50 dark:text-white/50 w-fit cursor-pointer">
+        Sign out
+      </h3>
     </div>
   );
 }

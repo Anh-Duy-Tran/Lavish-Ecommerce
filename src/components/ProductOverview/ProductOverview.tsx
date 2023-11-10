@@ -27,11 +27,6 @@ export function ProductOverview({
     setFilters(filters);
     clearSelectedFilter();
     closeFilter();
-
-    return () => {
-      closeFilter();
-      clearSelectedFilter();
-    };
   }, [closeFilter, clearSelectedFilter, filters, setFilters]);
 
   return (

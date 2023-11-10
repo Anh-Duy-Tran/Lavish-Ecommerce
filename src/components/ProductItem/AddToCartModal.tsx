@@ -5,6 +5,7 @@ import { useTransition, animated } from "@react-spring/web";
 import React, { useState } from "react";
 import { Button } from "../Button";
 import { useUIStore } from "@/context/useUIStore";
+import { useAddToCart } from "@/hooks/useAddToCart";
 
 interface AddToCartModalProps {
   productVariant: ProductVariantOverviewType;
@@ -12,6 +13,7 @@ interface AddToCartModalProps {
 
 export function AddToCartModal({ productVariant }: AddToCartModalProps) {
   const { viewmode } = useUIStore();
+  const { addToCart } = useAddToCart();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedSku, setSelectedSku] = useState<string>();
 
@@ -35,7 +37,7 @@ export function AddToCartModal({ productVariant }: AddToCartModalProps) {
       {viewmode !== 2 ? (
         <>
           <button onClick={() => setIsOpen((prev) => !prev)}>
-            <div className="absolute left-[50%] -translate-x-[50%] bottom-4 w-7 h-7 z-10 p-[8px] rounded-full bg-white/70 flex">
+            <div className="absolute left-[50%] -translate-x-[50%] bottom-4 w-7 h-7 z-10 p-[8px] rounded-full bg-white/50 hover:bg-white/90 flex">
               <svg
                 className="pr-[1px]"
                 viewBox="0 0 7 7"
@@ -82,6 +84,17 @@ export function AddToCartModal({ productVariant }: AddToCartModalProps) {
                         fullWidth
                         onClick={() => {
                           setIsOpen(false);
+                          addToCart({
+                            id: "123",
+                            name: "123",
+                            variantSlug: "123",
+                            media: "123",
+                            price: 123,
+                            size: "size123",
+                            sku: "sku",
+                            userId: "123",
+                            variantRef: "123",
+                          });
                           // setLoadingModalContent(
                           //   async () => {
                           //     await setTimeout(() => {}, 2000);

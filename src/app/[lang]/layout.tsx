@@ -32,12 +32,16 @@ export default async function RootLayout({
   params,
 }: RootLayoutProps) {
   const { lang } = params;
+
   const fetchedCategories = (
     await getClient().query(FetchCategoriesDocument, { lang })
   ).data?.categories?.categoriesCollection?.items;
+
   useCategoryStore.setState({
     categories: fetchedCategories as CategoriesType,
   });
+
+
 
   return (
     <html lang="en">
