@@ -1,10 +1,6 @@
-"use client";
-
-import { useCartStore } from "@/context/useCartStore";
 import React from "react";
+import { CartOverview } from "@/components/CartOverview";
 
 export default function page() {
-  const { cart } = useCartStore();
-
-  return <div>{JSON.stringify(cart)}</div>;
+  return <CartOverview />;
 }

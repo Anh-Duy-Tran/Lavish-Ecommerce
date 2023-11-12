@@ -5,7 +5,10 @@ import { CartItem } from "@prisma/client";
 import { getServerSession } from "next-auth/next";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 
-export async function addToUserCart(cartItemData: Omit<CartItem, "id">) {
+export async function changeCartItemQuantity(
+  cartItemId: string,
+  delta: number
+) {
   const session = await getServerSession(options);
 
   if (session?.user?.email) {
@@ -14,13 +17,24 @@ export async function addToUserCart(cartItemData: Omit<CartItem, "id">) {
     });
 
     if (user) {
-      const cartItem = await prisma.cartItem.create({
+      const cartItem = await prisma.cartItem.findFirst({
+        where: { id: cartItemId },
+      });
+
+      if (!cartItem) {
+        // should send message to client and not throw ?
+        throw new Error("User not found.");
+      }
+
+      const updatedCartItem = await prisma.cartItem.update({
+        where: {
+          id: cartItemId,
+        },
         data: {
-          ...cartItemData,
-          userId: user.id,
+          quantity: Math.max(cartItem.quantity + delta, 0),
         },
       });
-      return cartItem;
+      return updatedCartItem;
     } else {
       throw new Error("User not found.");
     }

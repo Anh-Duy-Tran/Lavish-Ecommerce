@@ -83,17 +83,24 @@ export function AddToCartModal({ productVariant }: AddToCartModalProps) {
                         variant="outlined"
                         fullWidth
                         onClick={() => {
+                          if (!selectedSku) {
+                            // size not selected
+                            return;
+                          }
+
                           setIsOpen(false);
                           addToCart({
-                            id: "123",
-                            name: "123",
-                            variantSlug: "123",
-                            media: "123",
-                            price: 123,
-                            size: "size123",
-                            sku: "sku",
-                            userId: "123",
-                            variantRef: "123",
+                            name: productVariant.linkedFrom.productCollection
+                              .items[0].name,
+                            variantSlug:
+                              productVariant.linkedFrom.productCollection
+                                .items[0].slug,
+                            media: productVariant.mediaCollection.items[0].url,
+                            price: productVariant.price,
+                            size: selectedSku.split("-").at(-1) as string,
+                            sku: selectedSku,
+                            userId: "",
+                            variantRef: productVariant.ref,
                           });
                           // setLoadingModalContent(
                           //   async () => {
