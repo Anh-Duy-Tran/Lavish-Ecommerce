@@ -1,7 +1,6 @@
 import React from "react";
 import { CartItem } from "@prisma/client";
 import Image from "next/image";
-import { Button } from "../Button";
 import { CartItemQuantity } from "./CartItemQuantity";
 
 interface CartItemProps {

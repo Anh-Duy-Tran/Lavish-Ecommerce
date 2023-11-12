@@ -17,7 +17,7 @@ export const useGuestCartStore = create<BearStore>()(
       updateGuestCart: (id: string, cartItem: CartItem) =>
         set(({ cart }) => ({
           cart: cart.map((oldCartItem) =>
-            oldCartItem.id === id ? cartItem : oldCartItem
+            oldCartItem.id === id ? cartItem : oldCartItem,
           ),
         })),
       addToGuestCart: (cartItem: CartItem) =>
@@ -26,6 +26,6 @@ export const useGuestCartStore = create<BearStore>()(
     {
       name: "guest-cart",
       storage: createJSONStorage(() => localStorage),
-    }
-  )
+    },
+  ),
 );

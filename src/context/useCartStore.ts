@@ -17,7 +17,7 @@ export const useCartStore = create<CartStoreType>()((set) => ({
   updateCart: (id: string, cartItem: CartItem) =>
     set(({ cart }) => ({
       cart: cart.map((oldCartItem) =>
-        oldCartItem.id === id ? cartItem : oldCartItem
+        oldCartItem.id === id ? cartItem : oldCartItem,
       ),
     })),
   clearCart: () => set({ cart: [] }),

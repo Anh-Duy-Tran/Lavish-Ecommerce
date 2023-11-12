@@ -13,7 +13,7 @@ export function useAddToCart() {
   const { addToClientCart } = useCartStore();
 
   const addToCart = async (
-    cartItem: Omit<CartItem, "id">
+    cartItem: Omit<CartItem, "id">,
   ): Promise<CartItem | Omit<CartItem, "id"> | undefined> => {
     if (session) {
       const addedCartItem = await addToUserCart(cartItem);

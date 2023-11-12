@@ -6,7 +6,7 @@ import { options } from "@/app/api/auth/[...nextauth]/options";
 
 export async function changeCartItemQuantity(
   cartItemId: string,
-  delta: number
+  delta: number,
 ) {
   const session = await getServerSession(options);
 
