@@ -112,22 +112,16 @@ export function AddToCartModal({ productVariant }: AddToCartModalProps) {
                               if (res) {
                                 return {
                                   message: "ABC",
-                                  title: "dev",
+                                  productAddedToCart: res,
+                                  title: "ADDED TO CART",
                                 };
                               }
                               return {
                                 message: "ABC",
-                                title: "dev",
+                                title: "FAILED",
                               };
                             }
                           );
-                          // setLoadingModalContent(
-                          //   async () => {
-                          //     await setTimeout(() => {}, 2000);
-                          //   },
-                          //   (res) => {}
-                          // );
-                          console.log("done add");
                         }}
                       >
                         ADD TO CART

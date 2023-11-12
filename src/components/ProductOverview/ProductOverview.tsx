@@ -44,7 +44,7 @@ export function ProductOverview({
           .filter((variant) =>
             filteredProductVariantRefs.length > 0
               ? filteredProductVariantRefs.includes(variant.ref)
-              : true
+              : true,
           )
           .map((variant) => (
             <ProductItem

@@ -11,7 +11,7 @@ export async function getCart(): Promise<CartItem[] | undefined> {
   if (session?.user?.email) {
     const userWithCart = await prisma.user.findFirst({
       where: { email: session.user.email },
-      select: { cart: true },
+      select: { cart: { orderBy: { createdAt: "desc" } } },
     });
 
     if (userWithCart && userWithCart.cart) {

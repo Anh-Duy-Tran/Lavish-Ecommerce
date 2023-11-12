@@ -47,7 +47,9 @@ export function LoginForm() {
         redirect: false,
       }),
       (res) =>
-        res?.ok ? null : { title: "LOGIN FAILED", message: "Wrong credentials" }
+        res?.ok
+          ? null
+          : { title: "LOGIN FAILED", message: "Wrong credentials" },
     );
 
     const userCart = await getCart();

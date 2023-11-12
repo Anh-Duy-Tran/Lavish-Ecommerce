@@ -79,7 +79,7 @@ export function ProductFilterModal() {
                               {value}
                             </Button>
                           </div>
-                        )
+                        ),
                       )}
                     </div>
                   </div>

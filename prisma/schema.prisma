@@ -22,7 +22,7 @@ model User {
 }
 
 model CartItem {
-  id            String  @id @default(uuid())
+  id            String   @id @default(uuid())
   name          String
   variantName   String
   variantSlug   String
@@ -31,7 +31,8 @@ model CartItem {
   size          String
   price         Int
   media         String
-  quantity      Int     @default(1)
-  User          User?   @relation(fields: [userId], references: [id])
+  quantity      Int      @default(1)
+  createdAt     DateTime @default(now())
+  User          User?    @relation(fields: [userId], references: [id])
   userId        String?
 }
