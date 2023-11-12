@@ -17,7 +17,7 @@ export default async function layout({ children }: PageProps) {
 
   return (
     <div className="page-wrapper">
-      <div className="page-container flex flex-col gap-8">
+      <div className="page-container flex flex-col gap-8 p-5 tablet:p-0">
         <div className="flex gap-3">
           <Link href={"/user/orders"}>
             <Button variant="outlined" size="compact">

@@ -52,14 +52,16 @@ export default async function page() {
   return (
     <div className="w-full tablet:w-[50%] flex flex-col gap-5">
       <p>{`${user.firstName.toUpperCase()} ${user.lastName.toUpperCase()}`}</p>
-      <div className="w-full p-2 py-4 border border-black/40 flex flex-col gap-5">
+      <div className="w-full p-2 py-4 border border-black/40 dark:border-white/40 flex flex-col gap-5">
         {profileEditLinks.map((link) => (
           <Link href={link.href} key={link.name}>
             <div className="flex justify-between p-2 items-center">
               <div>
                 <p>{link.name}</p>
                 {link.currentValue ? (
-                  <h3 className="text-black/50">{link.currentValue}</h3>
+                  <h3 className="text-black/50 dark:text-white/50">
+                    {link.currentValue}
+                  </h3>
                 ) : null}
               </div>
               <div>{LinkArrow}</div>
@@ -70,7 +72,7 @@ export default async function page() {
 
       <Signout />
 
-      <h3 className="underline text-black/50 w-fit cursor-pointer">
+      <h3 className="underline text-black/50 dark:text-white/50 w-fit cursor-pointer">
         Delete your account
       </h3>
     </div>

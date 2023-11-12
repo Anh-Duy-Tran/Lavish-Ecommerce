@@ -1,15 +1,10 @@
-import { ProductVariantOverviewType } from "@/app/[lang]/[categorySlug]/page";
+import { CartItem } from "@prisma/client";
 import { create } from "zustand";
-
-type ProductAddedToCart = {
-  productVariant: ProductVariantOverviewType;
-  sku: string;
-};
 
 type MessageModalContent = {
   title: string;
   message: string;
-  productAddedToCart?: ProductAddedToCart;
+  productAddedToCart?: CartItem | Omit<CartItem, "id">;
   loading?: boolean;
 };
 

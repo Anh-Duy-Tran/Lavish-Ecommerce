@@ -1,21 +1,38 @@
 generator client {
   provider = "prisma-client-js"
 }
- 
+
 datasource db {
-  provider = "postgresql"
-  url = env("POSTGRES_PRISMA_URL")
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL")
   directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
 model User {
-  id           String   @id @default(uuid())
-  name         String
-  firstName    String
-  lastName     String
-  email        String   @unique
-  password     String
-  phoneNumber  String   @unique
-  prefix       String
-  createdAt    DateTime @default(now())
+  id            String   @id @default(uuid())
+  name          String
+  firstName     String
+  lastName      String
+  email         String   @unique
+  password      String
+  phoneNumber   String   @unique
+  prefix        String
+  createdAt     DateTime @default(now())
+  cart          CartItem[]
+}
+
+model CartItem {
+  id            String   @id @default(uuid())
+  name          String
+  variantName   String
+  variantSlug   String
+  variantRef    String
+  sku           String
+  size          String
+  price         Int
+  media         String
+  quantity      Int      @default(1)
+  createdAt     DateTime @default(now())
+  User          User?    @relation(fields: [userId], references: [id])
+  userId        String?
 }

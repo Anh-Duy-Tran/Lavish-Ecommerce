@@ -2611,6 +2611,7 @@ export type FetchProductVariantsInCategoryQuery = {
       ref: string | null;
       price: number | null;
       firstMediaInOverview: number | null;
+      colorName: string | null;
       skuList: Array<string | null> | null;
       linkedFrom: {
         __typename?: "ProductVariantLinkingCollections";
@@ -3388,6 +3389,10 @@ export const FetchProductVariantsInCategoryDocument = {
                       {
                         kind: "Field",
                         name: { kind: "Name", value: "firstMediaInOverview" },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "colorName" },
                       },
                       {
                         kind: "Field",

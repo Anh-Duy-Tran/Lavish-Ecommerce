@@ -16,13 +16,18 @@ export function ProductOverview({
   filters,
 }: ProductOverviewProps) {
   const { viewmode } = useUIStore();
-  const { filteredProductVariantRefs, setFilters, clearSelectedFilter } =
-    useFilterStore();
+  const {
+    filteredProductVariantRefs,
+    setFilters,
+    clearSelectedFilter,
+    closeFilter,
+  } = useFilterStore();
 
   useEffect(() => {
     setFilters(filters);
     clearSelectedFilter();
-  }, [clearSelectedFilter, filters, setFilters]);
+    closeFilter();
+  }, [closeFilter, clearSelectedFilter, filters, setFilters]);
 
   return (
     <div className="flex flex-col justify-center overflow-x-hidden">
