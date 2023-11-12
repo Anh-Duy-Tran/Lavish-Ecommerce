@@ -15,7 +15,7 @@ export function useAddToCart() {
     if (session) {
       const addedCartItem = await addToUserCart(cartItem);
       if (addedCartItem) {
-        addToClientCart(addedCartItem);
+        return addToClientCart(addedCartItem);
       } else {
         //some error
       }

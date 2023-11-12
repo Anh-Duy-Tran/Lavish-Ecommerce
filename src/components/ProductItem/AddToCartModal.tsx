@@ -16,6 +16,7 @@ export function AddToCartModal({ productVariant }: AddToCartModalProps) {
   const { addToCart } = useAddToCart();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedSku, setSelectedSku] = useState<string>();
+  const { setLoadingModalContent } = useUIStore();
 
   const transition = useTransition(isOpen, {
     from: {
@@ -82,32 +83,51 @@ export function AddToCartModal({ productVariant }: AddToCartModalProps) {
                       <Button
                         variant="outlined"
                         fullWidth
-                        onClick={() => {
+                        onClick={async () => {
                           if (!selectedSku) {
                             // size not selected
                             return;
                           }
 
                           setIsOpen(false);
-                          addToCart({
-                            name: productVariant.linkedFrom.productCollection
-                              .items[0].name,
-                            variantSlug:
-                              productVariant.linkedFrom.productCollection
-                                .items[0].slug,
-                            media: productVariant.mediaCollection.items[0].url,
-                            price: productVariant.price,
-                            size: selectedSku.split("-").at(-1) as string,
-                            sku: selectedSku,
-                            userId: "",
-                            variantRef: productVariant.ref,
-                          });
+
+                          setLoadingModalContent(
+                            addToCart({
+                              name: productVariant.linkedFrom.productCollection
+                                .items[0].name,
+                              variantSlug:
+                                productVariant.linkedFrom.productCollection
+                                  .items[0].slug,
+                              media:
+                                productVariant.mediaCollection.items[0].url,
+                              price: productVariant.price,
+                              size: selectedSku.split("-").at(-1) as string,
+                              sku: selectedSku,
+                              variantRef: productVariant.ref,
+                              variantName: productVariant.colorName,
+                              quantity: 1,
+                              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                            } as any),
+                            (res) => {
+                              if (res) {
+                                return {
+                                  message: "ABC",
+                                  title: "dev",
+                                };
+                              }
+                              return {
+                                message: "ABC",
+                                title: "dev",
+                              };
+                            }
+                          );
                           // setLoadingModalContent(
                           //   async () => {
                           //     await setTimeout(() => {}, 2000);
                           //   },
                           //   (res) => {}
                           // );
+                          console.log("done add");
                         }}
                       >
                         ADD TO CART

@@ -9,29 +9,29 @@ datasource db {
 }
 
 model User {
-  id          String   @id @default(uuid())
-  name        String
-  firstName   String
-  lastName    String
-  email       String   @unique
-  password    String
-  phoneNumber String   @unique
-  prefix      String
-  createdAt   DateTime @default(now())
-
-  cart        CartItem[]
+  id            String   @id @default(uuid())
+  name          String
+  firstName     String
+  lastName      String
+  email         String   @unique
+  password      String
+  phoneNumber   String   @unique
+  prefix        String
+  createdAt     DateTime @default(now())
+  cart          CartItem[]
 }
 
 model CartItem {
-  id          String  @id @default(uuid())
-  name        String
-  variantSlug String
-  variantRef  String
-  sku         String
-  size        String
-  price       Int
-  media       String
-  quantity    Int     @default(1)
-  User        User?   @relation(fields: [userId], references: [id])
-  userId      String?
+  id            String  @id @default(uuid())
+  name          String
+  variantName   String
+  variantSlug   String
+  variantRef    String
+  sku           String
+  size          String
+  price         Int
+  media         String
+  quantity      Int     @default(1)
+  User          User?   @relation(fields: [userId], references: [id])
+  userId        String?
 }

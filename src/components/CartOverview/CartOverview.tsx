@@ -4,24 +4,32 @@ import { useCartStore } from "@/context/useCartStore";
 
 import React from "react";
 import { CartItem } from "./CartItem";
+import { Button } from "../Button";
 
 export function CartOverview() {
   const { cart } = useCartStore();
   return (
-    <div className="add-padding-top w-full flex justify-center flex-col items-center">
-      <div className="page-container p-5 tablet:p-0 tablet:pb-6 flex flex-col">
-        <h1>SHOPPING CART</h1>
+    <div className="add-padding-top w-full h-screen flex justify-center flex-col items-center">
+      <div className="relative h-[50px] page-container p-5 tablet:p-0 tablet:pb-6 flex-col">
+        <div className="fixed">
+          <h1>SHOPPING CART</h1>
+        </div>
         {cart.length === 0 ? (
-          <div className="pt-[60px] border-t border-black dark:border-white flex flex-col gap-4">
+          <div className="pt-[60px] flex flex-col gap-4">
             {emptyCart}
             <h3>YOUR CART IS EMPTY</h3>
           </div>
         ) : null}
       </div>
-      <div className="grid grid-cols-2 tablet:grid-cols-4 border-b border-t border-black dark:border-white">
-        {cart.map((cartItem, i) => (
-          <CartItem key={i} cartItem={cartItem} />
-        ))}
+      <div className="w-full flex-1 overflow-y-auto border-b border-t border-black dark:border-white">
+        <div className="grid grid-cols-2 tablet:grid-cols-5">
+          {cart.map((cartItem, i) => (
+            <CartItem key={i} cartItem={cartItem} />
+          ))}
+        </div>
+      </div>
+      <div>
+        <Button>ORDER</Button>
       </div>
     </div>
   );
