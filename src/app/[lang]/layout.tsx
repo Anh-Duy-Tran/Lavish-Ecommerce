@@ -13,7 +13,7 @@ import { CategoriesType, useCategoryStore } from "@/context/useCategoryStore";
 import { FetchCategoriesDocument } from "@/gql/graphql";
 import { getServerSession } from "next-auth";
 import { options } from "../api/auth/[...nextauth]/options";
-import { getCart } from "@/actions/getCart";
+import { getCart } from "@/actions/cartActions/getCart";
 import { useCartStore } from "@/context/useCartStore";
 import CartStoreInitializer from "@/hooks/CartStoreInitializer";
 import GuestCartStoreInitializer from "@/hooks/GuestCartStoreInitializer";
