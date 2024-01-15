@@ -16,13 +16,18 @@ export function ProductOverview({
   filters,
 }: ProductOverviewProps) {
   const { viewmode } = useUIStore();
-  const { filteredProductVariantRefs, setFilters, clearSelectedFilter } =
-    useFilterStore();
+  const {
+    filteredProductVariantRefs,
+    setFilters,
+    clearSelectedFilter,
+    closeFilter,
+  } = useFilterStore();
 
   useEffect(() => {
     setFilters(filters);
     clearSelectedFilter();
-  }, [clearSelectedFilter, filters, setFilters]);
+    closeFilter();
+  }, [closeFilter, clearSelectedFilter, filters, setFilters]);
 
   return (
     <div className="flex flex-col justify-center overflow-x-hidden">
@@ -31,8 +36,8 @@ export function ProductOverview({
           viewmode === 0
             ? "grid-cols-2 tablet:grid-cols-4 gap-2"
             : viewmode === 1
-            ? "grid-cols-2 tablet:grid-cols-6 gap-2"
-            : "grid-cols-4 tablet:grid-cols-10"
+              ? "grid-cols-2 tablet:grid-cols-6 gap-2"
+              : "grid-cols-4 tablet:grid-cols-10"
         }`}
       >
         {productVariants

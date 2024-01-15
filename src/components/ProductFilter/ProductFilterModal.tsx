@@ -1,6 +1,6 @@
 "use client";
 
-import "./sidebar.css";
+import "./productFilter.css";
 import { useTransition, animated } from "@react-spring/web";
 import React from "react";
 import { useFilterStore } from "@/context/useFilterStore";
@@ -34,7 +34,7 @@ export function ProductFilterModal() {
     <>
       {transition((style, isOpen) => (
         <>
-          {isOpen ? (
+          {isOpen && filters[currentOpenFilter as string] ? (
             <>
               <div
                 className="fixed w-full h-full z-10"

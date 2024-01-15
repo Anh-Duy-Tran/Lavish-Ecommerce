@@ -5,6 +5,7 @@ import { useTransition, animated } from "@react-spring/web";
 import React, { useState } from "react";
 import { Button } from "../Button";
 import { useUIStore } from "@/context/useUIStore";
+import { useAddToCart } from "@/hooks/useAddToCart";
 
 interface AddToCartModalProps {
   productVariant: ProductVariantOverviewType;
@@ -12,8 +13,10 @@ interface AddToCartModalProps {
 
 export function AddToCartModal({ productVariant }: AddToCartModalProps) {
   const { viewmode } = useUIStore();
+  const { addToCart } = useAddToCart();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedSku, setSelectedSku] = useState<string>();
+  const { setLoadingModalContent } = useUIStore();
 
   const transition = useTransition(isOpen, {
     from: {
@@ -35,7 +38,7 @@ export function AddToCartModal({ productVariant }: AddToCartModalProps) {
       {viewmode !== 2 ? (
         <>
           <button onClick={() => setIsOpen((prev) => !prev)}>
-            <div className="absolute left-[50%] -translate-x-[50%] bottom-4 w-7 h-7 z-10 p-[8px] rounded-full bg-white/70 flex">
+            <div className="absolute left-[50%] -translate-x-[50%] bottom-4 w-7 h-7 z-10 p-[8px] rounded-full bg-white/50 hover:bg-white/90 flex">
               <svg
                 className="pr-[1px]"
                 viewBox="0 0 7 7"
@@ -80,14 +83,45 @@ export function AddToCartModal({ productVariant }: AddToCartModalProps) {
                       <Button
                         variant="outlined"
                         fullWidth
-                        onClick={() => {
+                        onClick={async () => {
+                          if (!selectedSku) {
+                            // size not selected
+                            return;
+                          }
+
                           setIsOpen(false);
-                          // setLoadingModalContent(
-                          //   async () => {
-                          //     await setTimeout(() => {}, 2000);
-                          //   },
-                          //   (res) => {}
-                          // );
+
+                          setLoadingModalContent(
+                            addToCart({
+                              name: productVariant.linkedFrom.productCollection
+                                .items[0].name,
+                              variantSlug:
+                                productVariant.linkedFrom.productCollection
+                                  .items[0].slug,
+                              media:
+                                productVariant.mediaCollection.items[0].url,
+                              price: productVariant.price,
+                              size: selectedSku.split("-").at(-1) as string,
+                              sku: selectedSku,
+                              variantRef: productVariant.ref,
+                              variantName: productVariant.colorName,
+                              quantity: 1,
+                              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                            } as any),
+                            (res) => {
+                              if (res) {
+                                return {
+                                  message: "ABC",
+                                  productAddedToCart: res,
+                                  title: "ADDED TO CART",
+                                };
+                              }
+                              return {
+                                message: "ABC",
+                                title: "FAILED",
+                              };
+                            },
+                          );
                         }}
                       >
                         ADD TO CART

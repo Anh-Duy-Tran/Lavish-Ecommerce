@@ -9,6 +9,7 @@ query FetchProductVariantsInCategory(
       ref
       price
       firstMediaInOverview
+      colorName
       linkedFrom {
         productCollection(limit: 1) {
           items {

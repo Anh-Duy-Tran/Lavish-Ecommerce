@@ -274,10 +274,10 @@ export function Slider({
                 i === currentSlide
                   ? offsetCurrentSlide
                   : i === currentSlide + 1
-                  ? offsetNextSlide
-                  : i < currentSlide
-                  ? 0
-                  : 100
+                    ? offsetNextSlide
+                    : i < currentSlide
+                      ? 0
+                      : 100
               }
               key={i}
             >
