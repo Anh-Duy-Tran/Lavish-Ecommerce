@@ -8,6 +8,9 @@ import { Button } from "../Button";
 
 export function CartOverview() {
   const { cart } = useCartStore();
+
+  const totalPrice = cart.reduce((a, c) => (a += c.price * c.quantity), 0);
+
   return (
     <div className="add-padding-top w-full h-screen flex justify-center flex-col items-center">
       <div className="relative h-[50px] page-container p-5 tablet:p-0 tablet:pb-6 flex-col">
@@ -28,8 +31,18 @@ export function CartOverview() {
           ))}
         </div>
       </div>
-      <div>
-        <Button>ORDER</Button>
+      <div className="flex h-[100px] w-full">
+        <div className="p-4 flex justify-end items-center h-full flex-grow">
+          <div className="flex flex-col items-end">
+            <strong>TOTAL: {(totalPrice / 100).toFixed(2)} EUR</strong>
+            <p className="text-sm">* TAXES INCLUDED</p>
+          </div>
+        </div>
+        <div className="h-full w-[300px]">
+          <Button className="h-full w-full" variant="contained">
+            CONTINUE
+          </Button>
+        </div>
       </div>
     </div>
   );

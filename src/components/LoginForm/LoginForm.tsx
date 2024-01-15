@@ -11,7 +11,7 @@ import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useUIStore } from "@/context/useUIStore";
-import { getCart } from "@/actions/getCart";
+import { getCart } from "@/actions/cartActions/getCart";
 import { useCartStore } from "@/context/useCartStore";
 import { useGuestCartStore } from "@/context/useGuestCartStore";
 

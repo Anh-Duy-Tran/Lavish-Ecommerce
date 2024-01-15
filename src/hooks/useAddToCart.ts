@@ -1,6 +1,6 @@
 "use client";
 
-import { addToUserCart } from "@/actions/addToUserCart";
+import { addToUserCart } from "@/actions/cartActions/addToUserCart";
 import { useCartStore } from "@/context/useCartStore";
 import { useGuestCartStore } from "@/context/useGuestCartStore";
 import { CartItem } from "@prisma/client";
