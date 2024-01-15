@@ -2,10 +2,6 @@ import React, { ButtonHTMLAttributes } from "react";
 import { twMerge } from "tailwind-merge";
 import { tv, type VariantProps } from "tailwind-variants";
 
-export type ButtonVariantType = "text" | "contained" | "outlined";
-
-export type ButtonSizeType = "compact" | "standard" | "large";
-
 export interface ButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariant> {

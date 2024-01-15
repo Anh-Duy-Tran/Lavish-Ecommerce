@@ -20,6 +20,7 @@ export async function addToUserCart(
           userId: user.id,
         },
       });
+      console.log(cartItem);
       return cartItem;
     } else {
       throw new Error("User not found.");

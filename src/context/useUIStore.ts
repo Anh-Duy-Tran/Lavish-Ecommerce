@@ -41,8 +41,8 @@ export const useUIStore = create<UIStoreType>()((set) => ({
 
   isMessageModalOpen: false,
   messageModalContent: { title: "", message: "" },
-  // should not close message modal when the loading attribute is true
   closeMessageModal: () =>
+    // should not close message modal when the loading attribute is true
     set(({ isMessageModalOpen, messageModalContent }) => ({
       isMessageModalOpen: messageModalContent.loading
         ? isMessageModalOpen

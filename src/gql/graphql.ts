@@ -199,9 +199,6 @@ export type AssetLinkingCollectionsEntryCollectionArgs = {
 export type AssetLinkingCollectionsHighlightSlideCollectionArgs = {
   limit?: InputMaybe<Scalars["Int"]["input"]>;
   locale: InputMaybe<Scalars["String"]["input"]>;
-  order: InputMaybe<
-    Array<InputMaybe<AssetLinkingCollectionsHighlightSlideCollectionOrder>>
-  >;
   preview: InputMaybe<Scalars["Boolean"]["input"]>;
   skip?: InputMaybe<Scalars["Int"]["input"]>;
 };
@@ -209,9 +206,6 @@ export type AssetLinkingCollectionsHighlightSlideCollectionArgs = {
 export type AssetLinkingCollectionsProductGroupCollectionArgs = {
   limit?: InputMaybe<Scalars["Int"]["input"]>;
   locale: InputMaybe<Scalars["String"]["input"]>;
-  order: InputMaybe<
-    Array<InputMaybe<AssetLinkingCollectionsProductGroupCollectionOrder>>
-  >;
   preview: InputMaybe<Scalars["Boolean"]["input"]>;
   skip?: InputMaybe<Scalars["Int"]["input"]>;
 };
@@ -219,67 +213,9 @@ export type AssetLinkingCollectionsProductGroupCollectionArgs = {
 export type AssetLinkingCollectionsProductVariantCollectionArgs = {
   limit?: InputMaybe<Scalars["Int"]["input"]>;
   locale: InputMaybe<Scalars["String"]["input"]>;
-  order: InputMaybe<
-    Array<InputMaybe<AssetLinkingCollectionsProductVariantCollectionOrder>>
-  >;
   preview: InputMaybe<Scalars["Boolean"]["input"]>;
   skip?: InputMaybe<Scalars["Int"]["input"]>;
 };
-
-export enum AssetLinkingCollectionsHighlightSlideCollectionOrder {
-  HrefAsc = "href_ASC",
-  HrefDesc = "href_DESC",
-  NameAsc = "name_ASC",
-  NameDesc = "name_DESC",
-  RootCategorySlugAsc = "rootCategorySlug_ASC",
-  RootCategorySlugDesc = "rootCategorySlug_DESC",
-  ShouldRedirectAsc = "shouldRedirect_ASC",
-  ShouldRedirectDesc = "shouldRedirect_DESC",
-  SysFirstPublishedAtAsc = "sys_firstPublishedAt_ASC",
-  SysFirstPublishedAtDesc = "sys_firstPublishedAt_DESC",
-  SysIdAsc = "sys_id_ASC",
-  SysIdDesc = "sys_id_DESC",
-  SysPublishedAtAsc = "sys_publishedAt_ASC",
-  SysPublishedAtDesc = "sys_publishedAt_DESC",
-  SysPublishedVersionAsc = "sys_publishedVersion_ASC",
-  SysPublishedVersionDesc = "sys_publishedVersion_DESC",
-  ThemeAsc = "theme_ASC",
-  ThemeDesc = "theme_DESC",
-}
-
-export enum AssetLinkingCollectionsProductGroupCollectionOrder {
-  SysFirstPublishedAtAsc = "sys_firstPublishedAt_ASC",
-  SysFirstPublishedAtDesc = "sys_firstPublishedAt_DESC",
-  SysIdAsc = "sys_id_ASC",
-  SysIdDesc = "sys_id_DESC",
-  SysPublishedAtAsc = "sys_publishedAt_ASC",
-  SysPublishedAtDesc = "sys_publishedAt_DESC",
-  SysPublishedVersionAsc = "sys_publishedVersion_ASC",
-  SysPublishedVersionDesc = "sys_publishedVersion_DESC",
-  TypeAsc = "type_ASC",
-  TypeDesc = "type_DESC",
-}
-
-export enum AssetLinkingCollectionsProductVariantCollectionOrder {
-  ColorCodeAsc = "colorCode_ASC",
-  ColorCodeDesc = "colorCode_DESC",
-  ColorNameAsc = "colorName_ASC",
-  ColorNameDesc = "colorName_DESC",
-  FirstMediaInOverviewAsc = "firstMediaInOverview_ASC",
-  FirstMediaInOverviewDesc = "firstMediaInOverview_DESC",
-  PriceAsc = "price_ASC",
-  PriceDesc = "price_DESC",
-  RefAsc = "ref_ASC",
-  RefDesc = "ref_DESC",
-  SysFirstPublishedAtAsc = "sys_firstPublishedAt_ASC",
-  SysFirstPublishedAtDesc = "sys_firstPublishedAt_DESC",
-  SysIdAsc = "sys_id_ASC",
-  SysIdDesc = "sys_id_DESC",
-  SysPublishedAtAsc = "sys_publishedAt_ASC",
-  SysPublishedAtDesc = "sys_publishedAt_DESC",
-  SysPublishedVersionAsc = "sys_publishedVersion_ASC",
-  SysPublishedVersionDesc = "sys_publishedVersion_DESC",
-}
 
 export enum AssetOrder {
   ContentTypeAsc = "contentType_ASC",
@@ -2036,6 +1972,7 @@ export enum ProductVariantsCollectionOrder {
 
 export type Query = {
   __typename?: "Query";
+  _node: Maybe<_Node>;
   asset: Maybe<Asset>;
   assetCollection: Maybe<AssetCollection>;
   categories: Maybe<Categories>;
@@ -2055,6 +1992,12 @@ export type Query = {
   productGroupCollection: Maybe<ProductGroupCollection>;
   productVariant: Maybe<ProductVariant>;
   productVariantCollection: Maybe<ProductVariantCollection>;
+};
+
+export type Query_NodeArgs = {
+  id: Scalars["ID"]["input"];
+  locale: InputMaybe<Scalars["String"]["input"]>;
+  preview: InputMaybe<Scalars["Boolean"]["input"]>;
 };
 
 export type QueryAssetArgs = {
@@ -2254,6 +2197,10 @@ export type SysFilter = {
   publishedVersion_not_in: InputMaybe<
     Array<InputMaybe<Scalars["Float"]["input"]>>
   >;
+};
+
+export type _Node = {
+  _id: Scalars["ID"]["output"];
 };
 
 export type CfCategoryNestedFilter = {

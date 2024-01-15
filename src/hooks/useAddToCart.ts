@@ -21,7 +21,7 @@ export function useAddToCart() {
         addToClientCart(addedCartItem);
         return addedCartItem;
       } else {
-        //some error
+        throw new Error("Failed to add to database error");
       }
     } else {
       addToGuestCart({ ...cartItem, id: v4() });
