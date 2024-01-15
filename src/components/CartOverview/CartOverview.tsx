@@ -34,7 +34,7 @@ export function CartOverview() {
       <div className="flex h-[100px] w-full">
         <div className="p-4 flex justify-end items-center h-full flex-grow">
           <div className="flex flex-col items-end">
-            <strong>TOTAL: {(totalPrice/100).toFixed(2)} EUR</strong>
+            <strong>TOTAL: {(totalPrice / 100).toFixed(2)} EUR</strong>
             <p className="text-sm">* TAXES INCLUDED</p>
           </div>
         </div>

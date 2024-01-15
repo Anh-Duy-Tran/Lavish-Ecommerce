@@ -40,5 +40,3 @@ export function CartItem({ cartItem }: CartItemProps) {
     </div>
   );
 }
-
-

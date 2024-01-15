@@ -23,7 +23,7 @@ export function CartItemQuantity({ id }: CartItemQuantityProps) {
 
   const changeCartItemQuantityWithSession = async (
     id: string,
-    delta: number
+    delta: number,
   ): Promise<CartItem> => {
     if (session) {
       return changeCartItemQuantity(id, delta);
@@ -63,7 +63,7 @@ export function CartItemQuantity({ id }: CartItemQuantityProps) {
           return null;
         }
         return { title: "error", message: "error" };
-      }
+      },
     );
     updateCart(id, updatedCartItem);
   };
