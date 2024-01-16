@@ -26,7 +26,7 @@ export function SingleProductPage({
   const { replace } = useRouter();
 
   // Logic to put the variant ref in the search param in the begining of the variant list
-  // 
+  //
   // const currentProductVariantIdx = product.variantsCollection.items.findIndex(
   //   (item) => item.ref === variantRef
   // );
@@ -36,15 +36,15 @@ export function SingleProductPage({
 
   const currentProductVariant =
     product.variantsCollection.items.find(
-      (item) => item.ref === currentProductVariantRef
+      (item) => item.ref === currentProductVariantRef,
     ) || product.variantsCollection.items[0];
 
   const mediaSrcs = useMemo(
     () =>
       currentProductVariant.mediaCollection?.items.map(
-        (src) => src?.url
+        (src) => src?.url,
       ) as string[],
-    [currentProductVariant]
+    [currentProductVariant],
   );
 
   const handleChangeProductVariant = (ref: string) => {

@@ -40,7 +40,7 @@ export function ProductSlider({
     const totalSlide = srcs.length;
     const handleChangeSlide = (n: number) => {
       setCurrentSlide((prev) =>
-        prev + n >= totalSlide ? totalSlide - 1 : prev + n < 0 ? 0 : prev + n
+        prev + n >= totalSlide ? totalSlide - 1 : prev + n < 0 ? 0 : prev + n,
       );
     };
 

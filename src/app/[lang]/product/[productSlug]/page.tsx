@@ -14,11 +14,11 @@ export default async function ProductPage({
 }: ProductPageProps) {
   const { productSlug } = params;
 
-  const product = (
+  const product = // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (
     await getClient().query(FetchProductDocument, {
       productSlug,
     })
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ).data?.productCollection?.items[0] as any;
 
   return <SingleProductPage product={product} variantRef={searchParams.v1} />;
