@@ -10,15 +10,25 @@ interface ProductSliderProps {
   direction?: "horizontal" | "vertical";
   srcs: string[];
   href?: string;
+  shouldLoadAllMedia?: boolean;
 }
 
-export function ProductSlider({ href, direction, srcs }: ProductSliderProps) {
+export function ProductSlider({
+  href,
+  direction,
+  srcs,
+  shouldLoadAllMedia = false,
+}: ProductSliderProps) {
   const { dragging, mouse, handleMouseDown, handleTouchStart } =
     useMousePosition();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [squareRef, { width, height }] = useElementSize();
   const [thisDragging, setThisDragging] = useState(false);
-  const [loadAll, setLoadAll] = useState(false);
+  const [loadAll, setLoadAll] = useState(shouldLoadAllMedia);
+
+  useEffect(() => {
+    setCurrentSlide(0);
+  }, [srcs]);
 
   useEffect(() => {
     if (currentSlide > 0) {

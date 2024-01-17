@@ -1,15 +1,20 @@
-import { ProductSlider } from "@/components/ProductSlider";
-import { FetchProductDocument } from "@/gql/graphql";
-import { UseStartMouseListener } from "@/hooks/UseStartMouseListener";
-import { getClient } from "@/lib/graphql";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
+import { SingleProductPage } from "@/components/SingleProductPage";
+import { getClient } from "@/lib/graphql";
+import { FetchProductDocument } from "@/gql/graphql";
 
 interface ProductPageProps {
   params: { productSlug: string };
+  searchParams: { v1: string };
 }
 
-export default async function ProductPage({ params }: ProductPageProps) {
+export default async function ProductPage({
+  params,
+  searchParams,
+}: ProductPageProps) {
   const { productSlug } = params;
+
   const product = (
     await getClient().query(FetchProductDocument, {
       productSlug,
@@ -17,32 +22,6 @@ export default async function ProductPage({ params }: ProductPageProps) {
   ).data?.productCollection?.items[0];
 
   return (
-    <div className="page-wrapper">
-      <div className="page-container flex gap-2 border border-red-500">
-        <UseStartMouseListener />
-        <div></div>
-        <div className="aspect-[2/3] h-[70vh] laptop:h-[82vh] overflow-hidden">
-          <ProductSlider
-            direction="vertical"
-            srcs={
-              product?.variantsCollection?.items[0]?.mediaCollection?.items.map(
-                (src) => src?.url,
-              ) as string[]
-            }
-          />
-        </div>
-        <div className="flex invisible tablet:visible tablet:w-[160px] laptop:w-[210px] laptopHD:w-[280px] desktop:w-[330px] desktopHD:w-[370px] border border-green-500">
-          <div className="flex flex-col gap-4 p-3 border border-white">
-            <h1>{product?.name}</h1>
-            {product?.variantsCollection?.items[0]?.price ? (
-              <h2>{`${
-                product?.variantsCollection?.items[0]?.price / 100
-              } EUR`}</h2>
-            ) : null}
-            <h2>{product?.description}</h2>
-          </div>
-        </div>
-      </div>
-    </div>
+    <SingleProductPage product={product as any} variantRef={searchParams.v1} />
   );
 }

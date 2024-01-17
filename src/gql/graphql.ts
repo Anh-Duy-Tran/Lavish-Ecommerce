@@ -185,7 +185,6 @@ export type AssetLinkingCollections = {
   __typename?: "AssetLinkingCollections";
   entryCollection: Maybe<EntryCollection>;
   highlightSlideCollection: Maybe<HighlightSlideCollection>;
-  productGroupCollection: Maybe<ProductGroupCollection>;
   productVariantCollection: Maybe<ProductVariantCollection>;
 };
 
@@ -197,13 +196,6 @@ export type AssetLinkingCollectionsEntryCollectionArgs = {
 };
 
 export type AssetLinkingCollectionsHighlightSlideCollectionArgs = {
-  limit?: InputMaybe<Scalars["Int"]["input"]>;
-  locale: InputMaybe<Scalars["String"]["input"]>;
-  preview: InputMaybe<Scalars["Boolean"]["input"]>;
-  skip?: InputMaybe<Scalars["Int"]["input"]>;
-};
-
-export type AssetLinkingCollectionsProductGroupCollectionArgs = {
   limit?: InputMaybe<Scalars["Int"]["input"]>;
   locale: InputMaybe<Scalars["String"]["input"]>;
   preview: InputMaybe<Scalars["Boolean"]["input"]>;
@@ -374,12 +366,8 @@ export type CategoryAutoFillSchemaArgs = {
 export type CategoryCustomProductGroupCollectionArgs = {
   limit?: InputMaybe<Scalars["Int"]["input"]>;
   locale: InputMaybe<Scalars["String"]["input"]>;
-  order: InputMaybe<
-    Array<InputMaybe<CategoryCustomProductGroupCollectionOrder>>
-  >;
   preview: InputMaybe<Scalars["Boolean"]["input"]>;
   skip?: InputMaybe<Scalars["Int"]["input"]>;
-  where: InputMaybe<ProductGroupFilter>;
 };
 
 /** App category [See type definition](https://app.contentful.com/spaces/nh559twm3d3o/content_types/category) */
@@ -449,24 +437,11 @@ export type CategoryCollection = {
 
 export type CategoryCustomProductGroupCollection = {
   __typename?: "CategoryCustomProductGroupCollection";
-  items: Array<Maybe<ProductGroup>>;
+  items: Array<Maybe<Entry>>;
   limit: Scalars["Int"]["output"];
   skip: Scalars["Int"]["output"];
   total: Scalars["Int"]["output"];
 };
-
-export enum CategoryCustomProductGroupCollectionOrder {
-  SysFirstPublishedAtAsc = "sys_firstPublishedAt_ASC",
-  SysFirstPublishedAtDesc = "sys_firstPublishedAt_DESC",
-  SysIdAsc = "sys_id_ASC",
-  SysIdDesc = "sys_id_DESC",
-  SysPublishedAtAsc = "sys_publishedAt_ASC",
-  SysPublishedAtDesc = "sys_publishedAt_DESC",
-  SysPublishedVersionAsc = "sys_publishedVersion_ASC",
-  SysPublishedVersionDesc = "sys_publishedVersion_DESC",
-  TypeAsc = "type_ASC",
-  TypeDesc = "type_DESC",
-}
 
 export type CategoryFilter = {
   AND: InputMaybe<Array<InputMaybe<CategoryFilter>>>;
@@ -481,7 +456,6 @@ export type CategoryFilter = {
     Array<InputMaybe<Scalars["String"]["input"]>>
   >;
   contentfulMetadata: InputMaybe<ContentfulMetadataFilter>;
-  customProductGroup: InputMaybe<CfProductGroupNestedFilter>;
   customProductGroupCollection_exists: InputMaybe<Scalars["Boolean"]["input"]>;
   displayName: InputMaybe<Scalars["String"]["input"]>;
   displayName_contains: InputMaybe<Scalars["String"]["input"]>;
@@ -1498,172 +1472,6 @@ export type ProductFilter = {
   variantsCollection_exists: InputMaybe<Scalars["Boolean"]["input"]>;
 };
 
-/** [See type definition](https://app.contentful.com/spaces/nh559twm3d3o/content_types/productGroup) */
-export type ProductGroup = Entry & {
-  __typename?: "ProductGroup";
-  contentfulMetadata: ContentfulMetadata;
-  firstMediaOfEachVariant: Maybe<Array<Maybe<Scalars["String"]["output"]>>>;
-  highlightMedia: Maybe<Asset>;
-  linkedFrom: Maybe<ProductGroupLinkingCollections>;
-  productVariantsCollection: Maybe<ProductGroupProductVariantsCollection>;
-  sys: Sys;
-  type: Maybe<Scalars["String"]["output"]>;
-};
-
-/** [See type definition](https://app.contentful.com/spaces/nh559twm3d3o/content_types/productGroup) */
-export type ProductGroupFirstMediaOfEachVariantArgs = {
-  locale: InputMaybe<Scalars["String"]["input"]>;
-};
-
-/** [See type definition](https://app.contentful.com/spaces/nh559twm3d3o/content_types/productGroup) */
-export type ProductGroupHighlightMediaArgs = {
-  locale: InputMaybe<Scalars["String"]["input"]>;
-  preview: InputMaybe<Scalars["Boolean"]["input"]>;
-};
-
-/** [See type definition](https://app.contentful.com/spaces/nh559twm3d3o/content_types/productGroup) */
-export type ProductGroupLinkedFromArgs = {
-  allowedLocales: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
-};
-
-/** [See type definition](https://app.contentful.com/spaces/nh559twm3d3o/content_types/productGroup) */
-export type ProductGroupProductVariantsCollectionArgs = {
-  limit?: InputMaybe<Scalars["Int"]["input"]>;
-  locale: InputMaybe<Scalars["String"]["input"]>;
-  order: InputMaybe<
-    Array<InputMaybe<ProductGroupProductVariantsCollectionOrder>>
-  >;
-  preview: InputMaybe<Scalars["Boolean"]["input"]>;
-  skip?: InputMaybe<Scalars["Int"]["input"]>;
-  where: InputMaybe<ProductVariantFilter>;
-};
-
-/** [See type definition](https://app.contentful.com/spaces/nh559twm3d3o/content_types/productGroup) */
-export type ProductGroupTypeArgs = {
-  locale: InputMaybe<Scalars["String"]["input"]>;
-};
-
-export type ProductGroupCollection = {
-  __typename?: "ProductGroupCollection";
-  items: Array<Maybe<ProductGroup>>;
-  limit: Scalars["Int"]["output"];
-  skip: Scalars["Int"]["output"];
-  total: Scalars["Int"]["output"];
-};
-
-export type ProductGroupFilter = {
-  AND: InputMaybe<Array<InputMaybe<ProductGroupFilter>>>;
-  OR: InputMaybe<Array<InputMaybe<ProductGroupFilter>>>;
-  contentfulMetadata: InputMaybe<ContentfulMetadataFilter>;
-  firstMediaOfEachVariant_contains_all: InputMaybe<
-    Array<InputMaybe<Scalars["String"]["input"]>>
-  >;
-  firstMediaOfEachVariant_contains_none: InputMaybe<
-    Array<InputMaybe<Scalars["String"]["input"]>>
-  >;
-  firstMediaOfEachVariant_contains_some: InputMaybe<
-    Array<InputMaybe<Scalars["String"]["input"]>>
-  >;
-  firstMediaOfEachVariant_exists: InputMaybe<Scalars["Boolean"]["input"]>;
-  highlightMedia_exists: InputMaybe<Scalars["Boolean"]["input"]>;
-  productVariants: InputMaybe<CfProductVariantNestedFilter>;
-  productVariantsCollection_exists: InputMaybe<Scalars["Boolean"]["input"]>;
-  sys: InputMaybe<SysFilter>;
-  type: InputMaybe<Scalars["String"]["input"]>;
-  type_contains: InputMaybe<Scalars["String"]["input"]>;
-  type_exists: InputMaybe<Scalars["Boolean"]["input"]>;
-  type_in: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
-  type_not: InputMaybe<Scalars["String"]["input"]>;
-  type_not_contains: InputMaybe<Scalars["String"]["input"]>;
-  type_not_in: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
-};
-
-export type ProductGroupLinkingCollections = {
-  __typename?: "ProductGroupLinkingCollections";
-  categoryCollection: Maybe<CategoryCollection>;
-  entryCollection: Maybe<EntryCollection>;
-};
-
-export type ProductGroupLinkingCollectionsCategoryCollectionArgs = {
-  limit?: InputMaybe<Scalars["Int"]["input"]>;
-  locale: InputMaybe<Scalars["String"]["input"]>;
-  order: InputMaybe<
-    Array<InputMaybe<ProductGroupLinkingCollectionsCategoryCollectionOrder>>
-  >;
-  preview: InputMaybe<Scalars["Boolean"]["input"]>;
-  skip?: InputMaybe<Scalars["Int"]["input"]>;
-};
-
-export type ProductGroupLinkingCollectionsEntryCollectionArgs = {
-  limit?: InputMaybe<Scalars["Int"]["input"]>;
-  locale: InputMaybe<Scalars["String"]["input"]>;
-  preview: InputMaybe<Scalars["Boolean"]["input"]>;
-  skip?: InputMaybe<Scalars["Int"]["input"]>;
-};
-
-export enum ProductGroupLinkingCollectionsCategoryCollectionOrder {
-  AutoFillSchemaAsc = "autoFillSchema_ASC",
-  AutoFillSchemaDesc = "autoFillSchema_DESC",
-  DisplayNameAsc = "displayName_ASC",
-  DisplayNameDesc = "displayName_DESC",
-  IsRootCategoryAsc = "isRootCategory_ASC",
-  IsRootCategoryDesc = "isRootCategory_DESC",
-  NameAsc = "name_ASC",
-  NameDesc = "name_DESC",
-  SlugAsc = "slug_ASC",
-  SlugDesc = "slug_DESC",
-  SysFirstPublishedAtAsc = "sys_firstPublishedAt_ASC",
-  SysFirstPublishedAtDesc = "sys_firstPublishedAt_DESC",
-  SysIdAsc = "sys_id_ASC",
-  SysIdDesc = "sys_id_DESC",
-  SysPublishedAtAsc = "sys_publishedAt_ASC",
-  SysPublishedAtDesc = "sys_publishedAt_DESC",
-  SysPublishedVersionAsc = "sys_publishedVersion_ASC",
-  SysPublishedVersionDesc = "sys_publishedVersion_DESC",
-}
-
-export enum ProductGroupOrder {
-  SysFirstPublishedAtAsc = "sys_firstPublishedAt_ASC",
-  SysFirstPublishedAtDesc = "sys_firstPublishedAt_DESC",
-  SysIdAsc = "sys_id_ASC",
-  SysIdDesc = "sys_id_DESC",
-  SysPublishedAtAsc = "sys_publishedAt_ASC",
-  SysPublishedAtDesc = "sys_publishedAt_DESC",
-  SysPublishedVersionAsc = "sys_publishedVersion_ASC",
-  SysPublishedVersionDesc = "sys_publishedVersion_DESC",
-  TypeAsc = "type_ASC",
-  TypeDesc = "type_DESC",
-}
-
-export type ProductGroupProductVariantsCollection = {
-  __typename?: "ProductGroupProductVariantsCollection";
-  items: Array<Maybe<ProductVariant>>;
-  limit: Scalars["Int"]["output"];
-  skip: Scalars["Int"]["output"];
-  total: Scalars["Int"]["output"];
-};
-
-export enum ProductGroupProductVariantsCollectionOrder {
-  ColorCodeAsc = "colorCode_ASC",
-  ColorCodeDesc = "colorCode_DESC",
-  ColorNameAsc = "colorName_ASC",
-  ColorNameDesc = "colorName_DESC",
-  FirstMediaInOverviewAsc = "firstMediaInOverview_ASC",
-  FirstMediaInOverviewDesc = "firstMediaInOverview_DESC",
-  PriceAsc = "price_ASC",
-  PriceDesc = "price_DESC",
-  RefAsc = "ref_ASC",
-  RefDesc = "ref_DESC",
-  SysFirstPublishedAtAsc = "sys_firstPublishedAt_ASC",
-  SysFirstPublishedAtDesc = "sys_firstPublishedAt_DESC",
-  SysIdAsc = "sys_id_ASC",
-  SysIdDesc = "sys_id_DESC",
-  SysPublishedAtAsc = "sys_publishedAt_ASC",
-  SysPublishedAtDesc = "sys_publishedAt_DESC",
-  SysPublishedVersionAsc = "sys_publishedVersion_ASC",
-  SysPublishedVersionDesc = "sys_publishedVersion_DESC",
-}
-
 export type ProductLinkingCollections = {
   __typename?: "ProductLinkingCollections";
   entryCollection: Maybe<EntryCollection>;
@@ -1860,7 +1668,6 @@ export type ProductVariantLinkingCollections = {
   __typename?: "ProductVariantLinkingCollections";
   entryCollection: Maybe<EntryCollection>;
   productCollection: Maybe<ProductCollection>;
-  productGroupCollection: Maybe<ProductGroupCollection>;
 };
 
 export type ProductVariantLinkingCollectionsEntryCollectionArgs = {
@@ -1880,18 +1687,6 @@ export type ProductVariantLinkingCollectionsProductCollectionArgs = {
   skip?: InputMaybe<Scalars["Int"]["input"]>;
 };
 
-export type ProductVariantLinkingCollectionsProductGroupCollectionArgs = {
-  limit?: InputMaybe<Scalars["Int"]["input"]>;
-  locale: InputMaybe<Scalars["String"]["input"]>;
-  order: InputMaybe<
-    Array<
-      InputMaybe<ProductVariantLinkingCollectionsProductGroupCollectionOrder>
-    >
-  >;
-  preview: InputMaybe<Scalars["Boolean"]["input"]>;
-  skip?: InputMaybe<Scalars["Int"]["input"]>;
-};
-
 export enum ProductVariantLinkingCollectionsProductCollectionOrder {
   NameAsc = "name_ASC",
   NameDesc = "name_DESC",
@@ -1905,19 +1700,6 @@ export enum ProductVariantLinkingCollectionsProductCollectionOrder {
   SysPublishedAtDesc = "sys_publishedAt_DESC",
   SysPublishedVersionAsc = "sys_publishedVersion_ASC",
   SysPublishedVersionDesc = "sys_publishedVersion_DESC",
-}
-
-export enum ProductVariantLinkingCollectionsProductGroupCollectionOrder {
-  SysFirstPublishedAtAsc = "sys_firstPublishedAt_ASC",
-  SysFirstPublishedAtDesc = "sys_firstPublishedAt_DESC",
-  SysIdAsc = "sys_id_ASC",
-  SysIdDesc = "sys_id_DESC",
-  SysPublishedAtAsc = "sys_publishedAt_ASC",
-  SysPublishedAtDesc = "sys_publishedAt_DESC",
-  SysPublishedVersionAsc = "sys_publishedVersion_ASC",
-  SysPublishedVersionDesc = "sys_publishedVersion_DESC",
-  TypeAsc = "type_ASC",
-  TypeDesc = "type_DESC",
 }
 
 export enum ProductVariantOrder {
@@ -1988,8 +1770,6 @@ export type Query = {
   productAttribute: Maybe<ProductAttribute>;
   productAttributeCollection: Maybe<ProductAttributeCollection>;
   productCollection: Maybe<ProductCollection>;
-  productGroup: Maybe<ProductGroup>;
-  productGroupCollection: Maybe<ProductGroupCollection>;
   productVariant: Maybe<ProductVariant>;
   productVariantCollection: Maybe<ProductVariantCollection>;
 };
@@ -2112,21 +1892,6 @@ export type QueryProductCollectionArgs = {
   preview: InputMaybe<Scalars["Boolean"]["input"]>;
   skip?: InputMaybe<Scalars["Int"]["input"]>;
   where: InputMaybe<ProductFilter>;
-};
-
-export type QueryProductGroupArgs = {
-  id: Scalars["String"]["input"];
-  locale: InputMaybe<Scalars["String"]["input"]>;
-  preview: InputMaybe<Scalars["Boolean"]["input"]>;
-};
-
-export type QueryProductGroupCollectionArgs = {
-  limit?: InputMaybe<Scalars["Int"]["input"]>;
-  locale: InputMaybe<Scalars["String"]["input"]>;
-  order: InputMaybe<Array<InputMaybe<ProductGroupOrder>>>;
-  preview: InputMaybe<Scalars["Boolean"]["input"]>;
-  skip?: InputMaybe<Scalars["Int"]["input"]>;
-  where: InputMaybe<ProductGroupFilter>;
 };
 
 export type QueryProductVariantArgs = {
@@ -2318,32 +2083,6 @@ export type CfProductAttributeNestedFilter = {
   type_not_contains: InputMaybe<Scalars["String"]["input"]>;
   type_not_in: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
   valuesCollection_exists: InputMaybe<Scalars["Boolean"]["input"]>;
-};
-
-export type CfProductGroupNestedFilter = {
-  AND: InputMaybe<Array<InputMaybe<CfProductGroupNestedFilter>>>;
-  OR: InputMaybe<Array<InputMaybe<CfProductGroupNestedFilter>>>;
-  contentfulMetadata: InputMaybe<ContentfulMetadataFilter>;
-  firstMediaOfEachVariant_contains_all: InputMaybe<
-    Array<InputMaybe<Scalars["String"]["input"]>>
-  >;
-  firstMediaOfEachVariant_contains_none: InputMaybe<
-    Array<InputMaybe<Scalars["String"]["input"]>>
-  >;
-  firstMediaOfEachVariant_contains_some: InputMaybe<
-    Array<InputMaybe<Scalars["String"]["input"]>>
-  >;
-  firstMediaOfEachVariant_exists: InputMaybe<Scalars["Boolean"]["input"]>;
-  highlightMedia_exists: InputMaybe<Scalars["Boolean"]["input"]>;
-  productVariantsCollection_exists: InputMaybe<Scalars["Boolean"]["input"]>;
-  sys: InputMaybe<SysFilter>;
-  type: InputMaybe<Scalars["String"]["input"]>;
-  type_contains: InputMaybe<Scalars["String"]["input"]>;
-  type_exists: InputMaybe<Scalars["Boolean"]["input"]>;
-  type_in: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
-  type_not: InputMaybe<Scalars["String"]["input"]>;
-  type_not_contains: InputMaybe<Scalars["String"]["input"]>;
-  type_not_in: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
 };
 
 export type CfProductVariantNestedFilter = {
