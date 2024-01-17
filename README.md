@@ -1,6 +1,6 @@
-# LAVISH ECOMERCIAL - FULL STACK NEXTJS version 13
+# LAVISH ECOMERCIAL - FULL STACK NEXTJS
 
-Welcome to LAVISH, a web platform inspired by the Zara website's aesthetic and functionality. Built with the power of Nextjs version 13 and integrated with Contentful CMS, this app delivers a modern, user-centric shopping experience.
+Welcome to LAVISH, a web platform inspired by the Zara website's aesthetic and functionality. Built with the power of Nextjs version 14 and integrated with Contentful CMS, this app delivers a modern, user-centric shopping experience.
 
 ### Data Diagram
 
