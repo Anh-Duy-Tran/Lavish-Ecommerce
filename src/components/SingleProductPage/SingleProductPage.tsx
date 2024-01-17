@@ -31,15 +31,15 @@ export function SingleProductPage({
 
   const currentProductVariant =
     product.variantsCollection.items.find(
-      (item) => item.ref === currentProductVariantRef
+      (item) => item.ref === currentProductVariantRef,
     ) || product.variantsCollection.items[0];
 
   const mediaSrcs = useMemo(
     () =>
       currentProductVariant.mediaCollection?.items.map(
-        (src) => src?.url
+        (src) => src?.url,
       ) as string[],
-    [currentProductVariant]
+    [currentProductVariant],
   );
 
   const handleChangeProductVariant = (ref: string) => {
@@ -80,7 +80,7 @@ export function SingleProductPage({
           message: "ABC",
           title: "FAILED",
         };
-      }
+      },
     );
   };
 

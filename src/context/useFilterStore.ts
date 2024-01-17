@@ -104,7 +104,7 @@ function mergeWithoutDuplicates(lists: {
       mergedSet.forEach((item) => mergedIntersect.add(item));
     } else {
       mergedIntersect = new Set(
-        [...mergedSet].filter((i) => mergedIntersect.has(i))
+        [...mergedSet].filter((i) => mergedIntersect.has(i)),
       );
     }
   }

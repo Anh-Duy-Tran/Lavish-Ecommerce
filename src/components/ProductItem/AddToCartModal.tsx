@@ -120,7 +120,7 @@ export function AddToCartModal({ productVariant }: AddToCartModalProps) {
                                 message: "ABC",
                                 title: "FAILED",
                               };
-                            }
+                            },
                           );
                         }}
                       >

@@ -21,7 +21,7 @@ export function ProductItem({ productVariant, viewmode }: ProductItemProps) {
 
   const media = useMemo(() => {
     const media = productVariant.mediaCollection.items.map(
-      (media) => media.url
+      (media) => media.url,
     );
     if (productVariant.firstMediaInOverview) {
       media.unshift(media.splice(productVariant.firstMediaInOverview, 1)[0]);
