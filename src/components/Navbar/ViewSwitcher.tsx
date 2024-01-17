@@ -14,7 +14,8 @@ export function ViewSwitcher() {
     pathname.includes("login") ||
     pathname.includes("user") ||
     pathname.includes("cart") ||
-    pathname.includes("help");
+    pathname.includes("help") ||
+    pathname.includes("product");
 
   if (shouldNotRenderViewSwitcher) {
     return null;

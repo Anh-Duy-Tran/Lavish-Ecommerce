@@ -18,18 +18,19 @@ export function ProductItem({ productVariant, viewmode }: ProductItemProps) {
       .total;
 
   const media = productVariant.mediaCollection.items.map((media) => media.url);
+
+  const link = `/product/${productVariant.linkedFrom.productCollection.items[0].slug}?v1=${productVariant.ref}`;
+
   if (productVariant.firstMediaInOverview) {
     media.unshift(media.splice(productVariant.firstMediaInOverview, 1)[0]);
   }
 
   return (
     <div className="">
-      <div className="relative aspect-[2/3] w-full overflow-hidden">
+      <div className="relative aspect-[2/3] w-full overflow-hidden cursor-pointer">
         <AddToCartModal productVariant={productVariant} />
         {viewmode === 2 ? (
-          <Link
-            href={`/product/${productVariant.linkedFrom.productCollection.items[0].slug}?v1=${productVariant.ref}`}
-          >
+          <Link href={link}>
             <div className="relative h-full w-full">
               <Image
                 style={{
@@ -60,9 +61,11 @@ export function ProductItem({ productVariant, viewmode }: ProductItemProps) {
       {viewmode !== 2 ? (
         <div className="flex justify-between py-4 px-1">
           <div className="flex flex-col">
-            <h3>{`${productName} ${
-              numPeerVariant > 1 ? `+${numPeerVariant - 1}` : ""
-            }`}</h3>
+            <Link href={link}>
+              <h3>{`${productName} ${
+                numPeerVariant > 1 ? `+${numPeerVariant - 1}` : ""
+              }`}</h3>
+            </Link>
             <h3>{`${productVariant.price / 100} EUR`}</h3>
           </div>
           <div>

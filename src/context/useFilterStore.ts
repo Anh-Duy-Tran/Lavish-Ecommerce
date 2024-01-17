@@ -9,23 +9,11 @@ export type FilterType = {
   };
 };
 
-function mergeWithoutDuplicates(lists: string[][]): string[] {
-  // Use a Set to automatically filter out duplicates
-  const mergedSet = new Set<string>();
-
-  for (const list of lists) {
-    for (const item of list) {
-      mergedSet.add(item);
-    }
-  }
-
-  // Convert the Set back to an array
-  return [...mergedSet];
-}
 interface FilterStoreType {
   filters: FilterType;
   isFilterOpen: boolean;
   currentOpenFilter?: string;
+  filterActive: boolean;
 
   openFilter: (filter: string) => void;
   closeFilter: () => void;
@@ -39,11 +27,14 @@ interface FilterStoreType {
 export const useFilterStore = create<FilterStoreType>()((set) => ({
   filters: {},
   isFilterOpen: false,
+  filterActive: false,
   filteredProductVariantRefs: [],
   openFilter: (filter: string) =>
     set({ currentOpenFilter: filter, isFilterOpen: true }),
   closeFilter: () => set({ isFilterOpen: false }),
   toggleFilter: (name: string, value: string) => {
+    let filterActive = false;
+
     set((state) => {
       const newFilters = {
         ...state.filters,
@@ -56,17 +47,23 @@ export const useFilterStore = create<FilterStoreType>()((set) => ({
         },
       };
 
-      const refList: string[][] = [];
+      const refList: { [filterType: string]: string[][] } = {};
       for (const key in newFilters) {
+        if (!(key in refList)) {
+          refList[key] = [];
+        }
         for (const filterKey in newFilters[key]) {
           if (newFilters[key][filterKey].selected) {
-            refList.push(newFilters[key][filterKey].value);
+            filterActive = true;
+            refList[key].push(newFilters[key][filterKey].value);
           }
         }
       }
+
       const newFilteredProductRefList = mergeWithoutDuplicates(refList);
 
       return {
+        filterActive,
         filters: newFilters,
         filteredProductVariantRefs: newFilteredProductRefList,
       };
@@ -81,3 +78,36 @@ export const useFilterStore = create<FilterStoreType>()((set) => ({
     set({ filters });
   },
 }));
+
+function mergeWithoutDuplicates(lists: {
+  [filterType: string]: string[][];
+}): string[] {
+  console.log(lists);
+  let mergedIntersect = new Set<string>();
+
+  for (const type in lists) {
+    // Use a Set to automatically filter out duplicates
+    if (lists[type].length === 0) {
+      continue;
+    }
+
+    const mergedSet = new Set<string>();
+
+    for (const list of lists[type]) {
+      for (const item of list) {
+        mergedSet.add(item);
+      }
+    }
+
+    if (mergedIntersect.size === 0) {
+      mergedSet.forEach((item) => mergedIntersect.add(item));
+    } else {
+      mergedIntersect = new Set(
+        [...mergedSet].filter((i) => mergedIntersect.has(i)),
+      );
+    }
+  }
+
+  // Convert the Set back to an array
+  return [...mergedIntersect];
+}

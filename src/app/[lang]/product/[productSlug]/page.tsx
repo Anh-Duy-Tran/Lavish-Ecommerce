@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { SingleProductPage } from "@/components/SingleProductPage";
 import { getClient } from "@/lib/graphql";
@@ -14,12 +15,13 @@ export default async function ProductPage({
 }: ProductPageProps) {
   const { productSlug } = params;
 
-  const product = // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (
+  const product = (
     await getClient().query(FetchProductDocument, {
       productSlug,
     })
-  ).data?.productCollection?.items[0] as any;
+  ).data?.productCollection?.items[0];
 
-  return <SingleProductPage product={product} variantRef={searchParams.v1} />;
+  return (
+    <SingleProductPage product={product as any} variantRef={searchParams.v1} />
+  );
 }

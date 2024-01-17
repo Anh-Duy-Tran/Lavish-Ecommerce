@@ -57,7 +57,7 @@ export function SingleProductPage({
   return (
     <div className="page-wrapper">
       <UseStartMouseListener />
-      <div className="page-container flex gap-2 border border-red-500 justify-center">
+      <div className="page-container flex gap-2 justify-center">
         <div></div>
         <div className="aspect-[2/3] h-[70vh] laptop:h-[82vh] overflow-hidden">
           <ProductSlider
@@ -66,7 +66,7 @@ export function SingleProductPage({
             srcs={mediaSrcs}
           />
         </div>
-        <div className="invisible tablet:visible tablet:w-[160px] laptop:w-[210px] laptopHD:w-[280px] desktop:w-[330px] desktopHD:w-[370px] border border-green-500">
+        <div className="invisible tablet:visible tablet:w-[160px] laptop:w-[210px] laptopHD:w-[280px] desktop:w-[330px] desktopHD:w-[370px]">
           <div className="flex flex-col gap-[20px] p-3 border dark:border-white border-black">
             <div className="flex flex-col gap-4">
               <h1>{product?.name}</h1>
