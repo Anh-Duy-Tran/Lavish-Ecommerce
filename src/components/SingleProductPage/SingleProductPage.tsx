@@ -7,6 +7,8 @@ import { ProductSlider } from "@/components/ProductSlider";
 import { Button } from "@/components/Button";
 import { DeepNonNullable, ValuesType } from "utility-types";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
+import { useUIStore } from "@/context/useUIStore";
+import { useAddToCart } from "@/hooks/useAddToCart";
 
 interface SingleProductPageProps {
   product: ValuesType<
@@ -24,27 +26,20 @@ export function SingleProductPage({
   const [selectedSku, setSelectedSku] = useState<string>();
   const pathname = usePathname();
   const { replace } = useRouter();
-
-  // Logic to put the variant ref in the search param in the begining of the variant list
-  //
-  // const currentProductVariantIdx = product.variantsCollection.items.findIndex(
-  //   (item) => item.ref === variantRef
-  // );
-  // product.variantsCollection.items.unshift(
-  //   product.variantsCollection.items.splice(currentProductVariantIdx, 1)[0]
-  // );
+  const { addToCart } = useAddToCart();
+  const { setLoadingModalContent } = useUIStore();
 
   const currentProductVariant =
     product.variantsCollection.items.find(
-      (item) => item.ref === currentProductVariantRef,
+      (item) => item.ref === currentProductVariantRef
     ) || product.variantsCollection.items[0];
 
   const mediaSrcs = useMemo(
     () =>
       currentProductVariant.mediaCollection?.items.map(
-        (src) => src?.url,
+        (src) => src?.url
       ) as string[],
-    [currentProductVariant],
+    [currentProductVariant]
   );
 
   const handleChangeProductVariant = (ref: string) => {
@@ -52,6 +47,41 @@ export function SingleProductPage({
     const params = new URLSearchParams(searchParams);
     params.set("v1", ref);
     replace(`${pathname}?${params.toString()}`);
+  };
+
+  const handleAddToCart = () => {
+    if (!selectedSku) {
+      // size not selected
+      return;
+    }
+
+    setLoadingModalContent(
+      addToCart({
+        name: product.name,
+        variantSlug: product.slug,
+        media: currentProductVariant.mediaCollection.items[0].url,
+        price: currentProductVariant.price,
+        size: selectedSku.split("-").at(-1) as string,
+        sku: selectedSku,
+        variantRef: currentProductVariant.ref,
+        variantName: currentProductVariant.colorName,
+        quantity: 1,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } as any),
+      (res) => {
+        if (res) {
+          return {
+            message: "ABC",
+            productAddedToCart: res,
+            title: "ADDED TO CART",
+          };
+        }
+        return {
+          message: "ABC",
+          title: "FAILED",
+        };
+      }
+    );
   };
 
   return (
@@ -108,7 +138,9 @@ export function SingleProductPage({
                 );
               })}
             </div>
-            <Button variant="contained">ADD TO CART</Button>
+            <Button variant="contained" onClick={handleAddToCart}>
+              ADD TO CART
+            </Button>
           </div>
         </div>
       </div>

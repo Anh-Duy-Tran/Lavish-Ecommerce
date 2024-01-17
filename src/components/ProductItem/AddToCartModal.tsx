@@ -83,7 +83,7 @@ export function AddToCartModal({ productVariant }: AddToCartModalProps) {
                       <Button
                         variant="outlined"
                         fullWidth
-                        onClick={async () => {
+                        onClick={() => {
                           if (!selectedSku) {
                             // size not selected
                             return;
@@ -120,7 +120,7 @@ export function AddToCartModal({ productVariant }: AddToCartModalProps) {
                                 message: "ABC",
                                 title: "FAILED",
                               };
-                            },
+                            }
                           );
                         }}
                       >

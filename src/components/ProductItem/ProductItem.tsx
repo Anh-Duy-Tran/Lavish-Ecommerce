@@ -1,5 +1,5 @@
 import { ProductVariantOverviewType } from "@/app/[lang]/[categorySlug]/page";
-import React from "react";
+import React, { useMemo } from "react";
 import Image from "next/image";
 
 import { ProductSlider } from "../ProductSlider";
@@ -17,13 +17,17 @@ export function ProductItem({ productVariant, viewmode }: ProductItemProps) {
     productVariant.linkedFrom.productCollection.items[0].variantsCollection
       .total;
 
-  const media = productVariant.mediaCollection.items.map((media) => media.url);
-
   const link = `/product/${productVariant.linkedFrom.productCollection.items[0].slug}?v1=${productVariant.ref}`;
 
-  if (productVariant.firstMediaInOverview) {
-    media.unshift(media.splice(productVariant.firstMediaInOverview, 1)[0]);
-  }
+  const media = useMemo(() => {
+    const media = productVariant.mediaCollection.items.map(
+      (media) => media.url
+    );
+    if (productVariant.firstMediaInOverview) {
+      media.unshift(media.splice(productVariant.firstMediaInOverview, 1)[0]);
+    }
+    return media;
+  }, []);
 
   return (
     <div className="">

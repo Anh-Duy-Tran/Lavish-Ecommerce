@@ -69,7 +69,8 @@ export const useFilterStore = create<FilterStoreType>()((set) => ({
       };
     });
   },
-  clearSelectedFilter: () => set({ filteredProductVariantRefs: [] }),
+  clearSelectedFilter: () =>
+    set({ filteredProductVariantRefs: [], filterActive: false }),
   setFilters: (filters: FilterType) => {
     // filter out all the filter that only have 1 outcome
     filters = Object.keys(filters)
@@ -103,7 +104,7 @@ function mergeWithoutDuplicates(lists: {
       mergedSet.forEach((item) => mergedIntersect.add(item));
     } else {
       mergedIntersect = new Set(
-        [...mergedSet].filter((i) => mergedIntersect.has(i)),
+        [...mergedSet].filter((i) => mergedIntersect.has(i))
       );
     }
   }
