@@ -139,7 +139,7 @@ export function ProductSlider({
                     priority
                     fill
                     quality={100}
-                    sizes="1000px"
+                    sizes="25vw"
                     src={src}
                     alt={src}
                   />
